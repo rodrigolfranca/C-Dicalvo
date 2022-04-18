@@ -5,6 +5,9 @@
     font-family: 'Cairo';
     padding: 0px;
     margin: 0px;
+    --green: #2F4F4F;
+    --yellow: #DAA520;
+    --white: #F9F9F9;
 }
 body {
     margin: 0;
@@ -14,7 +17,7 @@ body {
     width: 100%;
     position: fixed;
     top: 0px;
-    background-color: #2F4F4F;
+    background-color: var(--green);
     padding: 0px;    
     display: flex;
     justify-content: center;
@@ -60,16 +63,16 @@ body {
                 margin-left: 50px;
                 font-family: 'Oxygen', sans-serif;
                 font-weight: bold;
-                color: #DAA520;
+                color: var(--yellow);
                 padding-top: 23px;
             }
             header li:hover{
                 cursor: pointer;
             }
-main {
+main{
     margin-top: 70px;
     padding-top: 10px;
-    background-color: #E5E5E5;
+    background-color: var(--white);
     height: fit-content;
     width: 100%;
 }
@@ -77,21 +80,67 @@ main {
     width:100%;
     height: fit-content;
     padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-    #carrosel {
-        
-        margin: 15px auto;        
+/* Carrosel inicio*/
+#carrosel{
+    margin: 30px 0 30px 0;
+}
+    .slider{
         width: 1200px;
-        height: 370px;
-        background-color: #C4C4C4;
+        height: 800px;
         border-radius: 10px;
+        overflow: hidden;
     }
+    
+    .slides{
+        width: 500%;
+        height:800px;
+        display: flex;
+    }
+    
+    .slides input{
+        display: none;
+    }
+    
+    .slide{
+        width: 20%;
+        transition: 2s;
+    }
+    
+    .slide img{
+        width: 1200px;
+        height: 800px;
+    }
+    #radio1:checked ~ .first{
+        margin-left: 0;
+    }
+    
+    #radio2:checked ~ .first{
+        margin-left: -20%;
+    }
+    
+    #radio3:checked ~ .first{
+        margin-left: -40%;
+    }
+    
+    #radio4:checked ~ .first{
+        margin-left: -60%;
+    }   
+    .navigation-auto div{
+        transition: 1s;
+    }
+    
+/* Carrosel fim */
+
     #entenda-box {
         width: 100%;
         height: 300px;
-        background-color: #2F4F4F;
+        background-color: var(--green);
+        color: var(--yellow);
         text-align: center;
-        color: #DAA520;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -111,17 +160,22 @@ main {
             #stepbystep{
                 margin: 0 auto;
                 display: flex;
-                justify-content: center;
                 width: 1000px;
                 height: 145px;
                 flex-wrap: wrap;
                 column-gap: 50px;
                 font-size: 24px;
+                justify-content: space-between;
+                align-items: center;
             }
                 #stepbystep span{
-                    color: #E5E5E5;
+                    color: var(--white);
                     font-size: 50px;
                     font-weight: bold;
+                }
+                .imgSetinhas{
+                    width: 55px;
+                    height: 31px;
                 }
                 .stepbystep {
                     display: flex;
@@ -144,8 +198,8 @@ main {
     width: 1200px;
     display: flex;
     justify-content: center;
-    background-color: #2F4F4F;
-    color:#DAA520;
+    background-color: var(--green);
+    color: var(--yellow);
     column-gap: 20px;
     padding-top: 50px;
 }

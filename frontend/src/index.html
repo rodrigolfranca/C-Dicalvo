@@ -1,69 +1,94 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">    
-        <title>C Dicalvo</title>
-        <link rel="stylesheet" href="./style.css">
-    </head>
-    <body>
-        <header id="header">
-            <div id="topMenu">
-                <img id=logoHeader src="./assets/logo-header.png" />
-                <ul>
-                    <li>Clube</li>
-                    <li>About us</li>
-                    <li>Products</li>
-                    <li>Offers</li>
-                </ul>
-                <img id="bagHeader" src="./assets/carrinho.png" />
-                <img id="userHeader" src="./assets/usuario.png" />
-            </div>
-        </header>
-        <main>
-            <section id="home">
-                <div id="carrosel"></div>
-                <div id="entenda-box">
-                    <div id="entenda">
-                        <h3>Entenda como funciona!</h3>
-                        <div id="stepbystep">
-                            <div class="stepbystep">
-                                <p>Escolha os produtos</p>
-                                <img src="./assets/escolha.png" />
-                            </div>
-                            <span>>></span>
-                            <div class="stepbystep">
-                                <p>Montamos a sua caixa</p>
-                                <img src="./assets/caixa.png" />
-                            </div>
-                            <span>>></span>
-                            <div class="stepbystep">
-                                <p>Enviamos direto para sua casa!</p>
-                                <img src="./assets/envio.png" />
-                            </div>
+<head>
+    <meta charset="UTF-8">    
+    <title>C Dicalvo</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header id="header">
+        <div id="topMenu">
+            <img id=logoHeader src="./assets/logo-header.png" />
+            <ul>
+                <li>Clube</li>
+                <li>About us</li>
+                <li>Products</li>
+                <li>Offers</li>
+            </ul>
+            <img id="bagHeader" src="./assets/carrinho.png" />
+            <img id="userHeader" src="./assets/usuario.png" />
+        </div>
+    </header>
+    <main>
+        <section id="home">
+            <!-- Carrosel inicio -->
+            <div id="carrosel">
+                <div class="slider">
+                    <div class="slides">
+                        <input type="radio" name="radio-btn" id="radio1">
+                        <input type="radio" name="radio-btn" id="radio2">
+                        <input type="radio" name="radio-btn" id="radio3">
+                        <input type="radio" name="radio-btn" id="radio4">
+                        <div class="slide first">
+                            <img src="./assets/slider/1.jpeg" alt="">
                         </div>
-                    </div>
-                </div>                
-            </section>
-            <section id="aboutus"></section>
-            <section id="userCad-box">
-                <div id="userCad">
-                    <header id="inviteCad">
-                        <h3>Criar sua conta no</h3>
-                        <img src="./assets/logo-header.png" />
-                    </header>
-                    <div id="formCad">
-                        <div>
-                            <input type="text" class="inputCad" id="name" placeholder="Name" />
-                            <input type="text" class="inputCad" id="superName" placeholder="Sobrenome" />
-                            <input type="email" class="inputCad" id="email" placeholder="E-mail" />
-                            <input type="password" class="inputCad" id="senha" placeholder="Senha" />
-                            <input type="password" class="inputCad" id="checkSenha" placeholder="Confirmar senha" />     
-                            <input type="text" class="inputCad" id="calvicie" placeholder="Qual seu tipo de calvíce? Veja na tabela ao lado e descreva!" />                                   
+                        <div class="slide">
+                            <img src="./assets/slider/2.jpeg" alt="">
                         </div>
-                        <img id=estagios src="./assets/estagios.png" />
+                        <div class="slide">
+                            <img src="./assets/slider/3.jpeg" alt="">
+                        </div>
+                        <div class="slide">
+                            <img src="./assets/slider/4.jpeg" alt="">
+                        </div>
                     </div>
                 </div>
-            </section>
-        </main>
-    </body>
+            </div>
+            <!-- Fim Carrosel -->
+            <div id="entenda-box">
+                <div id="entenda">
+                    <h3>Entenda como funciona!</h3>
+                    <div id="stepbystep">
+                        <div class="stepbystep">
+                            <p>Escolha os produtos</p>
+                            <img src="./assets/escolha.png" />
+                        </div>
+                        <img src="./assets/setas.png" alt="" class="imgSetinhas">
+                        <div class="stepbystep">
+                            <p>Montamos a sua caixa</p>
+                            <img src="./assets/caixa.png" />
+                        </div>
+                        <img src="./assets/setas.png" alt="" class="imgSetinhas">
+                        <div class="stepbystep">
+                            <p>Enviamos direto para sua casa!</p>
+                            <img src="./assets/envio.png" />
+                        </div>
+                    </div>
+                </div>
+            </div>                
+        </section>
+        <section id="aboutus"></section>
+        <section id="userCad-box">
+            <div id="userCad">
+                <header id="inviteCad">
+                    <h3>Criar sua conta no</h3>
+                    <img src="./assets/logo-header.png" />
+                </header>
+                <div id="formCad">
+                    <form name="createAccount">
+                        <input type="text" class="inputCad" id="nome" placeholder="Nome" />
+                        <input type="text" class="inputCad" id="superName" placeholder="Sobrenome" />
+                        <input type="email" class="inputCad" id="email" placeholder="E-mail" />
+                        <input type="password" class="inputCad" id="senha" placeholder="Senha" />
+                        <input type="password" class="inputCad" id="checkSenha" placeholder="Confirmar senha" />     
+                        <input type="text" class="inputCad" id="calvicie" placeholder="Qual seu tipo de calvíce? Veja na tabela ao lado e descreva!" />                                   
+                    </form>
+                    <img id=estagios src="./assets/estagios.png" />
+                </div>
+                <input type="submit" value="Criar conta!">
+            </div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
 </html>
