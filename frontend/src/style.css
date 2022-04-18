@@ -111,9 +111,16 @@ main {
     padding-left: 100px;
 }
     #inviteCad {
-        text-align: center;
-                
+        text-align: center;                
     }
+        #inviteCad h3{
+            display: inline-block;
+            font-family: 'Oxygen', sans-serif;
+            font-size: 26px;
+        }
+        #logoCad {
+            vertical-align: middle;
+        }
     #formCad {
         width: 700px;
         height: 360px
