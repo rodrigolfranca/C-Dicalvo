@@ -1,59 +1,71 @@
-@import url('https://fonts.googleapis.com/css2?family=Oxygen&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap');
 * {
     box-sizing: border-box;
+    font-family: 'Cairo';
+    padding: 0px;
+    margin: 0px;
 }
 body {
     margin: 0;
 }
-#topMenu {
+#header{
     height: 80px;
     width: 100%;
     position: fixed;
     top: 0px;
     background-color: #2F4F4F;
-    padding: 0px;
+    padding: 0px;    
+    display: flex;
+    justify-content: center;
+    box-shadow: 0px 0px 5px 0px black;
 }
-    header img{
-        vertical-align: top;
+    #topMenu {
+        height: 80px;
+        width: 1300px;
+        position: fixed;
     }
-    header img:hover{
-        cursor: pointer;
-    }
-    #logoHeader {
-        padding-top: 5px;
-        padding-left: 50px;
-        margin: 0px;
-    }
-    #userHeader{
-        float:right;
-        margin-right: 50px;
-        padding-top: 5px;
-    }
-    #bagHeader{
-        float: right;
-        margin-right: 50px;
-        padding-top: 5px;
-    }
-    header ul {
-        list-style: none;
-        display: inline-block;
-        margin: 0px
-    }
-        header li {
-            font-size: 30;
-            text-align: center;    
-            display: inline-block;
-            height: 80px;
-            width: 100px;
-            margin:0;
-            padding-top: 28px;
-            font-family: 'Oxygen', sans-serif;
-            font-weight: bold;
-            color: #DAA520;
+        header img{
+            vertical-align: top;
         }
-        header li:hover{
+        header img:hover{
             cursor: pointer;
         }
+        #logoHeader {
+            padding-top: 5px;
+            padding-left: 50px;
+            margin: 0px;
+        }
+        #userHeader{
+            float:right;
+            margin-right: 50px;
+            padding-top: 5px;
+        }
+        #bagHeader{
+            float: right;
+            margin-right: 50px;
+            padding-top: 5px;
+        }
+        header ul {
+            list-style: none;
+            display: inline-block;
+            margin: 0px;            
+        }
+            header li {
+                font-size: 24px;
+                text-align: center;    
+                display: inline-block;
+                height: 80px;
+                margin-right: 15px;
+                margin-left: 50px;
+                font-family: 'Oxygen', sans-serif;
+                font-weight: bold;
+                color: #DAA520;
+                padding-top: 23px;
+            }
+            header li:hover{
+                cursor: pointer;
+            }
 main {
     margin-top: 70px;
     padding-top: 10px;
@@ -61,7 +73,6 @@ main {
     height: fit-content;
     width: 100%;
 }
-
 #home{
     width:100%;
     height: fit-content;
@@ -75,61 +86,104 @@ main {
         background-color: #C4C4C4;
         border-radius: 10px;
     }
-
-    #entenda {
+    #entenda-box {
         width: 100%;
         height: 300px;
         background-color: #2F4F4F;
-        padding-top: 10px;
         text-align: center;
         color: #DAA520;
-    }
-    #stepbystep {
-        margin: 0 auto;
         display: flex;
-        width: 837px;
-        height: 200px;
-        flex-wrap: wrap;
-        column-gap: 50px;
+        justify-content: center;
+        align-items: center;
     }
-    .stepbystep {
-        height:200px;
-        width: 200px
-    }
-#userCad {
+        #entenda{
+            width: 1300px;
+            height: 225px;
+        }
+            #entenda-box h3{
+                padding: 0px;
+                margin: 0px;
+                font-family: 'Oxygen', sans-serif;
+                font-weight: bold;
+                font-size: 36px;
+                margin-bottom: 36px;
+            }
+            #stepbystep{
+                margin: 0 auto;
+                display: flex;
+                justify-content: center;
+                width: 1000px;
+                height: 145px;
+                flex-wrap: wrap;
+                column-gap: 50px;
+                font-size: 24px;
+            }
+                #stepbystep span{
+                    color: #E5E5E5;
+                    font-size: 50px;
+                    font-weight: bold;
+                }
+                .stepbystep {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    font-weight: bold;
+                    width: 200px
+                }
+                    .stepbystep p{
+                        width: 330px;
+                    }
+                    .stepbystep img{
+                        width: 100px;
+                        height: 100px;
+                    }
+#userCad-box {
     margin: 0 auto;
     border-radius: 30px;
     height: 835px;
     width: 1200px;
     display: flex;
-    flex-wrap: wrap;
+    justify-content: center;
     background-color: #2F4F4F;
     color:#DAA520;
     column-gap: 20px;
-
     padding-top: 50px;
-    padding-left: 100px;
+}
+#userCad{
+    width: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
     #inviteCad {
         text-align: center;
-                
+        display: flex;
+        width: 505px;
+        justify-content: center;
     }
-    #formCad {
-        width: 700px;
-        height: 360px
+        #inviteCad h3{
+            font-size: 40px;
+            margin-right: 15px;
+        }
+    #formCad{
+        display: flex;
+        align-items: center;
     }
-    .inputCad{
-        border-radius: 50px;
-        padding-left: 20px;
-        width: 300px;
-        height: 40px;
-        margin: 40px 45px 0 0;
-    }
-    #email {
-        display: block;
-        width: 650px;
-    }
-    #estagios {
-        width: 293px;
-        height: 360px;
-    }
+        .inputCad{
+            border-radius: 50px;
+            padding-left: 20px;
+            width: 300px;
+            height: 40px;
+            margin: 40px 45px 0 0;
+        }
+        #email {
+            display: block;
+            width: 650px;
+        }
+        #estagios {
+            width: 293px;
+            height: 360px;
+        }
+        #calvicie{
+            width: 650px;
+        }

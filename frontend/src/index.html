@@ -6,54 +6,63 @@
         <link rel="stylesheet" href="./style.css">
     </head>
     <body>
-        <header id="topMenu">
-            <img id=logoHeader src="./assets/logo-header.png" />
-            <ul>
-                <li>Clube</li>
-                <li>About us</li>
-                <li>Products</li>
-                <li>Offers</li>
-            </ul>
-            <img id="bagHeader" src="./assets/carrinho.png" />
-            <img id="userHeader" src="./assets/usuario.png" />
+        <header id="header">
+            <div id="topMenu">
+                <img id=logoHeader src="./assets/logo-header.png" />
+                <ul>
+                    <li>Clube</li>
+                    <li>About us</li>
+                    <li>Products</li>
+                    <li>Offers</li>
+                </ul>
+                <img id="bagHeader" src="./assets/carrinho.png" />
+                <img id="userHeader" src="./assets/usuario.png" />
+            </div>
         </header>
         <main>
             <section id="home">
                 <div id="carrosel"></div>
-                <div id="entenda">
-                    <h3>Entenda como funciona!</h3>
-                    <div id="stepbystep">
-                        <div class="stepbystep">
-                            <p>Escolha os produtos</p>
-                            <img src="./assets/escolha.png" />
-                        </div>
-                        <p>>></p>
-                        <div class="stepbystep">
-                            <p>Montamos a sua caixa</p>
-                            <img src="./assets/caixa.png" />
-                        </div>
-                        <p>>></p>
-                        <div class="stepbystep">
-                            <p>Enviamos direto para sua casa!</p>
-                            <img src="./assets/envio.png" />
+                <div id="entenda-box">
+                    <div id="entenda">
+                        <h3>Entenda como funciona!</h3>
+                        <div id="stepbystep">
+                            <div class="stepbystep">
+                                <p>Escolha os produtos</p>
+                                <img src="./assets/escolha.png" />
+                            </div>
+                            <span>>></span>
+                            <div class="stepbystep">
+                                <p>Montamos a sua caixa</p>
+                                <img src="./assets/caixa.png" />
+                            </div>
+                            <span>>></span>
+                            <div class="stepbystep">
+                                <p>Enviamos direto para sua casa!</p>
+                                <img src="./assets/envio.png" />
+                            </div>
                         </div>
                     </div>
                 </div>                
             </section>
             <section id="aboutus"></section>
-            <section id="userCad">
-                <div id="formCad">
+            <section id="userCad-box">
+                <div id="userCad">
                     <header id="inviteCad">
                         <h3>Criar sua conta no</h3>
                         <img src="./assets/logo-header.png" />
                     </header>
-                    <input type="text" class="inputCad" id="name" placeholder="Name" />
-                    <input type="text" class="inputCad" id="superName" placeholder="Sobrenome" />
-                    <input type="text" class="inputCad" id="email" placeholder="E-mail" />
-                    <input type="text" class="inputCad" id="senha" placeholder="Senha" />
-                    <input type="text" class="inputCad" id="checkSenha" placeholder="Confirmar senha" />                                        
+                    <div id="formCad">
+                        <div>
+                            <input type="text" class="inputCad" id="name" placeholder="Name" />
+                            <input type="text" class="inputCad" id="superName" placeholder="Sobrenome" />
+                            <input type="email" class="inputCad" id="email" placeholder="E-mail" />
+                            <input type="password" class="inputCad" id="senha" placeholder="Senha" />
+                            <input type="password" class="inputCad" id="checkSenha" placeholder="Confirmar senha" />     
+                            <input type="text" class="inputCad" id="calvicie" placeholder="Qual seu tipo de calvíce? Veja na tabela ao lado e descreva!" />                                   
+                        </div>
+                        <img id=estagios src="./assets/estagios.png" />
+                    </div>
                 </div>
-                <img id=estagios src="./assets/estagios.png" />
             </section>
         </main>
     </body>
