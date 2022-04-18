@@ -5,7 +5,7 @@
 body {
     margin: 0;
 }
-header {
+#topMenu {
     height: 80px;
     width: 100%;
     position: fixed;
@@ -19,17 +19,17 @@ header {
     header img:hover{
         cursor: pointer;
     }
-    #logo-header {
+    #logoHeader {
         padding-top: 5px;
         padding-left: 50px;
         margin: 0px;
     }
-    #user-header{
+    #userHeader{
         float:right;
         margin-right: 50px;
         padding-top: 5px;
     }
-    #bag-header{
+    #bagHeader{
         float: right;
         margin-right: 50px;
         padding-top: 5px;
@@ -55,7 +55,7 @@ header {
             cursor: pointer;
         }
 main {
-    margin-top: 80px;
+    margin-top: 70px;
     padding-top: 10px;
     background-color: #E5E5E5;
     height: fit-content;
@@ -64,7 +64,8 @@ main {
 
 #home{
     width:100%;
-    height: 1000px
+    height: fit-content;
+    padding-bottom: 10px;
 }
     #carrosel {
         
@@ -94,4 +95,41 @@ main {
     .stepbystep {
         height:200px;
         width: 200px
+    }
+#userCad {
+    margin: 0 auto;
+    border-radius: 30px;
+    height: 835px;
+    width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #2F4F4F;
+    color:#DAA520;
+    column-gap: 20px;
+
+    padding-top: 50px;
+    padding-left: 100px;
+}
+    #inviteCad {
+        text-align: center;
+                
+    }
+    #formCad {
+        width: 700px;
+        height: 360px
+    }
+    .inputCad{
+        border-radius: 50px;
+        padding-left: 20px;
+        width: 300px;
+        height: 40px;
+        margin: 40px 45px 0 0;
+    }
+    #email {
+        display: block;
+        width: 650px;
+    }
+    #estagios {
+        width: 293px;
+        height: 360px;
     }

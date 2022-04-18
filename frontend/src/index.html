@@ -6,16 +6,16 @@
         <link rel="stylesheet" href="./style.css">
     </head>
     <body>
-        <header>
-            <img id=logo-header src="./assets/logo-header.png" />
+        <header id="topMenu">
+            <img id=logoHeader src="./assets/logo-header.png" />
             <ul>
                 <li>Clube</li>
                 <li>About us</li>
                 <li>Products</li>
                 <li>Offers</li>
             </ul>
-            <img id="bag-header" src="./assets/carrinho.png" />
-            <img id="user-header" src="./assets/usuario.png" />
+            <img id="bagHeader" src="./assets/carrinho.png" />
+            <img id="userHeader" src="./assets/usuario.png" />
         </header>
         <main>
             <section id="home">
@@ -41,7 +41,20 @@
                 </div>                
             </section>
             <section id="aboutus"></section>
-            <section id="user-cad"></section>
+            <section id="userCad">
+                <div id="formCad">
+                    <header id="inviteCad">
+                        <h3>Criar sua conta no</h3>
+                        <img src="./assets/logo-header.png" />
+                    </header>
+                    <input type="text" class="inputCad" id="name" placeholder="Name" />
+                    <input type="text" class="inputCad" id="superName" placeholder="Sobrenome" />
+                    <input type="text" class="inputCad" id="email" placeholder="E-mail" />
+                    <input type="text" class="inputCad" id="senha" placeholder="Senha" />
+                    <input type="text" class="inputCad" id="checkSenha" placeholder="Confirmar senha" />                                        
+                </div>
+                <img id=estagios src="./assets/estagios.png" />
+            </section>
         </main>
     </body>
 </html>
