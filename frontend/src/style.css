@@ -342,3 +342,67 @@ main{
     #loginInvite:hover{
         cursor: pointer;
     }
+#accountLost {
+    height: 100%;
+    width: 100%;
+    display:flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+
+    background-color: var(--white);    
+}
+    #accountLostPanel {
+        height: 635px;
+        width: 450px;
+        border-radius: 30px;
+        background-color: var(--green);
+        padding-top: 50px;
+
+        text-align: center;
+    }
+    #accountLostPanel h3 {
+        margin: 0 auto;
+        height: 102px;
+        width: 285px;
+        text-align: center;
+        color:var(--yellow);
+
+        font-family: "Oxygen", sans-serif;
+        font-size: 40px;
+        line-height: 40px;
+    }
+    #accountLostPanel p {
+        width:330px;
+        height:165px;
+        margin:60px auto 83px;
+        color:var(--white);
+
+        font-size: 26px;
+        font-weight: bold;
+        line-height: 34px;
+    }
+    #accountLostPanel span {
+        color: var(--yellow);
+        font-size: 32px;
+        display: inline-block;
+        margin: 10px;
+        text-decoration: underline;        
+    }
+    #AccountLostBack {
+        margin: 9px auto 20px;
+        width: 250px;
+        height: 42px;
+        border-radius: 50px;
+        color:var(--white);
+        background-color: var(--yellow);
+        border:none;
+
+        font-family: 'Cairo',sans-serif;
+        font-size: 24px;
+        font-weight: bold;
+    }
+    #AccountLostBack:hover {
+        cursor: pointer;
+    }
