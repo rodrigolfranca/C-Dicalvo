@@ -4,15 +4,16 @@
     <meta charset="UTF-8">    
     <title>C Dicalvo</title>
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 </head>
 <body>
     <header id="header">
         <div id="topMenu">
-            <img id=logoHeader src="./assets/logo-header.png" />
+            <img id=logoHeader class="toHome" src="./assets/logo-header.png" />
             <ul>
                 <li>Clube</li>
-                <li>About us</li>
-                <li>Products</li>
+                <li id="aboutUsHeader">About us</li>
+                <li class="toProducts">Products</li>
                 <li>Offers</li>
             </ul>
             <img id="bagHeader" src="./assets/carrinho.png" />
@@ -84,7 +85,7 @@
                 <img id="logoAccountLost" src="./assets/logo-header.png" />
                 <h3>Esqueceu a sua conta?</h3>
                 <p>Envie um e-mail para: <span>support@cdicalvo.com</span> Explicando o seu<br /> problema!</p>
-                <input id="AccountLostBack" type="button" value="Voltar para loja" />
+                <input id="AccountLostBack" class="toHome" type="button" value="Voltar para loja" />
             </div>
         </section>
         <section id="userCad-box">
@@ -154,6 +155,8 @@
             </div>
         </section>
     </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

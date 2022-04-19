@@ -71,190 +71,192 @@ body {
                 cursor: pointer;
             }
 main{
-    margin-top: 70px;
+    margin-top: 80px;
     padding-top: 10px;
     background-color: var(--white);
     height: 100%;
     width: 100%;
 }
-#home{
-    width:100%;
-    height: fit-content;
-    padding-bottom: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-/* Carrosel inicio*/
-#carrosel{
-    margin: 30px 0 30px 0;
-}
-    .slider{
-        width: 1200px;
-        height: 800px;
-        border-radius: 10px;
-        overflow: hidden;
-    }
-    
-    .slides{
-        width: 500%;
-        height:800px;
+    #home{
+        margin-top: 10px;
+        width:100%;
+        height: fit-content;
+        padding-bottom: 10px;
         display: flex;
-    }
-    
-    .slides input{
-        display: none;
-    }
-    
-    .slide{
-        width: 20%;
-        transition: 2s;
-    }
-    
-    .slide img{
-        width: 1200px;
-        height: 800px;
-    }
-    #radio1:checked ~ .first{
-        margin-left: 0;
-    }
-    
-    #radio2:checked ~ .first{
-        margin-left: -20%;
-    }
-    
-    #radio3:checked ~ .first{
-        margin-left: -40%;
-    }
-    
-    #radio4:checked ~ .first{
-        margin-left: -60%;
-    }   
-    .navigation-auto div{
-        transition: 1s;
-    }
-    
-/* Carrosel fim */
-
-    #entenda-box {
-        width: 100%;
-        height: 300px;
-        background-color: var(--green);
-        color: var(--yellow);
-        text-align: center;
-        display: flex;
-        justify-content: center;
+        flex-direction: column;
         align-items: center;
     }
-        #entenda{
-            width: 1300px;
-            height: 225px;
+    /* Carrosel inicio*/
+    #carrosel{
+        margin: 0px 0 30px 0;
+    }
+        .slider{
+            width: 1200px;
+            height: 800px;
+            border-radius: 10px;
+            overflow: hidden;
         }
-            #entenda-box h3{
-                padding: 0px;
-                margin: 0px;
-                font-family: 'Oxygen', sans-serif;
-                font-weight: bold;
-                font-size: 36px;
-                margin-bottom: 36px;
+
+        .slides{
+            width: 500%;
+            height:800px;
+            display: flex;
+        }
+
+        .slides input{
+            display: none;
+        }
+
+        .slide{
+            width: 20%;
+            transition: 2s;
+        }
+
+        .slide img{
+            width: 1200px;
+            height: 800px;
+        }
+        #radio1:checked ~ .first{
+            margin-left: 0;
+        }
+
+        #radio2:checked ~ .first{
+            margin-left: -20%;
+        }
+
+        #radio3:checked ~ .first{
+            margin-left: -40%;
+        }
+
+        #radio4:checked ~ .first{
+            margin-left: -60%;
+        }   
+        .navigation-auto div{
+            transition: 1s;
+        }
+
+    /* Carrosel fim */
+
+        #entenda-box {
+            width: 100%;
+            height: 300px;
+            background-color: var(--green);
+            color: var(--yellow);
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+            #entenda{
+                width: 1300px;
+                height: 225px;
             }
-            #stepbystep{
-                margin: 0 auto;
-                display: flex;
-                width: 1000px;
-                height: 145px;
-                flex-wrap: wrap;
-                column-gap: 50px;
-                font-size: 24px;
-                justify-content: space-between;
-                align-items: center;
-            }
-                #stepbystep span{
-                    color: var(--white);
-                    font-size: 50px;
+                #entenda-box h3{
+                    padding: 0px;
+                    margin: 0px;
+                    font-family: 'Oxygen', sans-serif;
                     font-weight: bold;
+                    font-size: 36px;
+                    margin-bottom: 36px;
                 }
-                .imgSetinhas{
-                    width: 55px;
-                    height: 31px;
-                }
-                .stepbystep {
+                #stepbystep{
+                    margin: 0 auto;
                     display: flex;
-                    flex-direction: column;
+                    width: 1000px;
+                    height: 145px;
+                    flex-wrap: wrap;
+                    column-gap: 50px;
+                    font-size: 24px;
+                    justify-content: space-between;
                     align-items: center;
-                    font-weight: bold;
-                    width: 200px
                 }
-                    .stepbystep p{
-                        width: 330px;
+                    #stepbystep span{
+                        color: var(--white);
+                        font-size: 50px;
+                        font-weight: bold;
                     }
-                    .stepbystep img{
-                        width: 100px;
-                        height: 100px;
+                    .imgSetinhas{
+                        width: 55px;
+                        height: 31px;
                     }
+                    .stepbystep {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        font-weight: bold;
+                        width: 200px
+                    }
+                        .stepbystep p{
+                            width: 330px;
+                        }
+                        .stepbystep img{
+                            width: 100px;
+                            height: 100px;
+                        }
 #userCad-box {
-    margin: 0 auto;
+    margin: 10px auto;
     border-radius: 30px;
     height: 600px;
     width: 1200px;
-    display: flex;
+    display: none;
     justify-content: center;
     background-color: var(--green);
     color: var(--yellow);
     column-gap: 20px;
     padding-top: 50px;
 }
-#userCad{
-    width: 1000px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-    #inviteCad {
-        text-align: center;
+    #userCad{
+        width: 1000px;
         display: flex;
-        width: 505px;
-        justify-content: center;
-    }
-        #inviteCad h3{
-            font-size: 40px;
-            margin-right: 15px;
-        }
-    #formCad{
-        display: flex;
+        flex-direction: column;
         align-items: center;
     }
-        .inputCad{
+        #inviteCad {
+            text-align: center;
+            display: flex;
+            width: 505px;
+            justify-content: center;
+        }
+            #inviteCad h3{
+                font-size: 40px;
+                margin-right: 15px;
+            }
+        #formCad{
+            display: flex;
+            align-items: center;
+        }
+            .inputCad{
+                border-radius: 50px;
+                padding-left: 20px;
+                width: 300px;
+                height: 40px;
+                margin: 40px 45px 0 0;
+            }
+            #email {
+                display: block;
+                width: 650px;
+            }
+            #estagios {
+                width: 293px;
+                height: 360px;
+            }
+            #calvicie{
+                width: 650px;
+            }
+        #cadButton {
+            margin-top: 30px;
+            width: 250px;
+            height: 42px;
+            color: var(--white);
+            background-color: var(--yellow);
             border-radius: 50px;
-            padding-left: 20px;
-            width: 300px;
-            height: 40px;
-            margin: 40px 45px 0 0;
+            border:none;
         }
-        #email {
-            display: block;
-            width: 650px;
-        }
-        #estagios {
-            width: 293px;
-            height: 360px;
-        }
-        #calvicie{
-            width: 650px;
-        }
-    #cadButton {
-        margin-top: 30px;
-        width: 250px;
-        height: 42px;
-        color: var(--white);
-        background-color: var(--yellow);
-        border-radius: 50px;
-        border:none;
-    }
 #login {
+    margin: 10px 0;
     height: 100%;
     width: 100%;
-    display:flex;
+    display:none;
     align-content: center;
     align-items: center;
     justify-content: center;
@@ -343,9 +345,10 @@ main{
         cursor: pointer;
     }
 #accountLost {
+    margin: 10px 0;
     height: 100%;
     width: 100%;
-    display:flex;
+    display:none;
     align-content: center;
     align-items: center;
     justify-content: center;
@@ -411,7 +414,7 @@ main{
     width: 1070px;
     height: 700px;
 
-    display:flex;
+    display:none;
     flex-wrap: wrap;
     column-gap: 150px;    
 }
@@ -450,13 +453,14 @@ main{
         text-align: center;
     }
 #produtos{
+    display: none;
     background-color: var(--cream);
     height: 700px;
     width: 1200px;
     border-radius: 50px;
     padding-top: 30px;
     padding-left: 30px;
-    margin: 0 auto;
+    margin: 10px auto;
 
     border: 1px black solid;
 }
