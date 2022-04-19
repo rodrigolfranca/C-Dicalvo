@@ -66,8 +66,27 @@
                     </div>
                 </div>
             </div>                
+        </section>        
+        <section id="login">
+            <div id="loginForm">
+                <img id="logoLogin" src="./assets/logo-header.png" />
+                <h3 id="loginSpeech">Fazer login</h3>
+                <h3 id="loginReminder">Utilize seu email</h3>
+                <input type="email" class=loginForm id="emailLogin" placeholder="E-mail" />
+                <input type="password" class="loginForm" id="senhaLogin" placeholder="Senha" />
+                <input type="button" id="loginButton" value="Login" />
+                <input type="button" id="forgetButton" value="Esqueci minha conta" />
+                <p id="loginInvite">Criar conta</p>                
+            </div>
         </section>
-        <section id="aboutus"></section>
+        <section id="accountLost">
+            <div id="accountLostPanel">
+                <img id="logoAccountLost" src="./assets/logo-header.png" />
+                <h3>Esqueceu a sua conta?</h3>
+                <p>Envie um e-mail para: <span>support@cdicalvo.com</span> Explicando o seu<br /> problema!</p>
+                <input id="AccountLostBack" type="button" value="Voltar para loja" />
+            </div>
+        </section>
         <section id="userCad-box">
             <div id="userCad">
                 <header id="inviteCad">
@@ -85,7 +104,53 @@
                     </form>
                     <img id=estagios src="./assets/estagios.png" />
                 </div>
-                <input type="submit" value="Criar conta!">
+                <input type="submit" id=cadButton value="Criar conta!">
+            </div>
+        </section>
+        <section id="aboutUs">
+            <div id="us">
+                <div class="foto"></div>
+                <div class="foto"></div>
+                <p>“Estamos em busca de recuperar o Orgulho da Calvicie”</p>                
+            </div>
+            <p id="idea">C-Dicalvo começou após a subida do euro e com isso o distanciamento da tão sonhada protese capilar turquesa. Então Rodrigo e Gustavo se juntaram com o objetivo de fazer o problema capilar deles virar a nova moda do momento!</p>
+        </section>
+        <section id="produtos">
+            <div id="seletorPacote">
+                <input type="button" class="seletor" value="C Begginer" />
+                <input type="button" class="seletor" value="C Intermediate" />
+            </div>
+            <div id="painelProduto">
+                <div id="productPhoto">
+                    <img src="./assets/cBeginner.png" />
+                </div>
+                <div id="descricaoProduto">
+                    <img id="logoDescricao" src="./assets/logo-verde.png" />
+                    <h3 id="nomeProduto">C-Beginner</h3>
+                    <p>Produtos simples para aqueles que estão adentrando a calvicie agora.</p>
+                </div>
+                <div id="precos">
+                    <div class="precoContainer">
+                        <span class="desconto">30% off</span>
+                        <div class="precoFrame">
+                            <h3>Pacote</h3>
+                            <h4>Mensal</h4>
+                            <p class="precoAntes">R$ <span>99,99</span> por</p>
+                            <p class="precoAtual">R$ <span>69,93</span>/mês</p>
+                            <input class="buyButton" type="button" value="Assinar" />
+                        </div>
+                    </div>
+                    <div class="precoContainer">
+                        <span class="desconto">30% off</span>
+                        <div class="precoFrame">
+                            <h3>Pacote</h3>
+                            <h4>Anual</h4>
+                            <p class="precoAntes">R$ <span>696,96</span> por</p>
+                            <p class="precoAtual">R$ <span>420,00</span>/mês</p>
+                            <input class="buyButton" type="button" value="Assinar" />
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
