@@ -74,7 +74,7 @@ main{
     margin-top: 70px;
     padding-top: 10px;
     background-color: var(--white);
-    height: fit-content;
+    height: 100%;
     width: 100%;
 }
 #home{
@@ -195,7 +195,7 @@ main{
 #userCad-box {
     margin: 0 auto;
     border-radius: 30px;
-    height: 835px;
+    height: 600px;
     width: 1200px;
     display: flex;
     justify-content: center;
@@ -405,4 +405,47 @@ main{
     }
     #AccountLostBack:hover {
         cursor: pointer;
+    }
+#aboutUs {
+    margin: 10px auto;
+    width: 1070px;
+    height: 700px;
+
+    display:flex;
+    flex-wrap: wrap;
+    column-gap: 150px;    
+}
+    #us {
+        width: 500px;
+        height: 600px;
+        padding-top: 30px;
+        padding-left: 30px;
+
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 50px;
+    }
+    .foto {
+        width: 200px;
+        height: 230px;
+
+        border-radius: 50px;
+        border: solid 3px black;
+    }
+    #us p {
+        margin: 0 auto;
+        width: 380px;
+        height: 170px;
+
+        font-size: 30px;
+        text-align: center;
+    }
+    #idea {
+        width: 420px;
+        height: 420px;
+        padding-top: 55px;
+
+        font-size: 28px;
+        text-justify: auto;
+        text-align: center;
     }
