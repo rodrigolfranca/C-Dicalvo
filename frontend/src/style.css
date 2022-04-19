@@ -449,3 +449,162 @@ main{
         text-justify: auto;
         text-align: center;
     }
+#produtos{
+    background-color: var(--cream);
+    height: 700px;
+    width: 1200px;
+    border-radius: 50px;
+    padding-top: 30px;
+    padding-left: 30px;
+    margin: 0 auto;
+
+    border: 1px black solid;
+}
+    #seletorPacote{
+        width: 1000px;
+        height: 60px;
+
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 20px;
+    }
+        .seletor {
+            width: 250px;
+            height: 60px;
+            background-color: var(--green);
+            color: var(--yellow);
+            border: none;
+            border-radius: 50px;
+
+            font-size: 30px;
+            font-weight: bold;
+        }
+        .seletor:hover {
+            cursor: pointer;
+        }
+        
+    #painelProduto {
+        margin: 30px auto;
+        height: 600px;
+        width: 1100px;
+
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+        #productPhoto{
+            height: 500px;
+            width: 500px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+            #productPhoto img{
+                width: 300px;
+                height: 300px;            
+            }
+        #descricaoProduto{
+            width: 600px;
+            height: 200px;
+            padding-left: 20px;
+        }
+            #descricaoProduto img{
+                margin: 0;
+            }
+            #nomeProduto{
+                margin: -10px 0;
+                height: 50px;
+                width: 190px;
+                color: var(--green);
+
+                font-family: 'Oxygen';
+                font-size: 49px;
+            }
+            #descricaoProduto p{
+                margin-top: 20px;
+                height: 50px;
+                width: 450px;
+                color: var(--green);
+
+                font-size: 24px;
+                line-height: 26px;
+
+            }
+        #precos {
+            width: 600px;
+            height: 300px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            column-gap: 30px;
+        }
+            .precoContainer {
+                height: 255px;
+                width: 227px;
+            }
+                .desconto {
+                    display: inline-block;
+                    height: 50px;
+                    width: 75px;
+                    border-radius: 60px;
+                    padding-top: 6px;
+                    float:right;
+
+                    background-color: var(--green);
+                    color: var(--white);
+                    
+                    text-align: center;
+                    font-size: 20px;
+                    font-weight: bold;
+                }
+                .precoFrame {
+                    width: 190px;
+                    height:230px;
+                    background-color: var(--white);
+                    margin: 20px;
+                    padding-top: 30px;
+                    border-radius: 15px;
+
+                    text-align: center;
+                }
+                    .precoFrame h3 {
+                        font-size: 32px;
+                        line-height: 30px;
+                        font-weight: bold;
+                        color: var(--yellow);
+                    }
+                    .precoFrame h4 {
+                        font-size: 24px;
+                        line-height: 20px;
+                        font-weight: bold;
+                        color: var(--yellow);
+                    }
+                    .precoAntes {
+                        margin-top: 20px ;
+                        font-weight: bold;
+                        font-size: 20px;
+                    }
+                        .precoAntes span {
+                            text-decoration: line-through;
+                        }
+                    .precoAtual {                        
+                        font-size: 20px;
+                    }
+                        .precoAtual span {
+                            font-weight: bold;
+                            font-size: 32px;
+                            line-height: 30px;
+                        }
+                    .buyButton {
+                        margin-top: 15px;
+                        height: 30px;
+                        width: 150px;
+
+                        border:none;
+                        border-radius: 50px;
+
+                        background-color: var(--yellow);
+                        color: var(--white);
+                    }
