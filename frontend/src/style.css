@@ -544,8 +544,7 @@ main{
                 height: 255px;
                 width: 227px;
             }
-                .desconto {
-                    display: inline-block;
+                .desconto {                    
                     height: 50px;
                     width: 75px;
                     border-radius: 60px;
