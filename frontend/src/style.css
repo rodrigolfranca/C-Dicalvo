@@ -611,3 +611,138 @@ main{
                         background-color: var(--yellow);
                         color: var(--white);
                     }
+#carrinho {
+    margin: 10px auto;
+    width: 1300px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    justify-items: center;
+}
+    #carrinhoCard {
+        width: 1230px;
+        height: 420px;
+        padding-top: 50px;
+        padding-left: 50px;
+
+        border-radius: 30px;
+        background-color: var(--green);
+
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 30px;
+    }
+        #carrinhoTitle {
+            width: 600px;
+            height: 40px;
+            padding-left: 20px;
+            margin: 0;            
+
+            font-size: 30px;
+            font-weight: bold;
+            font-family: 'Oxygen', sans-serif;
+
+            color: var(--yellow);
+            border-bottom: 3px var(--yellow) solid;
+        }
+        #carrinhoContainer {
+            width: 800px;
+            height: 250px;
+            padding-top: 10px;
+            padding-left: 10px;
+
+
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+
+            background-color: var(--white);
+            border-radius: 30px;            
+        }
+            #carrinhoPhotoBox {
+                width: 230px;
+                height: 230px;
+
+                display: flex;
+                flex-wrap: wrap;
+
+                justify-content: center;
+                align-items: center;
+            }
+                #carrinhoPhoto {
+                    height: 150px;
+                    width: 150px;
+                }
+            #carrinhoContainer h4 {
+                width: 530px;
+                height: 50px;
+
+                color: var(--green);
+                font-family: 'Oxygen', sans-serif;
+                font-size: 40px;
+                font-weight: bold;
+            }
+            #carrinhoDescricao {
+                padding-top: 10px;
+                padding-left: 20px;
+
+                width: 530px;
+                height: 130px;
+            }
+            #carrinhoPrecoAtual {
+                width: 530px;
+                height: 50px;
+
+                text-align: end;
+                font-size: 20px;
+            }
+                #carrinhoPrecoAtual span{
+                    font-size: 40px;
+                    font-weight: bold;
+                    line-height: 40px;
+                }
+        #carrinhoFinal {
+            width: 300px;
+            height: 250px;
+            padding-top: 10px;
+
+            background-color: var(--white);
+            border-radius: 30px;
+
+            text-align: center;
+        }
+            #carrinhoFinal h3{
+                color: var(--green);
+                font-family: 'Oxygen', sans-serif;
+                font-size: 40px;
+                font-weight: bold;
+            }
+            #carrinhoPrecoFinal {
+                font-size: 20px;
+                margin-top: 40px;
+                margin-bottom: 30px;
+            }
+                #carrinhoPrecoFinal span{
+                    font-size: 40px;
+                    font-weight: bold;
+                    line-height: 40px;
+                }
+            #carrinhoFinalizar {
+                height: 50px;
+                width: 250px;                
+
+                background-color: var(--yellow);
+                color: var(--white);
+
+                border-radius: 50px;
+                border:none;
+
+                font-size: 32px;
+                font-family: 'Oxygen', sans-serif;
+                font-weight: bold;
+            }
+            #carrinhoFinalizar:hover {
+                cursor: pointer;
+            }
