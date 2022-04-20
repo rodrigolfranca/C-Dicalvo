@@ -4,18 +4,18 @@
     <meta charset="UTF-8">    
     <title>C Dicalvo</title>
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 </head>
 <body>
     <header id="header">
         <div id="topMenu">
-            <img id=logoHeader src="./assets/logo-header.png" />
+            <img id=logoHeader class="toHome" src="./assets/logo-header.png" />
             <ul>
                 <li>Clube</li>
-                <li>About us</li>
-                <li>Products</li>
-                <li>Blog</li>
+                <li id="aboutUsHeader">About us</li>
+                <li class="toProducts">Products</li>                
             </ul>
-            <img id="bagHeader" src="./assets/carrinho.png" />
+            <img id="bagHeader" class="toCart" src="./assets/carrinho.png" />
             <img id="userHeader" src="./assets/usuario.png" />
         </div>
     </header>
@@ -50,7 +50,7 @@
                     <h3>Entenda como funciona!</h3>
                     <div id="stepbystep">
                         <div class="stepbystep">
-                            <p>Escolha os produtos</p>
+                            <p>Escolha o pacote</p>
                             <img src="./assets/escolha.png" />
                         </div>
                         <img src="./assets/setas.png" alt="" class="imgSetinhas">
@@ -84,7 +84,7 @@
                 <img id="logoAccountLost" src="./assets/logo-header.png" />
                 <h3>Esqueceu a sua conta?</h3>
                 <p>Envie um e-mail para: <span>support@cdicalvo.com</span> Explicando o seu<br /> problema!</p>
-                <input id="AccountLostBack" type="button" value="Voltar para loja" />
+                <input id="AccountLostBack" class="toHome" type="button" value="Voltar para loja" />
             </div>
         </section>
         <section id="userCad-box">
@@ -153,7 +153,27 @@
                 </div>
             </div>
         </section>
+        <section id="carrinho">
+            <div id="carrinhoCard">
+                <h3 id="carrinhoTitle">Carrinho</h3>
+                <div id="carrinhoContainer">
+                    <div id="carrinhoPhotoBox">
+                        <img id="carrinhoPhoto" src="./assets/cBeginner.png" />                        
+                    </div>
+                    <h4>C-Beginner Mensal!</h4>
+                    <p id="carrinhoDescricao">Esponja para polir, pomada para polir, pente curto, mecha de cabelo falso e navalha da coragem</p>
+                    <p id="carrinhoPrecoAtual">R$<span>69,93</span>/mês</p>
+                </div>
+                <div id="carrinhoFinal">
+                    <h3>Preço Total</h3>
+                    <p id="carrinhoPrecoFinal">R$<span>69,93</span>/mês</p>
+                    <input id=carrinhoFinalizar type="button" value="Finalizar!" />
+                </div>
+            </div>
+        </section>
     </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
