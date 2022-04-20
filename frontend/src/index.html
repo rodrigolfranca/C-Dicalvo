@@ -126,7 +126,7 @@
                 </div>
                 <div id="descricaoProduto">
                     <img id="logoDescricao" src="./assets/logo-verde.png" />
-                    <h3 id="nomeProduto">C-Beginner</h3>
+                    <h3 id="nomeProduto"></h3>
                     <p>Produtos simples para aqueles que estão adentrando a calvicie agora.</p>
                 </div>
                 <div id="precos">
@@ -135,8 +135,8 @@
                         <div class="precoFrame">
                             <h3>Pacote</h3>
                             <h4>Mensal</h4>
-                            <p class="precoAntes">R$ <span>99,99</span> por</p>
-                            <p class="precoAtual">R$ <span>69,93</span>/mês</p>
+                            <p class="precoAntes">R$ <span id="precoAduterado"></span> por</p>
+                            <p class="precoAtual">R$ <span id="precosDoPacote"></span>/mês</p>
                             <input class="buyButton" type="button" value="Assinar" />
                         </div>
                     </div>
@@ -145,8 +145,8 @@
                         <div class="precoFrame">
                             <h3>Pacote</h3>
                             <h4>Anual</h4>
-                            <p class="precoAntes">R$ <span>696,96</span> por</p>
-                            <p class="precoAtual">R$ <span>420,00</span>/mês</p>
+                            <p class="precoAntes">R$ <span id="precosDoPacoteAdulteradoMensal"></span> por</p>
+                            <p class="precoAtual">R$ <span id="precosDoPacoteMensal"></span>/mês</p>
                             <input class="buyButton" type="button" value="Assinar" />
                         </div>
                     </div>
@@ -158,15 +158,14 @@
                 <h3 id="carrinhoTitle">Carrinho</h3>
                 <div id="carrinhoContainer">
                     <div id="carrinhoPhotoBox">
-                        <img id="carrinhoPhoto" src="./assets/cBeginner.png" />                        
                     </div>
-                    <h4>C-Beginner Mensal!</h4>
-                    <p id="carrinhoDescricao">Esponja para polir, pomada para polir, pente curto, mecha de cabelo falso e navalha da coragem</p>
-                    <p id="carrinhoPrecoAtual">R$<span>69,93</span>/mês</p>
+                    <h4 id="nomeDoPacote"></h4>
+                    <p id="carrinhoDescricao"></p>
+                    <p id="carrinhoPrecoAtual">R$<span class="precinhoHehe"></span>/mês</p>
                 </div>
                 <div id="carrinhoFinal">
                     <h3>Preço Total</h3>
-                    <p id="carrinhoPrecoFinal">R$<span>69,93</span>/mês</p>
+                    <p id="carrinhoPrecoFinal">R$<span class="precinhoHehe"></span>/mês</p>
                     <input id=carrinhoFinalizar type="button" value="Finalizar!" />
                 </div>
             </div>

@@ -76,6 +76,26 @@ $('.toProducts').on('click', () => {
     $('#produtos').fadeIn(1000);
     $('#login').fadeOut(1000);
     $('#carrinho').fadeOut(1000);
+
+    fetch(`http://localhost:3000/search/packs/1`)
+        .then(data => data.json())
+        .then(response => {
+            console.log(response);
+            $("#nomeProduto").text(`${response[0].name}`);
+            
+            const preco = response[0].monthly_price;
+            const precoAdulterado = preco * 13/10;
+            const precoMensal = preco * 12;
+            const precoMensalAdulterado = precoAdulterado * 12;
+            
+            $("#precosDoPacote").html(`${parseFloat(preco).toFixed(2)}`);
+
+            $("#precoAduterado").html(`${parseFloat(precoAdulterado).toFixed(2)}`);
+
+            $("#precosDoPacoteMensal").html(`${parseFloat(precoMensal).toFixed(2)}`);
+
+            $("#precosDoPacoteAdulteradoMensal").html(`${parseFloat(precoMensalAdulterado).toFixed(2)}`);
+        });
 });
 
 $('.toCart').on('click', () => {
@@ -87,6 +107,17 @@ $('.toCart').on('click', () => {
     $('#login').fadeOut(1000);
     $('#carrinho').fadeIn(1000);
     $('#carrinho').css('display', 'flex');
+
+    fetch(`http://localhost:3000/search/packs`)
+        .then(data => data.json())
+        .then(response => {
+            console.log(response);
+            $("#carrinhoPhotoBox").html(`
+                <img id="carrinhoPhoto" src="${response[0].img_url}" />`);
+            $("#nomeDoPacote").text(`${response[0].name}`);
+            $("#carrinhoDescricao").text(`${response[0].description}`);
+            $(".precinhoHehe").text(`${response[0].monthly_price}`);
+        })
 });
 
 $('.buyButton').on('click', () => {

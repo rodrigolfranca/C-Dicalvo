@@ -519,7 +519,7 @@ main{
             #nomeProduto{
                 margin: -10px 0;
                 height: 50px;
-                width: 190px;
+                width: 300px;
                 color: var(--green);
 
                 font-family: 'Oxygen';
