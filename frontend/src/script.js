@@ -9,7 +9,8 @@ setInterval(function(){
     }
 }, 4000);
 
-// telas: home: flex, userCad-box: flex , login: flex, accountLost: flex, aboutUs: flex, produtos: block
+// home: flex, userCad-box: flex , login: flex, accountLost: flex, aboutUs: flex, produtos: block, carrinho: flex
+
 $('#userHeader').on('click', () => {
     if (!userLogged) {
         $('#home').fadeOut(1000);
@@ -19,6 +20,7 @@ $('#userHeader').on('click', () => {
         $('#produtos').fadeOut(1000);
         $('#login').fadeIn(1000);
         $('#login').css('display', 'flex');
+        $('#carrinho').fadeOut(1000);
     }
 });
 
@@ -30,6 +32,7 @@ $('.toHome').on('click', () => {
     $('#aboutUs').fadeOut(1000);
     $('#produtos').fadeOut(1000);
     $('#login').fadeOut(1000);
+    $('#carrinho').fadeOut(1000);
 });
 
 $('#aboutUsHeader').on('click', () => {
@@ -40,6 +43,7 @@ $('#aboutUsHeader').on('click', () => {
     $('#aboutUs').css('display', 'flex');
     $('#produtos').fadeOut(1000);
     $('#login').fadeOut(1000);
+    $('#carrinho').fadeOut(1000);
 });
 
 $('#loginInvite').on('click', () => {
@@ -50,6 +54,7 @@ $('#loginInvite').on('click', () => {
     $('#aboutUs').fadeOut(1000);    
     $('#produtos').fadeOut(1000);
     $('#login').fadeOut(1000);
+    $('#carrinho').fadeOut(1000);
 });
 
 $('#forgetButton').on('click', () => {
@@ -60,6 +65,7 @@ $('#forgetButton').on('click', () => {
     $('#aboutUs').fadeOut(1000);    
     $('#produtos').fadeOut(1000);
     $('#login').fadeOut(1000);
+    $('#carrinho').fadeOut(1000);
 });
 
 $('.toProducts').on('click', () => {
@@ -69,4 +75,27 @@ $('.toProducts').on('click', () => {
     $('#aboutUs').fadeOut(1000);    
     $('#produtos').fadeIn(1000);
     $('#login').fadeOut(1000);
+    $('#carrinho').fadeOut(1000);
+});
+
+$('.toCart').on('click', () => {
+    $('#home').fadeOut(1000);    
+    $('#userCad-box').fadeOut(1000);    
+    $('#accountLost').fadeOut(1000);    
+    $('#aboutUs').fadeOut(1000);    
+    $('#produtos').fadeOut(1000);
+    $('#login').fadeOut(1000);
+    $('#carrinho').fadeIn(1000);
+    $('#carrinho').css('display', 'flex');
+});
+
+$('.buyButton').on('click', () => {
+    $('#home').fadeOut(1000);    
+    $('#userCad-box').fadeOut(1000);    
+    $('#accountLost').fadeOut(1000);    
+    $('#aboutUs').fadeOut(1000);    
+    $('#produtos').fadeOut(1000);
+    $('#login').fadeOut(1000);
+    $('#carrinho').fadeIn(1000);
+    $('#carrinho').css('display', 'flex');
 });

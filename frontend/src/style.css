@@ -611,11 +611,14 @@ main{
                         background-color: var(--yellow);
                         color: var(--white);
                     }
+                    .buyButton:hover{
+                        cursor: pointer;
+                    }
 #carrinho {
     margin: 10px auto;
     width: 1300px;
     height: 100%;
-    display: flex;
+    display: none;
     align-items: center;
     align-content: center;
     justify-content: center;
