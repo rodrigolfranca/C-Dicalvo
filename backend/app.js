@@ -11,5 +11,8 @@ app.get('/' , (req , res) => {
     res.send("Its Alive");
 });
 
+const ROUTER_PSQL = require("./routers/router")
+
+app.use("/", ROUTER_PSQL);
 
 app.listen(port, () => console.log("Servidor Aberto em", port));
