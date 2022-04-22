@@ -1,14 +1,5 @@
 let userLogged = 0;
 
-var counter = 1;
-setInterval(function(){
-    document.getElementById('radio' + counter).checked = true;
-    counter++;
-    if(counter > 4){
-    counter = 1;
-    }
-}, 4000);
-
 // home: flex, userCad-box: flex , login: flex, accountLost: flex, aboutUs: flex, produtos: block, carrinho: flex
 
 $('#userHeader').on('click', () => {

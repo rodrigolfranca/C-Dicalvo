@@ -9,40 +9,24 @@
 <body>
     <header id="header">
         <div id="topMenu">
-            <img id=logoHeader class="toHome" src="./assets/logo-header.png" />
-            <ul>
-                <li>Clube</li>
-                <li id="aboutUsHeader">About us</li>
-                <li class="toProducts">Products</li>                
-            </ul>
-            <img id="bagHeader" class="toCart" src="./assets/carrinho.png" />
-            <img id="userHeader" src="./assets/usuario.png" />
+            <div id="leftSideHeader">
+                <img id=logoHeader class="toHome" src="./assets/logo-header.png" />
+                <ul>
+                    <li>Clube</li>
+                    <li id="aboutUsHeader">About us</li>
+                    <li class="toProducts">Products</li>                
+                </ul>
+            </div>
+            <div id="iconsHeader">
+                <img id="bagHeader" class="toCart" src="./assets/carrinho.png" />
+                <img id="userHeader" src="./assets/usuario.png" />
+            </div>
         </div>
     </header>
     <main>
         <section id="home">
             <!-- Carrosel inicio -->
             <div id="carrosel">
-                <div class="slider">
-                    <div class="slides">
-                        <input type="radio" name="radio-btn" id="radio1">
-                        <input type="radio" name="radio-btn" id="radio2">
-                        <input type="radio" name="radio-btn" id="radio3">
-                        <input type="radio" name="radio-btn" id="radio4">
-                        <div class="slide first">
-                            <img src="./assets/slider/1.jpeg" alt="">
-                        </div>
-                        <div class="slide">
-                            <img src="./assets/slider/2.jpeg" alt="">
-                        </div>
-                        <div class="slide">
-                            <img src="./assets/slider/3.jpeg" alt="">
-                        </div>
-                        <div class="slide">
-                            <img src="./assets/slider/4.jpeg" alt="">
-                        </div>
-                    </div>
-                </div>
             </div>
             <!-- Fim Carrosel -->
             <div id="entenda-box">
@@ -83,7 +67,7 @@
             <div id="accountLostPanel">
                 <img id="logoAccountLost" src="./assets/logo-header.png" />
                 <h3>Esqueceu a sua conta?</h3>
-                <p>Envie um e-mail para: <span>support@cdicalvo.com</span> Explicando o seu<br /> problema!</p>
+                <p>Envie um e-mail para: <span>support@cdicalvo.com</span><br /> Explicando o seu<br /> problema!</p>
                 <input id="AccountLostBack" class="toHome" type="button" value="Voltar para loja" />
             </div>
         </section>
@@ -119,6 +103,7 @@
             <div id="seletorPacote">
                 <input type="button" class="seletor" value="C Begginer" />
                 <input type="button" class="seletor" value="C Intermediate" />
+                <input type="button" class="seletor" value="C Proud" />
             </div>
             <div id="painelProduto">
                 <div id="productPhoto">
