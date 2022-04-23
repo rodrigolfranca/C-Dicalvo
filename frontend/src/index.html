@@ -91,6 +91,105 @@
                 <input type="submit" id=cadButton value="Criar conta!">
             </div>
         </section>
+        <section id="crudSpace">
+            <header id="crudHeader">
+                <ul>
+                    <li class="crudMenu" id="crudMenuSelect">Pesquisar</li>
+                    <li class="crudMenu" id="crudMenuInsert">Adicionar</li>
+                    <li class="crudMenu" id="crudMenuAlter">Atualizar</li>
+                    <li class="crudMenu" id="crudMenuDelete">Deletar</li>
+                </ul>
+            </header>
+            <section id="crudSelect">
+                <h3>O que você quer pesquisar?</h3>
+                <div id="crudSelectFilters">
+                    <select id="buscarPor">
+                        <option value="-1">Selecione</option>
+                        <option value="users">Usuários</option>
+                        <option value="packs">Pacotes</option>
+                        <option value="bags">Sacolas</option>
+                    </select>
+                    <input type="button" id="crudSelectButton" value="Pesquisar" />
+                    <input type="text" id="crudSelectFilter" placeholder="Id (Vazio = Todos)" />
+                    <div id="crudSelectResults"></div>
+                </div>
+            </section>
+            <section id="crudInsert">
+                <h3>Em qual tabela você quer adcionar itens?</h3>
+                <select id="crudInsertSelect">
+                    <option value="-1">Selecione</option>
+                    <option value="users">Usuarios</option>
+                    <option value="packs">Pacotes</option>
+                </select>
+                <section id="crudInsertPacks">
+                    <input type="text" id="crudInsertPacksName" class="crudPacksName" placeholder="Nome" />
+                    <textarea id="crudInsertPacksDescricao" class="crudPacksDescricao" style="resize:none" placeholder="Descrição"></textarea>
+                    <input type="text" id="crudInsertPacksImage" class="crudPacksImage" placeholder="URL da Imagem" />
+                    <input type="text" id="crudInsertPacksPreco" class="crudPacksPreco" placeholder="Preço" />
+
+                    <input type="button" id="crudInsertPacksButton" class="crudPacksButton" value="Enviar" />
+                </section>
+                <section id="crudInsertUser">
+                    <input type="text" id="crudInsertUsersName" class="crudUsersName" placeholder="Nome" />
+                    <input type="text" id="crudInsertUsersSurname" class="crudUsersSurname" placeholder="Sobrenome" />                    
+                    <input type="text" id="crudInsertUsersEmail" class="crudUsersEmail" placeholder="E-mail" />
+                    <input type="password" id="crudInsertUsersSenha" class="crudUsersSenha" placeholder="Senha" />
+                    <input type="password" id="crudInsertUsersVerify" class="crudUsersVerify" placeholder="Confirmar Senha" />
+                    <input type="text" id="crudInsertUsersCalvicie" class="crudUsersCalvicie" placeholder="Tipo de Calvície" />
+                    <label for="crudInsertUsersAdmin">Admin?</label>
+                    <input type=checkbox id="crudInsertUsersAdmin" />
+                    <input type="text" id="crudInsertUsersBag" class="crudUsersBag" placeholder="Id do Carrinho" />
+                    <input type="text" id="crudInsertUsersAssinatura" class="crudUsersAssinatura" placeholder="Assinatura" />
+                    <input type="text" id="crudInsertUsersTipo" class="crudUsersTipo" placeholder="Tipo de Assinatura" />
+                    
+                    <input type="button" id="crudInsertUsersButton" class="crudUsersButton" value="Enviar" />
+                </section>
+            </section>
+            <section id="crudAlter">
+                <h3>O que vai atualizar?</h3>
+                <input type="text" id="crudAlterID" placeholder="ID" />
+                <select id="crudAlterSelect">
+                    <option value="-1">Selecione</option>
+                    <option value="users">Usuarios</option>
+                    <option value="packs">Pacotes</option>
+                </select>
+                <section id="crudAlterPacks">
+                    <input type="text" id="crudAlterPacksName" class="crudPacksName" placeholder="Nome" />
+                    <textarea id="crudAlterPacksDescricao" class="crudPacksDescricao" style="resize:none" placeholder="Descrição"></textarea>
+                    <input type="text" id="crudAlterPacksImagem" class="crudPacksImage" placeholder="URL da Imagem" />
+                    <input type="text" id="crudAlterPacksPreco" class="crudPacksPreco" placeholder="Preço" />
+
+                    <input type="button" id="crudAlterPacksButton" class="crudPacksButton" value="Atualizar" />
+                </section>
+                <section id="crudAlterUser">
+                    <input type="text" id="crudAlterUsersName" class="crudUsersName" placeholder="Nome" />
+                    <input type="text" id="crudAlterUsersSurname" class="crudUsersSurname" placeholder="Sobrenome" />                    
+                    <input type="text" id="crudAlterUsersEmail" class="crudUsersEmail" placeholder="E-mail" />
+                    <input type="password" id="crudAlterUsersSenha" class="crudUsersSenha" placeholder="Senha" />
+                    <input type="password" id="crudAlterUsersVerify" class="crudUsersVerify" placeholder="Confirmar Senha" />
+                    <input type="text" id="crudAlterUsersCalvicie" class="crudUsersCalvicie" placeholder="Tipo de Calvície" />
+                    <label for="crudAlterUsersAdmin">Admin?</label>
+                    <input type=checkbox id="crudAlterUsersAdmin" />
+                    <input type="text" id="crudAlterUsersBag" class="crudUsersBag" placeholder="Id do Carrinho" />
+                    <input type="text" id="crudAlterUsersAssinatura" class="crudUsersAssinatura" placeholder="Assinatura" />
+                    <input type="text" id="crudAlterUsersTipo" class="crudUsersTipo" placeholder="Tipo de Assinatura" />
+                    
+                    <input type="button" id="crudAlterUsersButton" class="crudUsersButton" value="Atualizar" />
+                </section>
+            </section>
+            <section id="crudDelete">
+                <h3>O que você quer deletar</h3>
+                <select id="crudDeleteSelect">
+                    <option val="-1">Selecione</option>
+                    <option val="users">Usuário</option>
+                    <option val="packs">Pacote</option>                    
+                </select>
+                <input type="text" id="crudDeleteID" placeholder="ID" />
+                <input type="button" id=crudDeleteSearchButton value="Buscar" />
+                <div id="crudDeleteResult"></div>
+                <input type="button" id=crudDeleteButton value="Deletar" />
+            </section>
+        </section>
         <section id="aboutUs">
             <div id="us">
                 <div class="foto"></div>
