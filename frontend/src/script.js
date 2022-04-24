@@ -3,78 +3,78 @@ let userLogged = 1;
 // home: flex, userCad-box: flex , login: flex, accountLost: flex, aboutUs: flex, produtos: block, carrinho: flex
 
 $('#userHeader').on('click', () => {
-    $('#home').fadeOut(1000);
-    $('#userCad-box').fadeOut(1000);
-    $('#accountLost').fadeOut(1000);
-    $('#aboutUs').fadeOut(1000);
-    $('#produtos').fadeOut(1000);
-    $('#carrinho').fadeOut(1000);
+    $('#home').hide();
+    $('#userCad-box').hide();
+    $('#accountLost').hide();
+    $('#aboutUs').hide();
+    $('#produtos').hide();
+    $('#carrinho').hide();
     if (!userLogged) {        
-        $('#login').fadeIn(1000);
+        $('#login').fadeIn();
         $('#login').css('display', 'flex');        
     } else {
-        $('#crudSpace').fadeIn(1000);        
+        $('#crudSpace').fadeIn();        
     }
 
 });
 
 $('.toHome').on('click', () => {
-    $('#home').fadeIn(1000);    
+    $('#home').fadeIn();    
     $('#home').css('display', 'flex');
-    $('#userCad-box').fadeOut(1000);
-    $('#accountLost').fadeOut(1000);
-    $('#aboutUs').fadeOut(1000);
-    $('#produtos').fadeOut(1000);
-    $('#login').fadeOut(1000);
-    $('#carrinho').fadeOut(1000);
-    $('#crudSpace').fadeOut(1000);
+    $('#userCad-box').hide();
+    $('#accountLost').hide();
+    $('#aboutUs').hide();
+    $('#produtos').hide();
+    $('#login').hide();
+    $('#carrinho').hide();
+    $('#crudSpace').hide();
 });
 
 $('#aboutUsHeader').on('click', () => {
-    $('#home').fadeOut(1000);    
-    $('#userCad-box').fadeOut(1000);
-    $('#accountLost').fadeOut(1000);
-    $('#aboutUs').fadeIn(1000);
+    $('#home').hide();    
+    $('#userCad-box').hide();
+    $('#accountLost').hide();
+    $('#aboutUs').fadeIn();
     $('#aboutUs').css('display', 'flex');
-    $('#produtos').fadeOut(1000);
-    $('#login').fadeOut(1000);
-    $('#carrinho').fadeOut(1000);
-    $('#crudSpace').fadeOut(1000);
+    $('#produtos').hide();
+    $('#login').hide();
+    $('#carrinho').hide();
+    $('#crudSpace').hide();
 });
 
 $('#loginInvite').on('click', () => {
-    $('#home').fadeOut(1000);    
-    $('#userCad-box').fadeIn(1000);
+    $('#home').hide();    
+    $('#userCad-box').fadeIn();
     $('#userCad-box').css('display', 'flex');
-    $('#accountLost').fadeOut(1000);
-    $('#aboutUs').fadeOut(1000);    
-    $('#produtos').fadeOut(1000);
-    $('#login').fadeOut(1000);
-    $('#carrinho').fadeOut(1000);
-    $('#crudSpace').fadeOut(1000);
+    $('#accountLost').hide();
+    $('#aboutUs').hide();    
+    $('#produtos').hide();
+    $('#login').hide();
+    $('#carrinho').hide();
+    $('#crudSpace').hide();
 });
 
 $('#forgetButton').on('click', () => {
-    $('#home').fadeOut(1000);    
-    $('#userCad-box').fadeOut(1000);    
-    $('#accountLost').fadeIn(1000);
+    $('#home').hide();    
+    $('#userCad-box').hide();    
+    $('#accountLost').fadeIn();
     $('#accountLost').css('display', 'flex');
-    $('#aboutUs').fadeOut(1000);    
-    $('#produtos').fadeOut(1000);
-    $('#login').fadeOut(1000);
-    $('#carrinho').fadeOut(1000);
-    $('#crudSpace').fadeOut(1000);
+    $('#aboutUs').hide();    
+    $('#produtos').hide();
+    $('#login').hide();
+    $('#carrinho').hide();
+    $('#crudSpace').hide();
 });
 
 $('.toProducts').on('click', () => {
-    $('#home').fadeOut(1000);    
-    $('#userCad-box').fadeOut(1000);    
-    $('#accountLost').fadeOut(1000);    
-    $('#aboutUs').fadeOut(1000);    
-    $('#produtos').fadeIn(1000);
-    $('#login').fadeOut(1000);
-    $('#carrinho').fadeOut(1000);
-    $('#crudSpace').fadeOut(1000);
+    $('#home').hide();    
+    $('#userCad-box').hide();    
+    $('#accountLost').hide();    
+    $('#aboutUs').hide();    
+    $('#produtos').fadeIn();
+    $('#login').hide();
+    $('#carrinho').hide();
+    $('#crudSpace').hide();
 
     fetch(`http://localhost:3000/search/packs/1`)
         .then(data => data.json())
@@ -98,15 +98,15 @@ $('.toProducts').on('click', () => {
 });
 
 $('.toCart').on('click', () => {
-    $('#home').fadeOut(1000);    
-    $('#userCad-box').fadeOut(1000);    
-    $('#accountLost').fadeOut(1000);    
-    $('#aboutUs').fadeOut(1000);    
-    $('#produtos').fadeOut(1000);
-    $('#login').fadeOut(1000);
-    $('#carrinho').fadeIn(1000);
+    $('#home').hide();    
+    $('#userCad-box').hide();    
+    $('#accountLost').hide();    
+    $('#aboutUs').hide();    
+    $('#produtos').hide();
+    $('#login').hide();
+    $('#carrinho').fadeIn();
     $('#carrinho').css('display', 'flex');
-    $('#crudSpace').fadeOut(1000);
+    $('#crudSpace').hide();
 
     fetch(`http://localhost:3000/search/packs`)
         .then(data => data.json())
@@ -121,21 +121,21 @@ $('.toCart').on('click', () => {
 });
 
 $('.buyButton').on('click', () => {
-    $('#home').fadeOut(1000);    
-    $('#userCad-box').fadeOut(1000);    
-    $('#accountLost').fadeOut(1000);    
-    $('#aboutUs').fadeOut(1000);    
-    $('#produtos').fadeOut(1000);
-    $('#login').fadeOut(1000);
-    $('#carrinho').fadeIn(1000);
+    $('#home').hide();    
+    $('#userCad-box').hide();    
+    $('#accountLost').hide();    
+    $('#aboutUs').hide();    
+    $('#produtos').hide();
+    $('#login').hide();
+    $('#carrinho').fadeIn();
     $('#carrinho').css('display', 'flex');
-    $('#crudSpace').fadeOut(1000);
+    $('#crudSpace').hide();
 });
 
 // crudSelect, crudInsert, crudAlter, crudDelete
 
 $('#crudMenuSelect').on('click', () => {
-    $('#crudSelect').fadeIn(1000);
+    $('#crudSelect').fadeIn();
     $('#crudInsert').hide();
     $('#crudAlter').hide();
     $('#crudDelete').hide();
@@ -143,7 +143,7 @@ $('#crudMenuSelect').on('click', () => {
 
 $('#crudMenuInsert').on('click', () => {
     $('#crudSelect').hide();
-    $('#crudInsert').fadeIn(1000);
+    $('#crudInsert').fadeIn();
     $('#crudAlter').hide();
     $('#crudDelete').hide();
 });
@@ -151,7 +151,7 @@ $('#crudMenuInsert').on('click', () => {
 $('#crudMenuAlter').on('click', () => {
     $('#crudSelect').hide();
     $('#crudInsert').hide();
-    $('#crudAlter').fadeIn(1000);
+    $('#crudAlter').fadeIn();
     $('#crudDelete').hide();
 });
 
@@ -159,7 +159,7 @@ $('#crudMenuDelete').on('click', () => {
     $('#crudSelect').hide();
     $('#crudInsert').hide();
     $('#crudAlter').hide();
-    $('#crudDelete').fadeIn(1000);
+    $('#crudDelete').fadeIn();
 });
 
 //crudInsertPacks crudInsertUser :crudInsertSelect

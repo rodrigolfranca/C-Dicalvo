@@ -549,7 +549,7 @@ main{
                 border:none;
                 outline: none;
             }
-            .crudUsersName {
+            .crudUsersMedium {
                 width: 190px;
                 height: 22px;
                 border-radius: 5px;
@@ -557,48 +557,12 @@ main{
                 border:none;
                 outline: none;
                 padding-left: 15px;
-            }
-            .crudUsersSurname {
-                width: 190px;
-                height: 22px;
-                border-radius: 5px;
-                display:inline;
-                border:none;
-                outline: none;
-                padding-left: 15px;
-            }
+            }            
             .crudUsersEmail {
                 width: 399px;
                 height: 22px;
                 border-radius: 5px;
                 display:block;
-                border:none;
-                outline: none;
-                padding-left: 15px;
-            }
-            .crudUsersSenha {
-                width: 190px;
-                height: 22px;
-                border-radius: 5px;
-                display:inline;
-                border:none;
-                outline: none;
-                padding-left: 15px;
-            }
-            .crudUsersVerify {
-                width: 190px;
-                height: 22px;
-                border-radius: 5px;
-                display:inline;
-                border:none;
-                outline: none;
-                padding-left: 15px;
-            }
-            .crudUsersCalvicie {
-                width: 190px;
-                height: 22px;
-                border-radius: 5px;
-                display:inline;
                 border:none;
                 outline: none;
                 padding-left: 15px;
