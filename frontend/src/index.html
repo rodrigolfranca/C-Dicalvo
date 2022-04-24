@@ -110,8 +110,46 @@
                         <option value="bags">Sacolas</option>
                     </select>
                     <input type="button" id="crudSelectButton" value="Pesquisar" />
-                    <input type="text" id="crudSelectFilter" placeholder="Id (Vazio = Todos)" />
-                    <div id="crudSelectResults"></div>
+                    <input type="text" id="crudSelectFilter" placeholder="Id (Vazio = Todos)" />                    
+                </div>
+                <div id="crudSelectResults" class=crudResults>
+                    <table>
+                        <thead>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Sobrenome</th>
+                            <th>E-mail</th>
+                            <th>Tipo</th>
+                            <th>ADM</th>
+                            <th>ID Sacola</th>
+                            <th>Assinatura</th>
+                            <th>Periodicidade</th>                                
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Rodrigo</td>
+                                <td>Luiz de França</td>                                    
+                                <td>rodrigolfranca@gmail.com</td>
+                                <td>M Segunda Etapa</td>
+                                <td>Sim</td>
+                                <td>1</td>
+                                <td>Sim</td>
+                                <td>Anual</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Luiz Gustavo</td>
+                                <td>Caldas</td>
+                                <td>lgcaldas@gmail.com</td>
+                                <td>A Final</td>
+                                <td>Sim</td>
+                                <td>2</td>
+                                <td>Sim</td>
+                                <td>Anual</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </section>
             <section id="crudInsert">
@@ -178,7 +216,7 @@
                 </section>
             </section>
             <section id="crudDelete">
-                <h3>O que você quer deletar</h3>
+                <h3>O que você quer deletar?</h3>
                 <select id="crudDeleteSelect">
                     <option val="-1">Selecione</option>
                     <option val="users">Usuário</option>
@@ -186,7 +224,34 @@
                 </select>
                 <input type="text" id="crudDeleteID" placeholder="ID" />
                 <input type="button" id=crudDeleteSearchButton value="Buscar" />
-                <div id="crudDeleteResult"></div>
+                <div id="crudDeleteResult" class="crudResults">
+                    <table>
+                        <thead>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Sobrenome</th>
+                            <th>E-mail</th>
+                            <th>Tipo</th>
+                            <th>ADM</th>
+                            <th>ID Sacola</th>
+                            <th>Assinatura</th>
+                            <th>Periodicidade</th>                                
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Rodrigo</td>
+                                <td>Luiz de França</td>                                    
+                                <td>rodrigolfranca@gmail.com</td>
+                                <td>M Segunda Etapa</td>
+                                <td>Sim</td>
+                                <td>1</td>
+                                <td>Sim</td>
+                                <td>Anual</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <input type="button" id=crudDeleteButton value="Deletar" />
             </section>
         </section>
