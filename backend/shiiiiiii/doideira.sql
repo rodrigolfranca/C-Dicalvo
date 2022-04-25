@@ -39,10 +39,8 @@ CREATE TABLE packs (
 );
 
 
-
-ALTER TABLE users ADD CONSTRAINT users_fk0 FOREIGN KEY (id_bag) REFERENCES bag(id);
-
 ALTER TABLE bag ADD CONSTRAINT bag_fk0 FOREIGN KEY (id_pack) REFERENCES packs(id);
+ALTER TABLE bag ADD CONSTRAINT bag_fk1 FOREIGN KEY (id_user) REFERENCES users(id);
 
 
 insert into users (id, fname, lname, password, email, type_of_bold, type_user) values (1, 'Shurlock', 'Huggons', 'African bush squirrel', 'shuggons0@nationalgeographic.com', 'Paraxerus cepapi', 1);
