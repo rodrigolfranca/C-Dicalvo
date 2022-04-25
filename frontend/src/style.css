@@ -448,13 +448,13 @@ main{
                 padding-left: 5px;
                 border: none;
             }
-        .crudResults {
-            border: 1px solid var(--black);
+        .crudResults {            
             display: block;
             height: fit-content;
             width: fit-content;
             max-height: 300px;
             overflow-y: scroll;
+            margin: 0 auto;
         }
             .crudResults td, .crudResults th, .crudResults table {
                 border: var(--black) 1px solid;

@@ -1,4 +1,4 @@
-let userLogged, userToken;
+let userLogged, userToken, userID, userADMIN;
 
 // home: flex, userCad-box: flex , login: flex, accountLost: flex, crudSpace,  aboutUs: flex, produtos: block, carrinho: flex
 function changeFrame(frame, display) {
@@ -23,7 +23,6 @@ $('#userHeader').on('click', () => {
     } else {
         changeFrame('#crudSpace');             
     }
-
 });
 
 $('.toHome').on('click', () => {
@@ -148,3 +147,123 @@ $('#crudAlterSelect').on('change', () => {
             $('#crudAlterPacks').hide();
     }    
 })
+
+
+
+$('#loginButton').on('click', () => {
+
+    const email = $('#emailLogin').val();
+    const senha = $('#senhaLogin').val();
+
+    const options = {
+        method: 'POST',
+        body: JSON.stringify({ email, senha }),
+        headers: { 'Content-Type': 'application/json' }
+    }
+
+    fetch('localhost:3000/login', options)
+        .then(data = data.json())
+        .then(resposta => {
+            if (resposta.auth) {
+
+                userLogged = 1;                
+                userToken = resposta.token;
+                userID = JSON.parse(window.atob(resposta.token.split('.')[1])).id;
+                userADMIN = JSON.parse(window.atob(resposta.token.split('.')[1])).admin;
+
+            } else {
+
+                console.log('Login falhou!')
+
+            }
+        })
+        .catch(err => console.log(err));
+});
+
+$('#crudSelectButton').on('click', function() {
+
+    const buscaPor = $('buscaPor').val();
+    const filtro = $('crudSelectFilter').val();
+
+    if (!buscaPor) {
+        alert("Selecione uma tabela para pesquisar");
+        return false;
+    }
+
+    fetch(`localhost:3000/search/${buscaPor}/${filtro}`)
+        .then(data => data.json())
+        .then(objeto => {
+            switch (buscaPor) {
+                case 'users':
+                    $('#crudSelectResults').html(`
+                    <table>
+                        <thead>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Sobrenome</th>
+                            <th>E-mail</th>
+                            <th>Tipo</th>
+                            <th>ADM</th>
+                            <th>ID Sacola</th>
+                            <th>Assinatura</th>
+                            <th>Periodicidade</th>                                
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>${objeto.id}</td>
+                                <td>${objeto.fname}</td>
+                                <td>${objeto.lname}</td>                                    
+                                <td>${objeto.email}</td>
+                                <td>${objeto['type_of_bold']}</td>
+                                <td>${objeto['adm']}</td>
+                                <td>${objeto['id_bag']}</td>
+                                <td>${objeto['signature_name']}</td>
+                                <td>${objeto['signature_type']}</td>
+                            </tr>
+                        </tbody>
+                    </table>                    
+                    `)
+                    break;
+                case 'packs':
+                    $('#crudSelectResults').html(`
+                    <table>
+                        <thead>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Preço Mensal</th>                         
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>${objeto.id}</td>
+                                <td>${objeto.name}</td>
+                                <td>${objeto['monthly_price']}</td>
+                            </tr>
+                        </tbody>
+                    </table>                    
+                    `)
+                    break;
+                case 'bags':
+                    $('#crudSelectResults').html(`
+                    <table>
+                        <thead>
+                            <th>ID</th>
+                            <th>Pacote</th>
+                            <th>Plano</th>
+                            <th>ID do Dono</th>                               
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>${objeto.id}</td>
+                                <td>${objeto['id_pack']}</td>
+                                <td>${objeto['signature_type']}</td>                                    
+                                <td>${objeto['user_id']}</td>
+                            </tr>
+                        </tbody>
+                    </table>                    
+                    `)
+                    break;
+                default:
+            }
+        })
+        .catch(err => console.log(err));
+});
