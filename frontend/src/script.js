@@ -1,14 +1,19 @@
-let userLogged = 1;
+let userLogged, userToken;
 
 // home: flex, userCad-box: flex , login: flex, accountLost: flex, aboutUs: flex, produtos: block, carrinho: flex
-
-$('#userHeader').on('click', () => {
+function allHide() {
     $('#home').hide();
     $('#userCad-box').hide();
     $('#accountLost').hide();
     $('#aboutUs').hide();
     $('#produtos').hide();
     $('#carrinho').hide();
+    $('#crudSpace').hide();
+    $('#login').hide();
+}
+
+$('#userHeader').on('click', () => {
+    allHide();
     if (!userLogged) {        
         $('#login').fadeIn();
         $('#login').css('display', 'flex');        
@@ -19,62 +24,32 @@ $('#userHeader').on('click', () => {
 });
 
 $('.toHome').on('click', () => {
+    allHide();
     $('#home').fadeIn();    
-    $('#home').css('display', 'flex');
-    $('#userCad-box').hide();
-    $('#accountLost').hide();
-    $('#aboutUs').hide();
-    $('#produtos').hide();
-    $('#login').hide();
-    $('#carrinho').hide();
-    $('#crudSpace').hide();
+    $('#home').css('display', 'flex');    
 });
 
 $('#aboutUsHeader').on('click', () => {
-    $('#home').hide();    
-    $('#userCad-box').hide();
-    $('#accountLost').hide();
+    allHide();    
     $('#aboutUs').fadeIn();
-    $('#aboutUs').css('display', 'flex');
-    $('#produtos').hide();
-    $('#login').hide();
-    $('#carrinho').hide();
-    $('#crudSpace').hide();
+    $('#aboutUs').css('display', 'flex');    
 });
 
 $('#loginInvite').on('click', () => {
-    $('#home').hide();    
+    allHide();
     $('#userCad-box').fadeIn();
     $('#userCad-box').css('display', 'flex');
-    $('#accountLost').hide();
-    $('#aboutUs').hide();    
-    $('#produtos').hide();
-    $('#login').hide();
-    $('#carrinho').hide();
-    $('#crudSpace').hide();
 });
 
 $('#forgetButton').on('click', () => {
-    $('#home').hide();    
-    $('#userCad-box').hide();    
+    allHide();
     $('#accountLost').fadeIn();
     $('#accountLost').css('display', 'flex');
-    $('#aboutUs').hide();    
-    $('#produtos').hide();
-    $('#login').hide();
-    $('#carrinho').hide();
-    $('#crudSpace').hide();
 });
 
 $('.toProducts').on('click', () => {
-    $('#home').hide();    
-    $('#userCad-box').hide();    
-    $('#accountLost').hide();    
-    $('#aboutUs').hide();    
+    allHide();
     $('#produtos').fadeIn();
-    $('#login').hide();
-    $('#carrinho').hide();
-    $('#crudSpace').hide();
 
     fetch(`http://localhost:3000/search/packs/1`)
         .then(data => data.json())
@@ -98,15 +73,9 @@ $('.toProducts').on('click', () => {
 });
 
 $('.toCart').on('click', () => {
-    $('#home').hide();    
-    $('#userCad-box').hide();    
-    $('#accountLost').hide();    
-    $('#aboutUs').hide();    
-    $('#produtos').hide();
-    $('#login').hide();
+    allHide();
     $('#carrinho').fadeIn();
-    $('#carrinho').css('display', 'flex');
-    $('#crudSpace').hide();
+    $('#carrinho').css('display', 'flex');    
 
     fetch(`http://localhost:3000/search/packs`)
         .then(data => data.json())
@@ -121,15 +90,9 @@ $('.toCart').on('click', () => {
 });
 
 $('.buyButton').on('click', () => {
-    $('#home').hide();    
-    $('#userCad-box').hide();    
-    $('#accountLost').hide();    
-    $('#aboutUs').hide();    
-    $('#produtos').hide();
-    $('#login').hide();
+    allHide();
     $('#carrinho').fadeIn();
     $('#carrinho').css('display', 'flex');
-    $('#crudSpace').hide();
 });
 
 // crudSelect, crudInsert, crudAlter, crudDelete
