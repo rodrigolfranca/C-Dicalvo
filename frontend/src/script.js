@@ -34,11 +34,11 @@ $('#aboutUsHeader').on('click', () => {
     changeFrame('#aboutUs', 'flex');
 });
 
-$('#loginInvite').on('click', () => {
+$('#forgetButton').on('click', () => {
     changeFrame('#userCad-box', 'flex');
 });
 
-$('#forgetButton').on('click', () => {
+$('#loginInvite').on('click', () => {
     changeFrame('#accountLost', 'flex');
 });
 
