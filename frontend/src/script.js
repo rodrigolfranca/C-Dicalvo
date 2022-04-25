@@ -1,7 +1,7 @@
 let userLogged, userToken;
 
-// home: flex, userCad-box: flex , login: flex, accountLost: flex, aboutUs: flex, produtos: block, carrinho: flex
-function allHide() {
+// home: flex, userCad-box: flex , login: flex, accountLost: flex, crudSpace,  aboutUs: flex, produtos: block, carrinho: flex
+function changeFrame(frame, display) {
     $('#home').hide();
     $('#userCad-box').hide();
     $('#accountLost').hide();
@@ -10,46 +10,40 @@ function allHide() {
     $('#carrinho').hide();
     $('#crudSpace').hide();
     $('#login').hide();
+    crudShow();
+    $(frame).fadeIn();
+    if (display) {
+        $(frame).css('display', display);
+    }
 }
 
-$('#userHeader').on('click', () => {
-    allHide();
-    if (!userLogged) {        
-        $('#login').fadeIn();
-        $('#login').css('display', 'flex');        
+$('#userHeader').on('click', () => {    
+    if (!userLogged) {
+        changeFrame('#login', 'flex');              
     } else {
-        $('#crudSpace').fadeIn();        
+        changeFrame('#crudSpace');             
     }
 
 });
 
 $('.toHome').on('click', () => {
-    allHide();
-    $('#home').fadeIn();    
-    $('#home').css('display', 'flex');    
+    changeFrame('#home', 'flex');
 });
 
 $('#aboutUsHeader').on('click', () => {
-    allHide();    
-    $('#aboutUs').fadeIn();
-    $('#aboutUs').css('display', 'flex');    
+    changeFrame('#aboutUs', 'flex');
 });
 
 $('#loginInvite').on('click', () => {
-    allHide();
-    $('#userCad-box').fadeIn();
-    $('#userCad-box').css('display', 'flex');
+    changeFrame('#userCad-box', 'flex');
 });
 
 $('#forgetButton').on('click', () => {
-    allHide();
-    $('#accountLost').fadeIn();
-    $('#accountLost').css('display', 'flex');
+    changeFrame('#accountLost', 'flex');
 });
 
 $('.toProducts').on('click', () => {
-    allHide();
-    $('#produtos').fadeIn();
+    changeFrame('#produtos');
 
     fetch(`http://localhost:3000/search/packs/1`)
         .then(data => data.json())
@@ -73,9 +67,7 @@ $('.toProducts').on('click', () => {
 });
 
 $('.toCart').on('click', () => {
-    allHide();
-    $('#carrinho').fadeIn();
-    $('#carrinho').css('display', 'flex');    
+    changeFrame('#carrinho', 'flex');  
 
     fetch(`http://localhost:3000/search/packs`)
         .then(data => data.json())
@@ -90,42 +82,40 @@ $('.toCart').on('click', () => {
 });
 
 $('.buyButton').on('click', () => {
-    allHide();
-    $('#carrinho').fadeIn();
-    $('#carrinho').css('display', 'flex');
+    changeFrame('#carrinho', 'flex');
 });
 
-// crudSelect, crudInsert, crudAlter, crudDelete
-
-$('#crudMenuSelect').on('click', () => {
-    $('#crudSelect').fadeIn();
+// crud Frame selector
+function crudShow(frame, link) {
+    $('#crudMenuSelect').css('color', 'var(--yellow)');
+    $('#crudMenuInsert').css('color', 'var(--yellow)');
+    $('#crudMenuAlter').css('color', 'var(--yellow)');
+    $('#crudMenuDelete').css('color', 'var(--yellow)');
+    if (link) $(link).css('color', 'var(--cream)');
     $('#crudInsert').hide();
     $('#crudAlter').hide();
     $('#crudDelete').hide();
+    $('#crudSelect').hide();
+    if (frame) $(frame).fadeIn();
+}
+
+$('#crudMenuSelect').on('click', () => {
+    crudShow('#crudSelect', '#crudMenuSelect')
 });
 
 $('#crudMenuInsert').on('click', () => {
-    $('#crudSelect').hide();
-    $('#crudInsert').fadeIn();
-    $('#crudAlter').hide();
-    $('#crudDelete').hide();
+    crudShow('#crudInsert', '#crudMenuInsert')
 });
 
 $('#crudMenuAlter').on('click', () => {
-    $('#crudSelect').hide();
-    $('#crudInsert').hide();
-    $('#crudAlter').fadeIn();
-    $('#crudDelete').hide();
+    crudShow('#crudAlter', '#crudMenuAlter')
 });
 
 $('#crudMenuDelete').on('click', () => {
-    $('#crudSelect').hide();
-    $('#crudInsert').hide();
-    $('#crudAlter').hide();
-    $('#crudDelete').fadeIn();
+    crudShow('#crudDelete', '#crudMenuDelete')
 });
 
-//crudInsertPacks crudInsertUser :crudInsertSelect
+// crudInsert select 
 $('#crudInsertSelect').on('change', () => {
     switch ($('#crudInsertSelect').val()){
         case 'users':
@@ -142,7 +132,7 @@ $('#crudInsertSelect').on('change', () => {
     }    
 });
 
-//crudAlterPacks crudAlterUser :crudAlterSelect
+// crudAlter select
 $('#crudAlterSelect').on('change', () => {
     switch ($('#crudAlterSelect').val()){
         case 'users':
