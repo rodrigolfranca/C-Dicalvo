@@ -165,14 +165,19 @@ $('#loginButton').on('click', () => {
         .then(data = data.json())
         .then(resposta => {
             if (resposta.auth) {
-                userLogged = 1;
-                token = resposta.token;
+
+                userLogged = 1;                
+                userToken = resposta.token;
+                userID = JSON.parse(window.atob(resposta.token.split('.')[1])).id;
+                userADMIN = JSON.parse(window.atob(resposta.token.split('.')[1])).admin;
+
             } else {
+
                 console.log('Login falhou!')
+
             }
         })
-        .catch(err => console.log(err))
-
+        .catch(err => console.log(err));
 });
 
 $('#crudSelectButton').on('click', function() {
@@ -225,16 +230,12 @@ $('#crudSelectButton').on('click', function() {
                         <thead>
                             <th>ID</th>
                             <th>Nome</th>
-                            <th>Descrição</th>
-                            <th>URL Imagem</th>
                             <th>Preço Mensal</th>                         
                         </thead>
                         <tbody>
                             <tr>
                                 <td>${objeto.id}</td>
                                 <td>${objeto.name}</td>
-                                <td>${objeto.description}</td>
-                                <td>${objeto['img_url']}</td>
                                 <td>${objeto['monthly_price']}</td>
                             </tr>
                         </tbody>
