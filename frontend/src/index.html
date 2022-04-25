@@ -27,6 +27,8 @@
         <section id="home">
             <!-- Carrosel inicio -->
             <div id="carrosel">
+                <img id="logoNegativa" src="./assets/logoNegativa.png " alt="">
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Recusandae culpa ut rerum corporis distinctio nobis, eaque ipsa, impedit, illum minus maiores. Fugit fuga ad enim ipsa quis harum modi magni.</p>
             </div>
             <!-- Fim Carrosel -->
             <div id="entenda-box">
@@ -112,34 +114,7 @@
                     <input type="button" id="crudSelectButton" value="Pesquisar" />
                     <input type="text" id="crudSelectFilter" placeholder="Id (Vazio = Todos)" />                    
                 </div>
-                <div id="crudSelectResults" class=crudResults>
-                    <table>
-                        <thead>
-                            <th>ID</th>
-                            <th>Nome</th>
-                            <th>Sobrenome</th>
-                            <th>E-mail</th>
-                            <th>Tipo</th>
-                            <th>ADM</th>
-                            <th>ID Sacola</th>
-                            <th>Assinatura</th>
-                            <th>Periodicidade</th>                                
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Rodrigo</td>
-                                <td>Luiz de França</td>                                    
-                                <td>rodrigolfranca@gmail.com</td>
-                                <td>M Segunda Etapa</td>
-                                <td>Sim</td>
-                                <td>1</td>
-                                <td>Sim</td>
-                                <td>Anual</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <div id="crudSelectResults" class=crudResults></div>
             </section>
             <section id="crudInsert">
                 <h3>Em qual tabela você quer adcionar itens?</h3>
@@ -254,9 +229,9 @@
         </section>
         <section id="produtos">
             <div id="seletorPacote">
-                <input type="button" class="seletor" value="C Begginer" />
-                <input type="button" class="seletor" value="C Intermediate" />
-                <input type="button" class="seletor" value="C Proud" />
+                <input type="button" class="seletor" value="C Begginer" id="cBegginer" />
+                <input type="button" class="seletor" value="C Intermediate" id="cBItermediate" />
+                <input type="button" class="seletor" value="C Proud" id="cProud" />
             </div>
             <div id="painelProduto">
                 <div id="productPhoto">

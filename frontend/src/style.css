@@ -15,7 +15,9 @@
 }
 body {
     margin: 0;
-    background-color: var(--white);
+    background-image: url("./assets/background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 option {
     font-family: 'Oxygen', sans-serif;
@@ -33,7 +35,7 @@ option {
 }
     #topMenu {
         height: 56px;
-        width: 1300px;
+        width: 1100px;
         position: fixed;
         display: flex;
         align-items: center;
@@ -48,11 +50,15 @@ option {
         #logoHeader {
             margin: 15px 0 0 00;
         }
-            #userHeader, #bagHeader{
-                margin-right: 50px;
-                height: 46px;
-                width: 46px;
-            }
+        #bagHeader{
+            margin-right: 50px;
+            height: 46px;
+            width: 46px;
+        }
+        #userHeader{
+            height: 46px;
+            width: 46px;
+        }
         header ul {
             list-style: none;
             display: inline-block;
@@ -90,12 +96,25 @@ main{
     /* Carrosel inicio*/
     #carrosel{
         width:100%;
-        height: 350px;
-        background-image: url("./assets/slider/1.jpeg");
-        background-position: center;
+        height: 412px;
+        background-image: url("./assets/slider/3.jpg");
         background-size: cover;
         background-repeat: no-repeat;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        column-gap: 100px;
     }
+        #logoNegativa{
+            height: 400px;
+        }
+        #carrosel p{
+            width: 400px;
+            color: var(--white);
+            text-align: justify;
+            font-weight: bold;
+            font-size: 18px;
+        }
     
     /* Carrosel fim */
 
@@ -498,7 +517,7 @@ main{
             display: none;            
             margin: 65px auto;
             height: 200px;
-            width: 416px;            
+            width: 416px;           
         }
         #crudAlterUser {
             display: none;
@@ -516,6 +535,7 @@ main{
                 margin:5.5px 7.5px;
             }
             #crudInsertUser label, #crudAlterUser label{
+                color: var(--white); 
                 padding-left: 40px;
             }
             #crudAlterUser input, #crudAlterUser label {
@@ -915,7 +935,7 @@ main{
     justify-items: center;
 }
     #carrinhoCard {
-        width: 1230px;
+        width: 1100px;
         height: 420px;
         padding-top: 50px;
         padding-left: 50px;
@@ -941,7 +961,7 @@ main{
             border-bottom: 3px var(--yellow) solid;
         }
         #carrinhoContainer {
-            width: 800px;
+            width: 725px;
             height: 250px;
             padding-top: 10px;
             padding-left: 10px;
@@ -956,7 +976,6 @@ main{
             box-shadow: 1px 4px 4px 0px #00000040;            
         }
             #carrinhoPhotoBox {
-                width: 230px;
                 height: 230px;
 
                 display: flex;
@@ -999,7 +1018,7 @@ main{
                     line-height: 40px;
                 }
         #carrinhoFinal {
-            width: 300px;
+            width: 250px;
             height: 250px;
             padding-top: 10px;
 

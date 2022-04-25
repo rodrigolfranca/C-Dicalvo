@@ -54,13 +54,12 @@ router.put("/update/:table/:id", async(req, res)=> {
             const {password} = req.body;
             const {email} = req.body;
             const {type_of_bold} = req.body;
-            const {id_bag} = req.body;
             const {signature_name} = req.body;
             const {signature_type} = req.body;
     
             const updateTables = await pool.query(`
-                UPDATE users SET fname = $1, lname = $2, password = $3, email = $4, type_of_bold = $5, id_bag = $6, signature_name =  $7, signature_type = $8 WHERE id = $9;`,
-                [ fname, lname, password, email, type_of_bold, id_bag, signature_name, signature_type, id]);
+                UPDATE users SET fname = $1, lname = $2, password = $3, email = $4, type_of_bold = $5, signature_name =  $6, signature_type = $7 WHERE id = $8;`,
+                [ fname, lname, password, email, type_of_bold, signature_name, signature_type, id]);
 
             console.log("Done!");
         } else if ( table == "packs" ){
@@ -77,10 +76,11 @@ router.put("/update/:table/:id", async(req, res)=> {
         } else if ( table == "bag" ){
             const {id_pack} = req.body;
             const {signature_type} = req.body;
+            const {id_user} = req.body;
 
             const updateTables = await pool.query(`
-            UPDATE bag SET id_pack = ($1), signature_type = ($2) WHERE id = ($3);`, 
-            [ id_pack, signature_type, id]);
+            UPDATE bag SET id_pack = ($1), signature_type = ($2), id_user = ($3)  WHERE id = ($4);`, 
+            [ id_pack, signature_type, id_user, id]);
 
             console.log("Done!");
         }
@@ -116,16 +116,17 @@ router.post("/add/:table", async(req, res) => {
 
             const addInTheTables = await pool.query(`
                 INSERT INTO packs (name, description, img_url, monthly_price) VALUES ($1, $2, $3, $4)`,
-                [ name, description, img_url, monthly_price]);
+                [ name, description, img_url, monthly_price ]);
 
             console.log("Done!");
         } else if ( table == "bag" ){
             const {id_pack} = req.body;
             const {signature_type} = req.body;
+            const {id_user} = req.body;
 
             const addInTheTables = await pool.query(`
-                INSERT INTO bag (id_pack, signature_type) VALUES ($1, $2)`, 
-                [ id_pack, signature_type]);
+                INSERT INTO bag (id_pack, signature_type, id_user) VALUES ($1, $2, $3)`, 
+                [ id_pack, signature_type, id_user ]);
 
             console.log("Done!");
         }

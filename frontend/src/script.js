@@ -171,8 +171,9 @@ $('#loginButton').on('click', () => {
                 userID = JSON.parse(window.atob(resposta.token.split('.')[1])).id;
                 userADMIN = JSON.parse(window.atob(resposta.token.split('.')[1])).admin;
 
-            } else {
+                changeFrame("#crudSpace");
 
+            } else {
                 console.log('Login falhou!')
 
             }
@@ -181,8 +182,6 @@ $('#loginButton').on('click', () => {
 });
 
 $('#crudSelectButton').on('click', function() {
-    
-
     const buscaPor = $('#buscarPor').val();
     let filtro = $('#crudSelectFilter').val();
     
@@ -211,7 +210,6 @@ $('#crudSelectButton').on('click', function() {
                                     <th>E-mail</th>
                                     <th>Tipo</th>
                                     <th>ADM</th>
-                                    <th>ID Sacola</th>
                                     <th>Assinatura</th>
                                     <th>Periodicidade</th>                                
                                 </thead>   
@@ -226,8 +224,7 @@ $('#crudSelectButton').on('click', function() {
                                     <td>${element.lname}</td>                                    
                                     <td>${element.email}</td>
                                     <td>${element['type_of_bold']}</td>
-                                    <td>${element['adm']}</td>
-                                    <td>${element['id_bag']}</td>
+                                    <td>${(element['type_user'])? "ADM": "COMUM"}</td>
                                     <td>${element['signature_name']}</td>
                                     <td>${element['signature_type']}</td>
                                 </tr>                 
