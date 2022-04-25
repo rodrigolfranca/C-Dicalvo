@@ -151,27 +151,4 @@ router.delete("/delete/:table/:id", async(req, res) => {
     }
 });
 
-router.post("login", async(req, res) => {
-    try {
-
-        const email = req.body.email;
-        const senha = req.body.senha;
-
-        const usuario = await pool.query(`SELECT * FROM users WHERE email = ($1)`, [ email ]);
-        if (senha === usuario.rows[0].password) {
-
-            const id = usuario.rows[0].id;
-            const adm = usuario.rows[0].admin;
-            const token = jwt.sign({ id , adm }, process.env.SECRET);
-
-            res.json({ auth: true, token})
-
-        } else {
-            res.json("Login Falhou, DB ou Senha errada :D Se vira Luiz. Corrige essa merda ai")
-        }
-    } catch (error) {
-        console.log(error);
-    }
-})
-
 module.exports = router;
