@@ -1,5 +1,5 @@
 let userLogged, userToken, userID, userADMIN;
-userLogged = 1;
+// userLogged = 1;
 
 // home: flex, userCad-box: flex , login: flex, accountLost: flex, crudSpace,  aboutUs: flex, produtos: block, carrinho: flex
 function changeFrame(frame, display) {
@@ -148,10 +148,11 @@ $('#loginButton').on('click', () => {
     fetch('http://localhost:3000/login', options)
         .then(data => data.json())
         .then(resposta => {
+        console.log("🚀 ~ file: script.js ~ line 151 ~ $ ~ resposta", resposta)
             if (resposta.auth) {
 
                 userLogged = 1;                
-                userToken = resposta.token;
+                userToken = resposta.token;                
                 userID = JSON.parse(window.atob(resposta.token.split('.')[1])).id;
                 userADMIN = JSON.parse(window.atob(resposta.token.split('.')[1])).adm;
 
@@ -296,7 +297,7 @@ $('#crudInsertUsersButton').on('click', function() {
     const options = {
         method: 'POST',
         body: JSON.stringify(newUser),
-        headers: { 'Content-Type': 'application/json'}
+        headers: { 'Content-Type': 'application/json', 'x-access-token': userToken}
     }
 
     fetch('http://localhost:3000/add/users', options)
@@ -326,7 +327,7 @@ $('#crudInsertPacksButton').on('click', function() {
     const options = {
         method: 'POST',
         body: JSON.stringify(newPack),
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json', 'x-access-token': userToken }
     }
 
     fetch('http://localhost:3000/add/packs', options)
@@ -400,7 +401,7 @@ $('#crudAlterUsersButton').on('click', () => {
     const options = {
         method: 'POST',
         body: JSON.stringify(newUser),
-        headers: { 'Content-Type': 'application/json', 'x-access-token' : userToken }
+        headers: { 'Content-Type': 'application/json', 'x-access-token': userToken }
     }
 
     fetch('http://localhost:3000/add/users', options)

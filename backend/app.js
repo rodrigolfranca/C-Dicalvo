@@ -26,7 +26,7 @@ app.post("/login", async(req, res) => {
         if (senha === usuario.rows[0].password) {
 
             const id = usuario.rows[0].id;
-            const adm = usuario.rows[0].admin;
+            const adm = usuario.rows[0].type_user;
             const token = jwt.sign({ id , adm }, process.env.SECRET);
 
             res.json({ auth: true, token})
