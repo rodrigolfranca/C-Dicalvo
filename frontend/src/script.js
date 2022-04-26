@@ -184,8 +184,12 @@ $('#crudSelectButton').on('click', function() {
     }
     $('#crudSelectResults').html(``);
 
+    const options = {
+        method: "GET",
+        header: {"x-access-token": userToken}
+    }
 
-    fetch(url)
+    fetch(url, options)
         .then(data => data.json())
         .then(objeto => {
                 switch (buscaPor) {
@@ -343,7 +347,12 @@ $("#crudAlterSearchButton").on('click', () => {
     const tabela = $('#crudAlterSelect').val();
     const id = $('#crudAlterID').val();
 
-    fetch(`http://localhost:3000/${tabela}/${id}`)
+    const options = {
+        method: "GET",
+        header: {"x-access-token": userToken}
+    }
+
+    fetch(`http://localhost:3000/${tabela}/${id}`, options)
         .then(data => data.json())
         .then( resultado => {
             switch (tabela) {
