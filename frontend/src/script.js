@@ -1,4 +1,5 @@
 let userLogged, userToken, userID, userADMIN;
+userLogged = 1;
 
 // home: flex, userCad-box: flex , login: flex, accountLost: flex, crudSpace,  aboutUs: flex, produtos: block, carrinho: flex
 function changeFrame(frame, display) {
@@ -131,24 +132,7 @@ $('#crudInsertSelect').on('change', () => {
     }    
 });
 
-// crudAlter select
-$('#crudAlterSelect').on('change', () => {
-    switch ($('#crudAlterSelect').val()){
-        case 'users':
-            $('#crudAlterUser').fadeIn();
-            $('#crudAlterPacks').hide();
-            break;
-        case 'packs':
-            $('#crudAlterUser').hide();
-            $('#crudAlterPacks').fadeIn();
-            break;
-        default:
-            $('#crudAlterUser').hide();
-            $('#crudAlterPacks').hide();
-    }    
-})
-
-
+//LOGIN: inicio
 
 $('#loginButton').on('click', () => {
 
@@ -181,9 +165,12 @@ $('#loginButton').on('click', () => {
         .catch(err => console.log(err));
 });
 
+//LOGIN: fim
+//SELECT: inicio
+
 $('#crudSelectButton').on('click', function() {
     const buscaPor = $('#buscarPor').val();
-    let filtro = $('#crudSelectFilter').val();
+    const filtro = $('#crudSelectFilter').val();
     
     let url;
     (!filtro)? url = `http://localhost:3000/search/${buscaPor}` : url = `http://localhost:3000/search/${buscaPor}/${filtro}`;
@@ -275,6 +262,112 @@ $('#crudSelectButton').on('click', function() {
                         break;
                     default:
                 }
+        })
+        .catch(err => console.log(err));
+});
+
+//SELECT: fim
+//INSERT: inicio
+
+$('#crudInsertUsersButton').on('click', function() {
+
+    //validação de inputs aqui \/\/\/\/\/\/\/\/
+
+    if (!$('#crudInsertUsersName').val()) { $('#crudInsertUsersName').effect('highlight'); console.log('teste'); return false; }
+    if (!$('#crudInsertUsersSurname').val()) { $('#crudInsertUsersSurname').effect('highlight'); console.log('teste'); return false; }
+    if (!$('#crudInsertUsersEmail').val()) { $('#crudInsertUsersEmail').effect('highlight'); console.log('teste'); return false; }
+    if (!$('#crudInsertUsersSenha').val()) { $('#crudInsertUsersSenha').effect('highlight'); console.log('teste'); return false; }
+    if (!$('#crudInsertUsersVerify').val()) { $('#crudInsertUsersVerify').effect('highlight'); console.log('teste'); return false; }
+    if (!$('#crudInsertUsersCalvicie').val()) { $('#crudInsertUsersCalvicie').effect('highlight'); console.log('teste'); return false; }
+
+    const newUser = {
+        fname : $('#crudInsertUsersName').val(),
+        lname : $('#crudInsertUsersSurname').val(),
+        email : $('#crudInsertUsersEmail').val(),
+        password : $('#crudInsertUsersSenha').val(),
+        type_of_bold : $('#crudInsertUsersCalvicie').val(),        
+        type_user : $('#crudInsertUsersAdmin').prop('checked'),
+        id_pack : $('#crudInsertUsersAssinatura').val(),
+        signature_type : $('#crudInsertUsersTipo').val()
+    }
+
+    const options = {
+        method: 'POST',
+        body: JSON.stringify(newUser),
+        headers: { 'Content-Type': 'application/json', 'x-access-token' : userToken }
+    }
+
+    fetch('http://localhost:3000/add/users', options)
+        .then(data => data.json())
+        .then(resposta => console.log(resposta))
+        .catch(err => console.log(err));
+
+});
+
+$('#crudInsertPacksButton').on('click', function() {
+
+    //validação de inputs aqui \/\/\/\/\/\/\/\/
+
+    if (!$('#crudInsertPacksName').val()) { $('#crudInsertPacksName').effect('highlight'); return false; }
+    if (!$('#crudInsertPacksDescricao').val()) { $('#crudInsertPacksDescricao').effect('highlight'); return false; }
+    if (!$('#crudInsertPacksImage').val()) { $('#crudInsertPacksImage').effect('highlight'); return false; }
+    if (!$('#crudInsertPacksPreco').val()) { $('#crudInsertPacksPreco').effect('highlight'); return false; }
+    
+
+    const newPack = {
+        name : $('#crudInsertPacksName').val(),
+        description : $('#crudInsertPacksDescricao').val(),
+        img_url : $('#crudInsertPacksImage').val(),
+        monthly_price : $('#crudInsertPacksPreco').val(),        
+    }
+
+    const options = {
+        method: 'POST',
+        body: JSON.stringify(newPack),
+        headers: { 'Content-Type': 'application/json', 'x-access-token' : userToken }
+    }
+
+    fetch('http://localhost:3000/add/packs', options)
+        .then(data => data.json())
+        .then(resposta => console.log(resposta))
+        .catch(err => console.log(err));
+        
+});
+
+//INSERT: fim
+//UPDATE: inicio
+
+$("#crudAlterSearchButton").on('click', () => {
+
+    const tabela = $('#crudAlterSelect').val();
+    const id = $('#crudAlterID').val();
+
+    fetch(`http://localhost:3000/${tabela}/${id}`)
+        .then(data => data.json())
+        .then( resultado => {
+            switch (tabela) {
+                case 'users':
+                    $('#crudAlterUser').fadeIn();
+                    $('#crudAlterPacks').hide();
+                    $('#crudAlterUsersName').val(resultado.fname);
+                    $('#crudAlterUsersSurname').val(resultado.lname);
+                    $('#crudAlterUsersEmail').val(resultado.email);
+                    $('#crudAlterUsersSenha').val(resultado.password);
+                    $('#crudAlterUsersVerify').val(resultado.password);
+                    $('#crudAlterUsersCalvicie').val(resultado['type_of_bold']);                    
+                    if (resultado['type_user']) $('#crudAlterUsersAdmin').prop('checked', true);
+                    $('#crudAlterUsersAssinatura').val(resultado['signature_name']);
+                    $('#crudAlterUsersTipo').val(resultado['signature_type']);
+                    break;
+                case 'packs':
+                    $('#crudAlterUser').hide();
+                    $('#crudAlterPacks').fadeIn();
+                    $('#crudAlterUsersName').val(resultado.name);
+                    $('#crudAlterUsersName').val(resultado.description);
+                    $('#crudAlterUsersName').val(resultado.img_url);
+                    $('#crudAlterUsersName').val(resultado.monthly_price);
+                    break;
+            }
         })
         .catch(err => console.log(err));
 });
