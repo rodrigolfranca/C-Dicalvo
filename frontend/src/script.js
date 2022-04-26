@@ -294,7 +294,7 @@ $('#crudInsertUsersButton').on('click', function() {
         password : $('#crudInsertUsersSenha').val(),
         type_of_bold : $('#crudInsertUsersCalvicie').val(),        
         type_user : $('#crudInsertUsersAdmin').prop('checked'),
-        id_pack : $('#crudInsertUsersAssinatura').val(),
+        signature_name : $('#crudInsertUsersAssinatura').val(),
         signature_type : $('#crudInsertUsersTipo').val()
     }
 
@@ -348,16 +348,12 @@ $("#crudAlterSearchButton").on('click', () => {
     const tabela = $('#crudAlterSelect').val();
     const id = $('#crudAlterID').val();
 
-<<<<<<< HEAD
     const options = {
         method: "GET",
         header: {"x-access-token": userToken}
     }
 
     fetch(`http://localhost:3000/${tabela}/${id}`, options)
-=======
-    fetch(`http://localhost:3000/search/${tabela}/${id}`)
->>>>>>> 28dd5ecc1ace160148e499d77765a878d32e1b26
         .then(data => data.json())
         .then( resultado => {
             resultado = resultado[0];
@@ -371,8 +367,7 @@ $("#crudAlterSearchButton").on('click', () => {
                     $('#crudAlterUsersEmail').val(resultado.email);
                     $('#crudAlterUsersSenha').val(resultado.password);
                     $('#crudAlterUsersVerify').val(resultado.password);
-                    $('#crudAlterUsersCalvicie').val(resultado['type_of_bold']);                    
-                    if (resultado['type_user']) $('#crudAlterUsersAdmin').prop('checked', true);
+                    $('#crudAlterUsersCalvicie').val(resultado['type_of_bold']);
                     $('#crudAlterUsersAssinatura').val(resultado['signature_name']);
                     $('#crudAlterUsersTipo').val(resultado['signature_type']);
                     break;
@@ -391,34 +386,139 @@ $("#crudAlterSearchButton").on('click', () => {
 
 $('#crudAlterUsersButton').on('click', () => {
 
-    //validação de inputs aqui \/\/\/\/\/\/\/\/
-
-    if (!$('#crudInsertUsersName').val()) { $('#crudInsertUsersName').effect('highlight'); return false; }
-    if (!$('#crudInsertUsersSurname').val()) { $('#crudInsertUsersSurname').effect('highlight'); return false; }
-    if (!$('#crudInsertUsersEmail').val()) { $('#crudInsertUsersEmail').effect('highlight'); return false; }
-    if (!$('#crudInsertUsersSenha').val()) { $('#crudInsertUsersSenha').effect('highlight'); return false; }
-    if (!$('#crudInsertUsersVerify').val()) { $('#crudInsertUsersVerify').effect('highlight'); return false; }
-    if (!$('#crudInsertUsersCalvicie').val()) { $('#crudInsertUsersCalvicie').effect('highlight'); return false; }
-
-    const newUser = {
-        fname : $('#crudInsertUsersName').val(),
-        lname : $('#crudInsertUsersSurname').val(),
-        email : $('#crudInsertUsersEmail').val(),
-        password : $('#crudInsertUsersSenha').val(),
-        type_of_bold : $('#crudInsertUsersCalvicie').val(),        
-        type_user : $('#crudInsertUsersAdmin').prop('checked'),
-        id_pack : $('#crudInsertUsersAssinatura').val(),
-        signature_type : $('#crudInsertUsersTipo').val()
+    const tabela = $('#crudAlterSelect').val();
+    const id = $('#crudAlterID').val();
+    
+    const alteredUser = {
+        fname : $('#crudAlterUsersName').val(),
+        lname : $('#crudAlterUsersSurname').val(),
+        email : $('#crudAlterUsersEmail').val(),
+        password : $('#crudAlterUsersSenha').val(),
+        type_of_bold : $('#crudAlterUsersCalvicie').val(),
+        signature_name : $('#crudAlterUsersAssinatura').val(),
+        signature_type : $('#crudAlterUsersTipo').val()
     }
 
     const options = {
-        method: 'POST',
-        body: JSON.stringify(newUser),
+        method: 'PUT',
+        body: JSON.stringify(alteredUser),
         headers: { 'Content-Type': 'application/json', 'x-access-token': userToken }
     }
 
-    fetch('http://localhost:3000/add/users', options)
+    fetch(`http://localhost:3000/update/${tabela}/${id}`, options)
         .then(data => data.json())
-        .then(resposta => console.log(resposta))
+        .then(resposta => $('#crudAlterUserAlert').text(resposta))
         .catch(err => console.log(err));
+
+});
+
+$('#crudAlterPacksButton').on('click', () => {
+
+    const tabela = $('#crudAlterSelect').val();
+    const id = $('#crudAlterID').val();
+    
+    const alteredPack = {
+        name : $('#crudAlterPacksName').val(),
+        description : $('#crudAlterPacksDescricao').val(),
+        img_url : $('#crudAlterPacksImagem').val(),
+        monthly_price : $('#crudAlterPacksPreco').val()
+    }
+
+    const options = {
+        method: 'PUT',
+        body: JSON.stringify(alteredPack),
+        headers: { 'Content-Type': 'application/json', 'x-access-token': userToken }
+    }
+
+    fetch(`http://localhost:3000/update/${tabela}/${id}`, options)
+        .then(data => data.json())
+        .then(resposta => $('#crudAlterPacksAlert').text(resposta))
+        .catch(err => console.log(err));
+});
+
+//UPDATE: fim
+//DELETE: inicio
+
+$("#crudDeleteSearchButton").on('click', () => {
+
+    const tabela = $('#crudDeleteSelect').val();
+    const id = $('#crudDeleteID').val();
+
+    const options = {
+        method: "GET",
+        header: {"x-access-token": userToken}
+    }
+
+    fetch(`http://localhost:3000/search/${tabela}/${id}`, options)
+        .then(data => data.json())
+        .then( element => {
+            element = element[0];
+            switch (tabela) {
+                case 'users':
+                    $('#crudDeleteResult').html(`
+                        <table>
+                            <thead>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Sobrenome</th>
+                                <th>E-mail</th>
+                                <th>Tipo</th>
+                                <th>ADM</th>
+                                <th>Assinatura</th>
+                                <th>Periodicidade</th>                                
+                            </thead>   
+                            <tbody>
+                                <tr>
+                                    <td>${element.id}</td>
+                                    <td>${element.fname}</td>
+                                    <td>${element.lname}</td>                                    
+                                    <td>${element.email}</td>
+                                    <td>${element['type_of_bold']}</td>
+                                    <td>${(element['type_user'])? "ADM": "COMUM"}</td>
+                                    <td>${element['signature_name']}</td>
+                                    <td>${element['signature_type']}</td>
+                                </tr>
+                            </tbody>       
+                        </table>    
+                    `);
+                    break;
+                case 'packs':
+                    $('#crudDeleteResult').html(`
+                        <table>
+                            <thead>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Preço Mensal</th>                         
+                            </thead>
+                            <tbody id="tBody">
+                                <tr>
+                                    <td>${element.id}</td>
+                                    <td>${element.name}</td>
+                                    <td>${element['monthly_price']}</td>
+                                </tr>
+                            </tbody>
+                        </table>                    
+                    `);                    
+                    break;
+            }
+            $('#crudDeleteButton').css('display', 'block');
+        })
+        .catch(err => console.log(err));
+});
+
+$('#crudDeleteButton').on('click', () => {
+
+    const tabela = $('#crudDeleteSelect').val();
+    const id = $('#crudDeleteID').val();
+
+    const options = {
+        method: "DELETE",
+        header: {"x-access-token": userToken}
+    }
+
+    fetch(`http://localhost:3000/DELETE/${tabela}/${id}`, options)
+        .then(data => data.json())
+        .then(resposta => $('#crudDeleteAlert').text(resposta))
+        .catch(err => console.log(err));
+
 });

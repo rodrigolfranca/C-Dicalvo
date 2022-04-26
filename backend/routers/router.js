@@ -19,7 +19,7 @@ function verificadorJWT(req, res, next){
 const pool = require("./db");
 
 // pesquisar nas tabelas
-router.get("/search/:table", async(req, res) => {
+router.get("/search/:table", verificadorJWT, async(req, res) => {
     try {
         const { table } = req.params;
 
@@ -37,7 +37,7 @@ router.get("/search/:table", async(req, res) => {
     }
 });
 // pesquisar nas tabelas por ID;
-router.get("/search/:table/:id", async(req, res) => {
+router.get("/search/:table/:id", verificadorJWT, async(req, res) => {
     try {
         const { table } = req.params;
         const { id } = req.params;
