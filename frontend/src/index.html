@@ -10,11 +10,19 @@
     <header id="header">
         <div id="topMenu">
             <div id="leftSideHeader">
-                <img id=logoHeader class="toHome" src="./assets/logo.png" />
-                <ul>
-                    <li>Clube</li>
-                    <li id="aboutUsHeader">About us</li>
-                    <li class="toProducts">Products</li>                
+                <a  class="toHome" href="#home">
+                    <img id=logoHeader src="./assets/logo.png" />
+                </a>
+                <ul class="toHome">
+                    <a href="#carrosel">
+                        <li>Clube</li>
+                    </a>
+                    <a href="#aboutUs">
+                        <li id="aboutUsHeader">About us</li>
+                    </a>
+                    <a href="#produtos">    
+                        <li class="toProducts">Products</li>                
+                    </a>
                 </ul>
             </div>
             <div id="iconsHeader">
@@ -24,35 +32,139 @@
         </div>
     </header>
     <main>
-        <section id="home">
-            <!-- Carrosel inicio -->
-            <div id="carrosel">
-                <img id="logoNegativa" src="./assets/logoNegativa.png " alt="">
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Recusandae culpa ut rerum corporis distinctio nobis, eaque ipsa, impedit, illum minus maiores. Fugit fuga ad enim ipsa quis harum modi magni.</p>
-            </div>
-            <!-- Fim Carrosel -->
-            <div id="entenda-box">
-                <div id="entenda">
-                    <h3>Entenda como funciona!</h3>
-                    <div id="stepbystep">
-                        <div class="stepbystep">
-                            <p>Escolha o pacote</p>
-                            <img src="./assets/escolha.png" />
+        <div id="primeiraPagina">
+            <section id="home">
+                <!-- Carrosel inicio -->
+                <div id="carrosel">
+                    <img id="logoNegativa" src="./assets/logoNegativa.png " alt="">
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Recusandae culpa ut rerum corporis distinctio nobis, eaque ipsa, impedit, illum minus maiores. Fugit fuga ad enim ipsa quis harum modi magni.</p>
+                </div>
+                <!-- Fim Carrosel -->
+                <div id="entenda-box">
+                    <div id="entenda">
+                        <h3>Entenda como funciona!</h3>
+                        <div id="stepbystep">
+                            <div class="stepbystep">
+                                <p>Escolha o pacote</p>
+                                <img src="./assets/escolha.png" />
+                            </div>
+                            <img src="./assets/setas.png" alt="" class="imgSetinhas">
+                            <div class="stepbystep">
+                                <p>Montamos a sua caixa</p>
+                                <img src="./assets/caixa.png" />
+                            </div>
+                            <img src="./assets/setas.png" alt="" class="imgSetinhas">
+                            <div class="stepbystep">
+                                <p>Enviamos direto para sua casa!</p>
+                                <img src="./assets/envio.png" />
+                            </div>
                         </div>
-                        <img src="./assets/setas.png" alt="" class="imgSetinhas">
-                        <div class="stepbystep">
-                            <p>Montamos a sua caixa</p>
-                            <img src="./assets/caixa.png" />
+                    </div>
+                </div>                
+            </section>
+            <section id="produtos-box">
+                <div id="produtos">
+                    <h2>Escolha a CalvoBox ideal para você e viva essa experiência!</h2>
+                    <div id="seletorPacote"></div>
+                    
+                    <!-- <input type="button" class="seletor" value="C Begginer" id="cBegginer" />
+                    <input type="button" class="seletor" value="C Intermediate" id="cBItermediate" />
+                    <input type="button" class="seletor" value="C Proud" id="cProud" /> -->
+
+                    <div id="painelProduto">
+                        <div id="productPhoto">
                         </div>
-                        <img src="./assets/setas.png" alt="" class="imgSetinhas">
-                        <div class="stepbystep">
-                            <p>Enviamos direto para sua casa!</p>
-                            <img src="./assets/envio.png" />
+                        <div id="descricaoProduto">
+                            <img id="logoDescricao" src="./assets/logo-verde.png" />
+                            <h3 id="nomeProduto"></h3>
+                            <p id="descricao">Produtos simples para aqueles que estão adentrando a calvicie agora.</p>
+                        </div>
+                        <div id="precos">
+                            <div class="precoContainer">
+                                <span class="desconto">30% off</span>
+                                <div class="precoFrame">
+                                    <h3>Pacote</h3>
+                                    <h4>Mensal</h4>
+                                    <p class="precoAntes">R$ <span id="precoAduterado"></span> por</p>
+                                    <p class="precoAtual">R$ <span id="precosDoPacote"></span>/mês</p>
+                                    <div id="inputAssinar">
+                                        <input class="buyButton" type="button" value="Assinar" signature_name="1" signature_type="anual" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="precoContainer">
+                                <span class="desconto">30% off</span>
+                                <div class="precoFrame">
+                                    <h3>Pacote</h3>
+                                    <h4>Anual</h4>
+                                    <p class="precoAntes">R$ <span id="precosDoPacoteAdulteradoMensal"></span> por</p>
+                                    <p class="precoAtual">R$ <span id="precosDoPacoteMensal"></span>/mês</p>
+                                    <div id="inputAssinarAdulterado">
+                                        <input class="buyButton" type="button" value="Assinar" signature_name="1" signature_type="mensal" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>                
-        </section>        
+            </section>
+            <section id="oQueVai-box">
+                <div id="oQueVai">
+                    <h2>Oque vai dentro da sua CalvoBox?</h2>
+                    <div id="oQueVaiItens">
+                        <div class="oQueVaiItensCaixa">
+                            <img src="./assets/cProud.png" alt="">
+                            <div>
+                                <p>Varios Produtos</p>
+                                <span>Você vai receber produtos diferenciados todo o mês para o tratamento da sua auto estima como calvo.</span>
+                            </div>
+                        </div>
+                        <div class="oQueVaiItensCaixa">
+                            <img src="./assets/revista.png" alt="">
+                            <div>
+                                <p>Uma Revista</p>
+                                <span>Uma revista com varias materias feitas para o nosso publico, como dicas de beleza para os poucos fios que temos, filmes aonde o protagonista é calvo/careca etc. </span>
+                            </div>
+                        </div>
+                        <div class="oQueVaiItensCaixa">
+                            <img src="./assets/broche.png" alt="">
+                            <div>
+                                <p>Um broche</p>
+                                <span>Todo mês enviamos um broche diferente para colecionar, podendo ser colocado em roupas(recomendamos levar eles nos nossos encontros), em mochilas ou toalhas.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="aboutUs">
+                <div id="us">
+                    <div class="foto"></div>
+                    <div class="foto"></div>
+                    <p>“Estamos em busca de recuperar o Orgulho da Calvicie”</p>                
+                </div>
+                <p id="idea">C-Dicalvo começou após a subida do euro e com isso o distanciamento da tão sonhada protese capilar turquesa. Então Rodrigo e Gustavo se juntaram com o objetivo de fazer o problema capilar deles virar a nova moda do momento!</p>
+            </section>
+        </div>
+
+        <!--/////////// Pagina de Carrinho ///////////-->
+        <section id="carrinho">
+            <div id="carrinhoCard">
+                <h3 id="carrinhoTitle">Carrinho</h3>
+                <div id="carrinhoContainer">
+                    <div id="carrinhoPhotoBox">
+                    </div>
+                    <h4 id="nomeDoPacote"></h4>
+                    <p id="carrinhoDescricao"></p>
+                    <p id="carrinhoPrecoAtual">R$<span class="precinhoHehe"></span>/mês</p>
+                </div>
+                <div id="carrinhoFinal">
+                    <h3>Preço Total</h3>
+                    <p id="carrinhoPrecoFinal">R$<span class="precinhoHehe"></span>/mês</p>
+                    <input id=carrinhoFinalizar type="button" value="Finalizar!" />
+                </div>
+            </div>
+        </section>
+        <!--/////////// Pagina de Login ///////////-->
         <section id="login">
             <div id="loginForm">
                 <img id="logoLogin" src="./assets/logo-header.png" />
@@ -93,6 +205,7 @@
                 <input type="submit" id=cadButton value="Criar conta!">
             </div>
         </section>
+        <!--/////////// Pagina de Crud ///////////-->
         <section id="crudSpace">
             <header id="crudHeader">
                 <ul>
@@ -216,101 +329,6 @@
                 </div>
                 <input type="button" id=crudDeleteButton value="Deletar" />
             </section>
-        </section>
-        <section id="produtos-box">
-            <div id="produtos">
-                <h2>Escolha a CalvoBox ideal para você e viva essa experiência!</h2>
-                <div id="seletorPacote">
-                    <input type="button" class="seletor" value="C Begginer" id="cBegginer" />
-                    <input type="button" class="seletor" value="C Intermediate" id="cBItermediate" />
-                    <input type="button" class="seletor" value="C Proud" id="cProud" />
-                </div>
-                <div id="painelProduto">
-                    <div id="productPhoto">
-                        <img src="./assets/cBeginner.png" />
-                    </div>
-                    <div id="descricaoProduto">
-                        <img id="logoDescricao" src="./assets/logo-verde.png" />
-                        <h3 id="nomeProduto"></h3>
-                        <p>Produtos simples para aqueles que estão adentrando a calvicie agora.</p>
-                    </div>
-                    <div id="precos">
-                        <div class="precoContainer">
-                            <span class="desconto">30% off</span>
-                            <div class="precoFrame">
-                                <h3>Pacote</h3>
-                                <h4>Mensal</h4>
-                                <p class="precoAntes">R$ <span id="precoAduterado"></span> por</p>
-                                <p class="precoAtual">R$ <span id="precosDoPacote"></span>/mês</p>
-                                <input class="buyButton" type="button" value="Assinar" />
-                            </div>
-                        </div>
-                        <div class="precoContainer">
-                            <span class="desconto">30% off</span>
-                            <div class="precoFrame">
-                                <h3>Pacote</h3>
-                                <h4>Anual</h4>
-                                <p class="precoAntes">R$ <span id="precosDoPacoteAdulteradoMensal"></span> por</p>
-                                <p class="precoAtual">R$ <span id="precosDoPacoteMensal"></span>/mês</p>
-                                <input class="buyButton" type="button" value="Assinar" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section id="oQueVai-box">
-            <div id="oQueVai">
-                <h2>Oque vai dentro da sua CalvoBox?</h2>
-                <div id="oQueVaiItens">
-                    <div class="oQueVaiItensCaixa">
-                        <img src="./assets/cProud.png" alt="">
-                        <div>
-                            <p>Varios Produtos</p>
-                            <span>Você vai receber produtos diferenciados todo o mês para o tratamento da sua auto estima como calvo.</span>
-                        </div>
-                    </div>
-                    <div class="oQueVaiItensCaixa">
-                        <img src="./assets/revista.png" alt="">
-                        <div>
-                            <p>Uma Revista</p>
-                            <span>Uma revista com varias materias feitas para o nosso publico, como dicas de beleza para os poucos fios que temos, filmes aonde o protagonista é calvo/careca etc. </span>
-                        </div>
-                    </div>
-                    <div class="oQueVaiItensCaixa">
-                        <img src="./assets/broche.png" alt="">
-                        <div>
-                            <p>Um broche</p>
-                            <span>Todo mês enviamos um broche diferente para colecionar, podendo ser colocado em roupas(recomendamos levar eles nos nossos encontros), em mochilas ou toalhas.</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section id="aboutUs">
-            <div id="us">
-                <div class="foto"></div>
-                <div class="foto"></div>
-                <p>“Estamos em busca de recuperar o Orgulho da Calvicie”</p>                
-            </div>
-            <p id="idea">C-Dicalvo começou após a subida do euro e com isso o distanciamento da tão sonhada protese capilar turquesa. Então Rodrigo e Gustavo se juntaram com o objetivo de fazer o problema capilar deles virar a nova moda do momento!</p>
-        </section>
-        <section id="carrinho">
-            <div id="carrinhoCard">
-                <h3 id="carrinhoTitle">Carrinho</h3>
-                <div id="carrinhoContainer">
-                    <div id="carrinhoPhotoBox">
-                    </div>
-                    <h4 id="nomeDoPacote"></h4>
-                    <p id="carrinhoDescricao"></p>
-                    <p id="carrinhoPrecoAtual">R$<span class="precinhoHehe"></span>/mês</p>
-                </div>
-                <div id="carrinhoFinal">
-                    <h3>Preço Total</h3>
-                    <p id="carrinhoPrecoFinal">R$<span class="precinhoHehe"></span>/mês</p>
-                    <input id=carrinhoFinalizar type="button" value="Finalizar!" />
-                </div>
-            </div>
         </section>
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

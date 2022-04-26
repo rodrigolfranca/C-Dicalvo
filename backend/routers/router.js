@@ -12,7 +12,7 @@ router.get("/search/:table", async(req, res) => {
         if(table == "user") return res.send("Nope")
 
         const searchTables = await pool.query(
-            `SELECT * FROM ${table}`);
+            `SELECT * FROM ${table} ORDER BY id`);
 
         res.json(searchTables.rows);
 
@@ -79,8 +79,8 @@ router.put("/update/:table/:id", async(req, res)=> {
             const {id_user} = req.body;
 
             const updateTables = await pool.query(`
-            UPDATE bag SET id_pack = ($1), signature_type = ($2), id_user = ($3)  WHERE id = ($4);`, 
-            [ id_pack, signature_type, id_user, id]);
+                UPDATE bag SET id_pack = ($1), signature_type = ($2), id_user = ($3)  WHERE id = ($4);`, 
+                [ id_pack, signature_type, id_user, id]);
 
             console.log("Done!");
         }
@@ -143,8 +143,8 @@ router.delete("/delete/:table/:id", async(req, res) => {
         const {id} = req.params;
 
         const deleteIteminTheTables  = await pool.query(`
-        DELETE FROM ${table} WHERE id = ($1)`,
-        [ id ]);
+            DELETE FROM ${table} WHERE id = ($1)`,
+            [ id ]);
 
         res.json(`Item ${id} from ${table} was deleted`)
     } catch (error) {

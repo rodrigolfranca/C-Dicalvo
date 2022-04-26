@@ -2,11 +2,13 @@ let userLogged, userToken, userID, userADMIN;
 
 // home: flex, userCad-box: flex , login: flex, accountLost: flex, crudSpace,  aboutUs: flex, produtos: block, carrinho: flex
 function changeFrame(frame, display) {
+    $('#primeiraPagina').hide();
     $('#home').hide();
     $('#userCad-box').hide();
     $('#accountLost').hide();
     $('#aboutUs').hide();
     $('#produtos').hide();
+    $('#oQueVai-box').hide();
     $('#carrinho').hide();
     $('#crudSpace').hide();
     $('#login').hide();
@@ -15,6 +17,69 @@ function changeFrame(frame, display) {
     if (display) {
         $(frame).css('display', display);
     }
+}
+
+const arrResponse = [];
+$(document).ready( async () => {
+    // Fetch para o preço dos produtos na main page
+    const fetchProdutos = await fetch(`http://localhost:3000/search/packs`)
+        .then(data => data.json())
+        .then(response => {
+            console.log(response);
+            response.forEach(element => {
+                arrResponse.push(element)
+                $('#seletorPacote').append(`
+                    <input type="button" class="seletor" value="${element.name}" id="seletor_${element.id}" onClick="criadorDeFuncao(${element.id})" />
+                `);
+            });
+
+            $("#nomeProduto").text(`${response[0].name}`);
+        
+            $("#productPhoto").append(`
+                <img src="${response[0].img_url}" />
+            `)
+            
+            const preco = response[0].monthly_price;
+            const precoAdulterado = preco * 13/10;
+            const precoMensal = preco * 12;
+            const precoMensalAdulterado = precoAdulterado * 12;
+            
+            $("#precosDoPacote").html(`${parseFloat(preco).toFixed(2)}`);
+        
+            $("#precoAduterado").html(`${parseFloat(precoAdulterado).toFixed(2)}`);
+        
+            $("#precosDoPacoteMensal").html(`${parseFloat(precoMensal).toFixed(2)}`);
+        
+            $("#precosDoPacoteAdulteradoMensal").html(`${parseFloat(precoMensalAdulterado).toFixed(2)}`);
+        });
+})
+
+function criadorDeFuncao(params) {
+    console.log(arrResponse[params-1]);
+
+    $("#productPhoto").html(`
+        <img src="${arrResponse[params-1].img_url}" />
+    `)
+
+    $("#nomeProduto").text(`${arrResponse[params-1].name}`);
+
+    $("#inputAssinar").html(`
+        <input class="buyButton" type="button" value="Assinar" signature_name="${arrResponse[params-1].id}" signature_type="mensal" />
+    `);
+    
+    $("#inputAssinarAdulterado").html(`
+        <input class="buyButton" type="button" value="Assinar" signature_name="${arrResponse[params-1].id}" signature_type="anual" />
+    `);
+
+    const preco = arrResponse[params-1].monthly_price;
+    const precoAdulterado = preco * 13/10;
+    const precoMensal = preco * 12;
+    const precoMensalAdulterado = precoAdulterado * 12;
+    
+    $("#precosDoPacote").html(`${parseFloat(preco).toFixed(2)}`);
+    $("#precoAduterado").html(`${parseFloat(precoAdulterado).toFixed(2)}`);
+    $("#precosDoPacoteMensal").html(`${parseFloat(precoMensal).toFixed(2)}`);
+    $("#precosDoPacoteAdulteradoMensal").html(`${parseFloat(precoMensalAdulterado).toFixed(2)}`);
 }
 
 $('#userHeader').on('click', () => {    
@@ -27,57 +92,20 @@ $('#userHeader').on('click', () => {
 
 $('.toHome').on('click', () => {
     changeFrame('#home', 'flex');
-});
-
-$('#aboutUsHeader').on('click', () => {
-    changeFrame('#aboutUs', 'flex');
-});
-
-$('#forgetButton').on('click', () => {
-    changeFrame('#userCad-box', 'flex');
+    $('#primeiraPagina').css('display', "block");
+    $('#aboutUs').css('display', "flex");
+    $('#produtos').css('display', "block");
+    $('#oQueVai-box').css('display', "flex");
 });
 
 $('#loginInvite').on('click', () => {
     changeFrame('#accountLost', 'flex');
 });
 
-$('.toProducts').on('click', () => {
-    changeFrame('#produtos');
-
-    fetch(`http://localhost:3000/search/packs/1`)
-        .then(data => data.json())
-        .then(response => {
-            console.log(response);
-            $("#nomeProduto").text(`${response[0].name}`);
-            
-            const preco = response[0].monthly_price;
-            const precoAdulterado = preco * 13/10;
-            const precoMensal = preco * 12;
-            const precoMensalAdulterado = precoAdulterado * 12;
-            
-            $("#precosDoPacote").html(`${parseFloat(preco).toFixed(2)}`);
-
-            $("#precoAduterado").html(`${parseFloat(precoAdulterado).toFixed(2)}`);
-
-            $("#precosDoPacoteMensal").html(`${parseFloat(precoMensal).toFixed(2)}`);
-
-            $("#precosDoPacoteAdulteradoMensal").html(`${parseFloat(precoMensalAdulterado).toFixed(2)}`);
-        });
-});
-
 $('.toCart').on('click', () => {
     changeFrame('#carrinho', 'flex');  
 
-    fetch(`http://localhost:3000/search/packs`)
-        .then(data => data.json())
-        .then(response => {
-            console.log(response);
-            $("#carrinhoPhotoBox").html(`
-                <img id="carrinhoPhoto" src="${response[0].img_url}" />`);
-            $("#nomeDoPacote").text(`${response[0].name}`);
-            $("#carrinhoDescricao").text(`${response[0].description}`);
-            $(".precinhoHehe").text(`${response[0].monthly_price}`);
-        })
+    
 });
 
 $('.buyButton').on('click', () => {

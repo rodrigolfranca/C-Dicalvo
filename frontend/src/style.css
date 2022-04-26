@@ -14,6 +14,9 @@
 
     color:var(--black)
 }
+a{
+    text-decoration: none;
+}
 body {
     margin: 0;
     background-image: url("./assets/background.jpg");
@@ -774,7 +777,7 @@ main{
 }
 #produtos{
     width: 1100px;
-    height: 560px;
+    height: 650px;
 }
     #produtos h2{
         color: var(--green);
@@ -787,7 +790,7 @@ main{
     }
     #seletorPacote{
         margin-left: 30px;
-        height: 60px;
+        height: 150px;
 
         display: flex;
         flex-wrap: wrap;

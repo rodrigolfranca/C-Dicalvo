@@ -10,7 +10,7 @@ CREATE TABLE users (
 	signature_type varchar(60),
 	CONSTRAINT users_pk PRIMARY KEY (id)
 ) WITH (
-  OIDS=FALSE
+	OIDS=FALSE
 );
 
 
@@ -22,7 +22,7 @@ CREATE TABLE bags (
 	id_users integer,
 	CONSTRAINT bag_pk PRIMARY KEY (id)
 ) WITH (
-  OIDS=FALSE
+	OIDS=FALSE
 );
 
 
@@ -35,7 +35,7 @@ CREATE TABLE packs (
 	monthly_price DECIMAL(7,2) NOT NULL,
 	CONSTRAINT packs_pk PRIMARY KEY (id)
 ) WITH (
-  OIDS=FALSE
+	OIDS=FALSE
 );
 
 
