@@ -521,7 +521,7 @@ main{
         }
         #crudAlterUser {
             display: none;
-            margin: 65px auto;
+            margin: 45px auto;
             height: 200px;
             width: 416px;            
         }
@@ -670,6 +670,22 @@ main{
             border:none;
             outline: none;
             padding-left: 15px;
+        }
+        #crudAlterSearchButton {
+            width: 85px;
+            height: 22px;
+            margin: 10px auto;
+            border-radius: 10px;
+            background-color: var(--yellow);
+            color: var(--white);
+            line-height: 20px;
+            text-align: center;
+            display:block;
+            border:none;
+            outline: none;
+        }
+        #crudAlterSearchButton:hover {
+            cursor: pointer;
         }
     #crudDelete{
         display: none;        
