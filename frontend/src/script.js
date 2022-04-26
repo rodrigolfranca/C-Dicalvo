@@ -294,7 +294,7 @@ $('#crudInsertUsersButton').on('click', function() {
     const options = {
         method: 'POST',
         body: JSON.stringify(newUser),
-        headers: { 'Content-Type': 'application/json', 'x-access-token' : userToken }
+        headers: { 'Content-Type': 'application/json'}
     }
 
     fetch('http://localhost:3000/add/users', options)
@@ -324,7 +324,7 @@ $('#crudInsertPacksButton').on('click', function() {
     const options = {
         method: 'POST',
         body: JSON.stringify(newPack),
-        headers: { 'Content-Type': 'application/json', 'x-access-token' : userToken }
+        headers: { 'Content-Type': 'application/json' }
     }
 
     fetch('http://localhost:3000/add/packs', options)
@@ -342,9 +342,11 @@ $("#crudAlterSearchButton").on('click', () => {
     const tabela = $('#crudAlterSelect').val();
     const id = $('#crudAlterID').val();
 
-    fetch(`http://localhost:3000/${tabela}/${id}`)
+    fetch(`http://localhost:3000/search/${tabela}/${id}`)
         .then(data => data.json())
         .then( resultado => {
+            resultado = resultado[0];
+            
             switch (tabela) {
                 case 'users':
                     $('#crudAlterUser').fadeIn();
