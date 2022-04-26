@@ -525,6 +525,14 @@ main{
             height: 200px;
             width: 416px;            
         }
+        .crudAlert {
+            display: block;
+            height: 20px;
+            width: fit-content;
+            margin: 0 auto;
+            text-align: center;
+            color: var(--white);
+        }
             #crudInsertPacks input, #crudInsertPacks textarea {
                 margin:12px
             }
