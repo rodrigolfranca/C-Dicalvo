@@ -153,7 +153,9 @@ $('#loginButton').on('click', () => {
                 userLogged = 1;                
                 userToken = resposta.token;
                 userID = JSON.parse(window.atob(resposta.token.split('.')[1])).id;
-                userADMIN = JSON.parse(window.atob(resposta.token.split('.')[1])).admin;
+                userADMIN = JSON.parse(window.atob(resposta.token.split('.')[1])).adm;
+
+                console.log(`ID: ${userID} - ADM: ${userADMIN}`);
 
                 changeFrame("#crudSpace");
 
@@ -273,12 +275,12 @@ $('#crudInsertUsersButton').on('click', function() {
 
     //validação de inputs aqui \/\/\/\/\/\/\/\/
 
-    if (!$('#crudInsertUsersName').val()) { $('#crudInsertUsersName').effect('highlight'); console.log('teste'); return false; }
-    if (!$('#crudInsertUsersSurname').val()) { $('#crudInsertUsersSurname').effect('highlight'); console.log('teste'); return false; }
-    if (!$('#crudInsertUsersEmail').val()) { $('#crudInsertUsersEmail').effect('highlight'); console.log('teste'); return false; }
-    if (!$('#crudInsertUsersSenha').val()) { $('#crudInsertUsersSenha').effect('highlight'); console.log('teste'); return false; }
-    if (!$('#crudInsertUsersVerify').val()) { $('#crudInsertUsersVerify').effect('highlight'); console.log('teste'); return false; }
-    if (!$('#crudInsertUsersCalvicie').val()) { $('#crudInsertUsersCalvicie').effect('highlight'); console.log('teste'); return false; }
+    if (!$('#crudInsertUsersName').val()) { $('#crudInsertUsersName').effect('highlight'); return false; }
+    if (!$('#crudInsertUsersSurname').val()) { $('#crudInsertUsersSurname').effect('highlight'); return false; }
+    if (!$('#crudInsertUsersEmail').val()) { $('#crudInsertUsersEmail').effect('highlight'); return false; }
+    if (!$('#crudInsertUsersSenha').val()) { $('#crudInsertUsersSenha').effect('highlight'); return false; }
+    if (!$('#crudInsertUsersVerify').val()) { $('#crudInsertUsersVerify').effect('highlight'); return false; }
+    if (!$('#crudInsertUsersCalvicie').val()) { $('#crudInsertUsersCalvicie').effect('highlight'); return false; }
 
     const newUser = {
         fname : $('#crudInsertUsersName').val(),
@@ -338,7 +340,6 @@ $('#crudInsertPacksButton').on('click', function() {
 //UPDATE: inicio
 
 $("#crudAlterSearchButton").on('click', () => {
-
     const tabela = $('#crudAlterSelect').val();
     const id = $('#crudAlterID').val();
 
@@ -371,5 +372,39 @@ $("#crudAlterSearchButton").on('click', () => {
                     break;
             }
         })
+        .catch(err => console.log(err));
+});
+
+$('#crudAlterUsersButton').on('click', () => {
+
+    //validação de inputs aqui \/\/\/\/\/\/\/\/
+
+    if (!$('#crudInsertUsersName').val()) { $('#crudInsertUsersName').effect('highlight'); return false; }
+    if (!$('#crudInsertUsersSurname').val()) { $('#crudInsertUsersSurname').effect('highlight'); return false; }
+    if (!$('#crudInsertUsersEmail').val()) { $('#crudInsertUsersEmail').effect('highlight'); return false; }
+    if (!$('#crudInsertUsersSenha').val()) { $('#crudInsertUsersSenha').effect('highlight'); return false; }
+    if (!$('#crudInsertUsersVerify').val()) { $('#crudInsertUsersVerify').effect('highlight'); return false; }
+    if (!$('#crudInsertUsersCalvicie').val()) { $('#crudInsertUsersCalvicie').effect('highlight'); return false; }
+
+    const newUser = {
+        fname : $('#crudInsertUsersName').val(),
+        lname : $('#crudInsertUsersSurname').val(),
+        email : $('#crudInsertUsersEmail').val(),
+        password : $('#crudInsertUsersSenha').val(),
+        type_of_bold : $('#crudInsertUsersCalvicie').val(),        
+        type_user : $('#crudInsertUsersAdmin').prop('checked'),
+        id_pack : $('#crudInsertUsersAssinatura').val(),
+        signature_type : $('#crudInsertUsersTipo').val()
+    }
+
+    const options = {
+        method: 'POST',
+        body: JSON.stringify(newUser),
+        headers: { 'Content-Type': 'application/json', 'x-access-token' : userToken }
+    }
+
+    fetch('http://localhost:3000/add/users', options)
+        .then(data => data.json())
+        .then(resposta => console.log(resposta))
         .catch(err => console.log(err));
 });

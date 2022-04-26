@@ -1,11 +1,12 @@
 const EXPRESS = require("express");
 const router = EXPRESS.Router();
+const jwtVerifica = require('../jwt')
 
 // postgreSQL;
 const pool = require("./db");
 
 // pesquisar nas tabelas
-router.get("/search/:table", async(req, res) => {
+router.get("/search/:table", jwtVerifica, async(req, res) => {
     try {
         const { table } = req.params;
 
@@ -23,7 +24,7 @@ router.get("/search/:table", async(req, res) => {
     }
 });
 // pesquisar nas tabelas por ID;
-router.get("/search/:table/:id", async(req, res) => {
+router.get("/search/:table/:id", jwtVerifica, async(req, res) => {
     try {
         const { table } = req.params;
         const { id } = req.params;
@@ -43,7 +44,7 @@ router.get("/search/:table/:id", async(req, res) => {
     }
 });
 // update item nas tabelas pelo ID;
-router.put("/update/:table/:id", async(req, res)=> {
+router.put("/update/:table/:id", jwtVerifica, async(req, res)=> {
     try {
         const { table } = req.params;
         const { id } = req.params;
@@ -91,7 +92,7 @@ router.put("/update/:table/:id", async(req, res)=> {
     }
 });
 // Add item nas tabelas!
-router.post("/add/:table", async(req, res) => {
+router.post("/add/:table", jwtVerifica, async(req, res) => {
     try {
         const { table } = req.params;
 
@@ -137,7 +138,7 @@ router.post("/add/:table", async(req, res) => {
     }
 })
 // DELETE item nas tabelas, pelo id
-router.delete("/delete/:table/:id", async(req, res) => {
+router.delete("/delete/:table/:id", jwtVerifica, async(req, res) => {
     try {
         const {table} = req.params;
         const {id} = req.params;
