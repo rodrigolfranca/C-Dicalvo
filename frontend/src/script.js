@@ -313,12 +313,12 @@ $('#crudInsertUsersButton').on('click', function() {
 
     //validação de inputs aqui \/\/\/\/\/\/\/\/
 
-    if (!$('#crudInsertUsersName').val()) { $('#crudInsertUsersName').effect('highlight'); return false; }
-    if (!$('#crudInsertUsersSurname').val()) { $('#crudInsertUsersSurname').effect('highlight'); return false; }
-    if (!$('#crudInsertUsersEmail').val()) { $('#crudInsertUsersEmail').effect('highlight'); return false; }
-    if (!$('#crudInsertUsersSenha').val()) { $('#crudInsertUsersSenha').effect('highlight'); return false; }
-    if (!$('#crudInsertUsersVerify').val()) { $('#crudInsertUsersVerify').effect('highlight'); return false; }
-    if (!$('#crudInsertUsersCalvicie').val()) { $('#crudInsertUsersCalvicie').effect('highlight'); return false; }
+    if (!$('#crudInsertUsersName').val()) { $('#crudInsertUsersName').effect('highlight'); $("#crudInsertUserAlert").text("Nome Inválido"); return false; }
+    if (!$('#crudInsertUsersSurname').val()) { $('#crudInsertUsersSurname').effect('highlight'); $("#crudInsertUserAlert").text("Sobrenome Inválido"); return false; }
+    if (!$('#crudInsertUsersEmail').val()) { $('#crudInsertUsersEmail').effect('highlight'); $("#crudInsertUserAlert").text("E-mail Inválido"); return false; }
+    if (!$('#crudInsertUsersSenha').val()) { $('#crudInsertUsersSenha').effect('highlight'); $("#crudInsertUserAlert").text("Senha Inválida"); return false; }
+    if ($('#crudInsertUsersVerify').val() !== $('#crudInsertUsersSenha').val()) { $('#crudInsertUsersVerify').effect('highlight'); $("#crudInsertUserAlert").text("Senha e Confirmação de senha não correspondem"); return false; }
+    if (!$('#crudInsertUsersCalvicie').val()) { $('#crudInsertUsersCalvicie').effect('highlight'); $("#crudInsertUserAlert").text("Tipo de Calvície inválida"); return false; }
 
     const newUser = {
         fname : $('#crudInsertUsersName').val(),
@@ -348,10 +348,10 @@ $('#crudInsertPacksButton').on('click', function() {
 
     //validação de inputs aqui \/\/\/\/\/\/\/\/
 
-    if (!$('#crudInsertPacksName').val()) { $('#crudInsertPacksName').effect('highlight'); return false; }
-    if (!$('#crudInsertPacksDescricao').val()) { $('#crudInsertPacksDescricao').effect('highlight'); return false; }
-    if (!$('#crudInsertPacksImage').val()) { $('#crudInsertPacksImage').effect('highlight'); return false; }
-    if (!$('#crudInsertPacksPreco').val()) { $('#crudInsertPacksPreco').effect('highlight'); return false; }
+    if (!$('#crudInsertPacksName').val()) { $('#crudInsertPacksName').effect('highlight'); $("#crudInsertPacksAlert").text("Nome de Pacote inválido"); return false; }
+    if (!$('#crudInsertPacksDescricao').val()) { $('#crudInsertPacksDescricao').effect('highlight'); $("#crudInsertPacksAlert").text("Descrição de Pacote inválida"); return false; }
+    if (!$('#crudInsertPacksImage').val()) { $('#crudInsertPacksImage').effect('highlight'); $("#crudInsertPacksAlert").text("URL da Imagem inválido"); return false; }
+    if (!$('#crudInsertPacksPreco').val()) { $('#crudInsertPacksPreco').effect('highlight'); $("#crudInsertPacksAlert").text("Preço inválido"); return false; }
     
 
     const newPack = {
@@ -419,6 +419,15 @@ $("#crudAlterSearchButton").on('click', () => {
 
 $('#crudAlterUsersButton').on('click', () => {
 
+    //validação de inputs aqui \/\/\/\/\/\/\/\/
+
+    if (!$('#crudAlterUsersName').val()) { $('#crudAlterUsersName').effect('highlight'); $("#crudAlterUserAlert").text("Nome Inválido"); return false; }
+    if (!$('#crudAlterUsersSurname').val()) { $('#crudAlterUsersSurname').effect('highlight'); $("#crudAlterUserAlert").text("Sobrenome Inválido"); return false; }
+    if (!$('#crudAlterUsersEmail').val()) { $('#crudAlterUsersEmail').effect('highlight'); $("#crudAlterUserAlert").text("E-mail Inválido"); return false; }
+    if (!$('#crudAlterUsersSenha').val()) { $('#crudAlterUsersSenha').effect('highlight'); $("#crudAlterUserAlert").text("Senha Inválida"); return false; }
+    if ($('#crudAlterUsersVerify').val() !== $('#crudAlterUsersSenha').val()) { $('#crudAlterUsersVerify').effect('highlight'); $("#crudAlterUserAlert").text("Senha e Confirmação de senha não correspondem"); return false; }
+    if (!$('#crudAlterUsersCalvicie').val()) { $('#crudAlterUsersCalvicie').effect('highlight'); $("#crudAlterUserAlert").text("Tipo de Calvície inválida"); return false; }
+
     const tabela = $('#crudAlterSelect').val();
     const id = $('#crudAlterID').val();
     
@@ -446,6 +455,13 @@ $('#crudAlterUsersButton').on('click', () => {
 });
 
 $('#crudAlterPacksButton').on('click', () => {
+
+    // VALIDAÇÃO DE INPUTS \/\/\/\/\/\/
+
+    if (!$('#crudAlterPacksName').val()) { $('#crudAlterPacksName').effect('highlight'); $("#crudAlterPacksAlert").text("Nome de Pacote inválido"); return false; }
+    if (!$('#crudAlterPacksDescricao').val()) { $('#crudAlterPacksDescricao').effect('highlight'); $("#crudAlterPacksAlert").text("Descrição de Pacote inválida"); return false; }
+    if (!$('#crudAlterPacksImage').val()) { $('#crudAlterPacksImage').effect('highlight'); $("#crudAlterPacksAlert").text("URL da Imagem inválido"); return false; }
+    if (!$('#crudAlterPacksPreco').val()) { $('#crudAlterPacksPreco').effect('highlight'); $("#crudAlterPacksAlert").text("Preço inválido"); return false; }
 
     const tabela = $('#crudAlterSelect').val();
     const id = $('#crudAlterID').val();
@@ -563,7 +579,7 @@ $('.buyButton').on('click', async function() {
     if (!userLogged) { changeFrame('#login', 'flex'); return false; }
     const newCart = {
         signature_type : $(this).attr('signature_type'),
-        signature_name : $(this).attr('signature_name'),
+        id_pack : $(this).attr('id_pack'),
         id_user : userID
     }
 
@@ -583,9 +599,8 @@ $('.buyButton').on('click', async function() {
 });
 
 $('#carrinhoFinalizar').on('click', async () => {
-    changeFrame('#compraFinalizada');
-    emptyCart();
 
+    // Get the cart info
     let options= {
         method:'GET',
         headers: { 'x-access-token' : userToken } 
@@ -597,23 +612,72 @@ $('#carrinhoFinalizar').on('click', async () => {
             resultado = resultado[0];
             return {
                 signature_name: resultado.signature_name ,
-                signature_type: resultado.signature_type
+                signature_type: resultado.signature_type ,
+                id_bag : result.id
             }            
         })
         .catch(err => console.log(err));
     
+    // Insert signature info at user
     options = {
         method: 'PUT',
         body: JSON.stringify(signature),
         headers: { 'Content-Type': 'application/json', 'x-access-token': userToken }
     }
 
-    fetch(`maisUmaUrlSatanica/${userID}`)
+    await fetch(`http://localhost:3000/updateonly/users/${userID}`)
         .then(data => data.json())
         .then(resultado => console.log(resultado))
         .catch(err => console.log(err))
+
+    // Delete the cart
+    options = {
+        method: 'DELETE',
+        headers: { 'x-access-token': userToken }
+    }
+
+    await fetch(`http://localhost:3000/delete/bags/${signature.id_bag}"`)
+        .then(data => data.json())
+        .then(resultado => console.log(resultado))
+        .catch(err => console.log(err))
+
+    changeFrame('#compraFinalizada');
+    emptyCart();
+
+});
+
+//Carrinho: fim
+//user Creating a user : inicio
+
+$('#cadButton').on('click', () => {
     
-    
+    //validação de inputs aqui \/\/\/\/\/\/\/\/
+
+    if (!$('#nome').val()) { $('#nome').effect('highlight'); return false; }
+    if (!$('#superName').val()) { $('#superName').effect('highlight'); return false; }
+    if (!$('#email').val()) { $('#email').effect('highlight'); return false; }
+    if (!$('#senha').val()) { $('#senha').effect('highlight'); return false; }
+    if ($('#senha').val() !== $('#checkSenha').val()) { $('#checkSenha').effect('highlight'); return false; }
+    if (!$('#calvicie').val()) { $('#calvicie').effect('highlight'); return false; }
+
+    const newUser = {
+        fname : $('#nome').val(),
+        lname : $('#superName').val(),
+        email : $('#email').val(),
+        password : $('#senha').val(),
+        type_of_bold : $('#calvicie').val()
+    }
+
+    const options = {
+        method: 'POST',
+        body: JSON.stringify(newUser),
+        headers: { 'Content-Type': 'application/json' }
+    }
+
+    fetch('http://localhost:3000/add/users', options)
+        .then(data => data.json())
+        .then(resposta => {console.log(resposta); changeFrame("#login", 'flex')} )
+        .catch(err => console.log(err));
 
 });
 
