@@ -1159,7 +1159,7 @@ main{
     margin: 110px auto 0;
     width: 1300px;
     height: 100%;
-    display: flex;
+    display: none;
     align-items: center;
     align-content: center;
     justify-content: center;
