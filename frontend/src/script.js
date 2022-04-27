@@ -33,7 +33,6 @@ $(document).ready( async () => {
                     <input type="button" class="seletor" value="${element.name}" id="seletor_${element.id}" onClick="criadorDeFuncao(${element.id})" />
                 `);
             })
-        .catch(err => console.log(err));
 
             $("#nomeProduto").text(`${response[0].name}`);
         
@@ -53,7 +52,8 @@ $(document).ready( async () => {
             $("#precosDoPacoteMensal").html(`${parseFloat(precoMensal).toFixed(2)}`);
         
             $("#precosDoPacoteAdulteradoMensal").html(`${parseFloat(precoMensalAdulterado).toFixed(2)}`);
-        });
+        })
+        .catch(err => console.log(err));
 })
 
 function criadorDeFuncao(params) {
@@ -64,10 +64,10 @@ function criadorDeFuncao(params) {
     `)
     $("#nomeProduto").text(`${arrResponse[params-1].name}`);
     $("#inputAssinar").html(`
-        <input class="buyButton" type="button" value="Assinar" signature_name="${arrResponse[params-1].id}" signature_type="mensal" />
+        <input class="buyButton" type="button" value="Assinar" onclick="buyButtom('mensal', ${arrResponse[params-1].id})" />
     `);
     $("#inputAssinarAdulterado").html(`
-        <input class="buyButton" type="button" value="Assinar" signature_name="${arrResponse[params-1].id}" signature_type="anual" />
+        <input class="buyButton" type="button" value="Assinar" onclick="buyButtom('anual', ${arrResponse[params-1].id})" />
     `);
 
     const preco = arrResponse[params-1].monthly_price;
@@ -103,18 +103,6 @@ $('#loginInvite').on('click', () => {
 
 $('.toCart').on('click', () => {
     changeFrame('#carrinho', 'flex');  
-
-    fetch(`http://localhost:3000/packs`)
-        .then(data => data.json())
-        .then(response => {
-            console.log(response);
-            $("#carrinhoPhotoBox").html(`
-                <img id="carrinhoPhoto" src="${response[0].img_url}" />`);
-            $("#nomeDoPacote").text(`${response[0].name}`);
-            $("#carrinhoDescricao").text(`${response[0].description}`);
-            $(".precinhoHehe").text(`${response[0].monthly_price}`);
-        })    
-        .catch(err => console.log(err));
 });
 
 // crud Frame selector
@@ -574,32 +562,78 @@ $('#crudDeleteButton').on('click', () => {
 //DELETE: fim
 //Carrinho: Início
 
-$('.buyButton').on('click', async function() {
+async function buyButtom(signature_type, id_pack) {
     if (!userLogged) { changeFrame('#login', 'flex'); return false; }
     const newCart = {
-        signature_type : $(this).attr('signature_type'),
-        id_pack : $(this).attr('id_pack'),
+        signature_type : signature_type,
+        id_pack : id_pack,
         id_user : userID
     }
-
+    console.log(newCart);
     const options = {
-        method: 'PUT',
+        method: 'POST',
         body: JSON.stringify(newCart),
         headers: { 'Content-Type': 'application/json', 'x-access-token': userToken }
     }
 
-    await fetch(`http://localhost:3000/add/bag`, options)
+    await fetch(`http://localhost:3000/add/bags`, options)
         .then(data => data.json())
         .then(result => console.log(result))
         .catch(err => console.log(err));
     
     fillCart();
     changeFrame('#carrinho', 'flex');
-});
+}
 
-$('#carrinhoFinalizar').on('click', async () => {
+// $('#carrinhoFinalizar').on('click', async () => {
 
-    // Get the cart info
+//     // Get the cart info
+//     let options= {
+//         method:'GET',
+//         headers: { 'x-access-token' : userToken } 
+//     }
+
+//     const signature = await fetch(`http://localhost:3000/search/cart/${userID}`, options)
+//         .then(data => data.json())
+//         .then(resultado => {
+//             resultado = resultado[0];
+//             return {
+//                 signature_name: resultado.signature_name ,
+//                 signature_type: resultado.signature_type ,
+//                 id_bag : result.id
+//             }            
+//         })
+//         .catch(err => console.log(err));
+    
+//     // Insert signature info at user
+//     options = {
+//         method: 'PUT',
+//         body: JSON.stringify(signature),
+//         headers: { 'Content-Type': 'application/json', 'x-access-token': userToken }
+//     }
+
+//     await fetch(`http://localhost:3000/updateonly/users/${userID}`)
+//         .then(data => data.json())
+//         .then(resultado => console.log(resultado))
+//         .catch(err => console.log(err))
+
+//     // Delete the cart
+//     options = {
+//         method: 'DELETE',
+//         headers: { 'x-access-token': userToken }
+//     }
+
+//     await fetch(`http://localhost:3000/delete/bags/${signature.id_bag}"`)
+//         .then(data => data.json())
+//         .then(resultado => console.log(resultado))
+//         .catch(err => console.log(err))
+
+//     changeFrame('#compraFinalizada');
+//     emptyCart();
+
+// });
+
+async function carrinhoFinalizarButton() {
     let options= {
         method:'GET',
         headers: { 'x-access-token' : userToken } 
@@ -610,12 +644,13 @@ $('#carrinhoFinalizar').on('click', async () => {
         .then(resultado => {
             resultado = resultado[0];
             return {
-                signature_name: resultado.signature_name ,
+                signature_name: resultado.name ,
                 signature_type: resultado.signature_type ,
-                id_bag : result.id
+                id_bag : resultado.id
             }            
         })
         .catch(err => console.log(err));
+console.log(signature);
     
     // Insert signature info at user
     options = {
@@ -624,26 +659,27 @@ $('#carrinhoFinalizar').on('click', async () => {
         headers: { 'Content-Type': 'application/json', 'x-access-token': userToken }
     }
 
-    await fetch(`http://localhost:3000/updateonly/users/${userID}`)
+    await fetch(`http://localhost:3000/updateonly/users/${userID}`, options)
         .then(data => data.json())
         .then(resultado => console.log(resultado))
         .catch(err => console.log(err))
+console.log(signature);
 
     // Delete the cart
     options = {
         method: 'DELETE',
         headers: { 'x-access-token': userToken }
     }
-
-    await fetch(`http://localhost:3000/delete/bags/${signature.id_bag}"`)
+    
+console.log(signature);
+    await fetch(`http://localhost:3000/delete/bags/${signature.id_bag}`, options)
         .then(data => data.json())
         .then(resultado => console.log(resultado))
         .catch(err => console.log(err))
 
     changeFrame('#compraFinalizada');
     emptyCart();
-
-});
+}
 
 //Carrinho: fim
 //user Creating a user : inicio
@@ -689,21 +725,23 @@ async function fillCart() {
     await fetch(`http://localhost:3000/search/cart/${userID}`, options)
     .then(data => data.json())
     .then(resultado => {
+        console.log("🚀 ~ file: script.js ~ line 692 ~ fillCart ~ resultado", resultado)
         resultado = resultado[0]
+        console.log("🚀 ~ file: script.js ~ line 694 ~ fillCart ~ resultado", resultado)
         $('#carrinhoCard').html(`
             <h3 id="carrinhoTitle">Carrinho</h3>
             <div id="carrinhoContainer">
                 <div id="carrinhoPhotoBox">
-                    <img src="${resultado.img_url}" />
+                    <img id="carrinhoPhoto" src="${resultado.img_url}" />
                 </div>
-                <h4 id="nomeDoPacote">${resultado.signature_name}</h4>
+                <h4 id="nomeDoPacote">${resultado.name}</h4>
                 <p id="carrinhoDescricao">${resultado.description}</p>
                 <p id="carrinhoPrecoAtual">R$${resultado.monthly_price}<span class="precinhoHehe"></span>/mês</p>
             </div>
             <div id="carrinhoFinal">
                 <h3>Preço Total</h3>
                 <p id="carrinhoPrecoFinal">R$${(resultado.signature_type === 'mensal')? resultado.monthly_price : (parseFloat(resultado.monthly_price) * 12).toFixed(2)}<span class="precinhoHehe"></span>/mês</p>
-                <input id=carrinhoFinalizar type="button" value="Finalizar!" />
+                <input id=carrinhoFinalizar type="button" value="Finalizar!" onclick="carrinhoFinalizarButton()" />
             </div>
         `)
     })

@@ -13,19 +13,15 @@ CREATE TABLE users (
 	OIDS=FALSE
 );
 
-
-
 CREATE TABLE bags (
 	id serial NOT NULL,
 	id_pack integer NOT NULL,
 	signature_type varchar(60),
-	id_users integer,
+	id_user integer UNIQUE,
 	CONSTRAINT bag_pk PRIMARY KEY (id)
 ) WITH (
 	OIDS=FALSE
 );
-
-
 
 CREATE TABLE packs (
 	id serial NOT NULL,

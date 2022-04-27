@@ -22,12 +22,14 @@ router.get("/search/cart/:id", verificadorJWT, async(req, res) => {
     //  SELECT id_user, signature_type, id_pack, name, description, img_url, monthly_price FROM bags INNER JOIN packs ON id_pack = packs.id WHERE id_user = 10;
     try {
         const {id} = req.params;
+        console.log("🚀 ~ file: router.js ~ line 25 ~ router.get ~ id", id)
 
         const searchCart = await pool.query(
-            `SELECT id_user, signature_type, id_pack, name, description, img_url, monthly_price FROM bags INNER JOIN packs ON id_pack = packs.id WHERE id_user = ($1)`,
-            [ id  ]);
+            `SELECT bags.id, id_user, signature_type, id_pack, name, description, img_url, monthly_price FROM bags INNER JOIN packs ON id_pack = packs.id WHERE id_user = ($1)`,
+            [ id ]);
 
         res.json(searchCart.rows);
+        console.log("🚀 ~ file: router.js ~ line 31 ~ router.get ~ searchCart", searchCart.rows)
 
         console.log(`MALUCOO`);
     } catch (error) {
@@ -136,7 +138,7 @@ router.put("/update/:table/:id", verificadorJWT, async(req, res)=> {
     }
 });
 // 
-router.put("/updateOnly/users/:id", verificadorJWT, async(req, res)=> {
+router.put("/updateonly/users/:id", verificadorJWT, async(req, res)=> {
     try {
         const { id } = req.params;
 
@@ -144,10 +146,10 @@ router.put("/updateOnly/users/:id", verificadorJWT, async(req, res)=> {
         const {signature_type} = req.body;
     
         const updateTables = await pool.query(`
-            UPDATE users SET  signature_name =  $1, signature_type = $2 WHERE id = $3;`,
+            UPDATE users SET  signature_name = ($1), signature_type = ($2) WHERE id = ($3);`,
             [ signature_name, signature_type, id]);
 
-        res.json(`ID = ${id} in ${table} was Updated!`);
+        res.json(`ID = ${id} in users was Updated!`);
     } catch (error) {
         console.log(error);
     }
@@ -182,13 +184,13 @@ router.post("/add/:table", verificadorJWT, async(req, res) => {
                 [ name, description, img_url, monthly_price ]);
 
             console.log("Done!");
-        } else if ( table == "bag" ){
+        } else if ( table == "bags" ){
             const {id_pack} = req.body;
             const {signature_type} = req.body;
             const {id_user} = req.body;
 
             const addInTheTables = await pool.query(`
-                INSERT INTO bag (id_pack, signature_type, id_user) VALUES ($1, $2, $3)`, 
+                INSERT INTO bags (id_pack, signature_type, id_user) VALUES ($1, $2, $3)`, 
                 [ id_pack, signature_type, id_user ]);
 
             console.log("Done!");
