@@ -1155,3 +1155,92 @@ main{
             #carrinhoFinalizar:hover {
                 cursor: pointer;
             }
+#profilePage-box{
+    margin: 0 auto 25px;
+    width: 1100px;
+    height: 400px;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    justify-items: center;
+    background-color: var(--green);
+    border-radius: 15px;
+    border: 1px solid var(--yellow) outset;
+}
+    #profilePage{
+        display: flex;
+    }
+        #profilePage-left{
+            width: 250px;
+            background-color: var(--green);
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 15px;
+        }
+            #profilePage-left span{
+                color: var(--yellow);
+            }
+            #profilePage-left-um, #profilePage-left-dois, #profilePage-left-tres{
+                height: 50px;
+                width: 250px;
+                border: 1px solid var(--yellow);
+                background-color: var(--green);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                color: var(--yellow);
+            }
+                #profilePage-left-tres{                    
+                    border-radius: 0 0 0 15px ;
+                }
+                #profilePage-left-um:hover, #profilePage-left-dois:hover, #profilePage-left-tres:hover{
+                    background-color: #416e6e;
+                    color:  var(--white);
+                }
+            #profilePage-left-img{
+                border: 1px solid var(--yellow);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                background-color: var(--green);
+                height: 250px;
+                width: 250px;
+                border-radius: 15px 0 0 0 ;
+            }
+
+            #profilePage-right h3{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 70px;
+                width: 250px;
+                font-size: 22px;
+                font-weight:normal;
+                color: var(--yellow);
+            }
+            #infoDoFetch{
+                margin: 15px 0px 0 15px;
+                width: 800px;
+                display: flex;
+                column-gap: 25px;
+            }
+            #infoDoFetchPerfilDesc{
+                font-size: 18px;
+                font-weight: bold;
+            }
+            #infoDoFetch img{
+                margin-left: 75px;
+            }
+                #infoDoFetch h3{
+                    font-size: 26px;
+                }
+                #infoDoFetch p{
+                    color: var(--white);
+                }
+                #infoDoFetch span{
+                    font-size: 18px;
+                    color: var(--white);
+                }

@@ -1,6 +1,7 @@
 let userLogged, userToken, userID, userADMIN;
 
 function changeFrame(frame, display) {
+    $('#profilePage-box').hide();
     $('#primeiraPagina').hide();
     $('#home').hide();
     $('#userCad-box').hide();
@@ -587,54 +588,6 @@ async function buyButtom(signature_type, id_pack) {
     changeFrame('#carrinho', 'flex');
 }
 
-// $('#carrinhoFinalizar').on('click', async () => {
-
-//     // Get the cart info
-//     let options= {
-//         method:'GET',
-//         headers: { 'x-access-token' : userToken } 
-//     }
-
-//     const signature = await fetch(`http://localhost:3000/search/cart/${userID}`, options)
-//         .then(data => data.json())
-//         .then(resultado => {
-//             resultado = resultado[0];
-//             return {
-//                 signature_name: resultado.signature_name ,
-//                 signature_type: resultado.signature_type ,
-//                 id_bag : result.id
-//             }            
-//         })
-//         .catch(err => console.log(err));
-    
-//     // Insert signature info at user
-//     options = {
-//         method: 'PUT',
-//         body: JSON.stringify(signature),
-//         headers: { 'Content-Type': 'application/json', 'x-access-token': userToken }
-//     }
-
-//     await fetch(`http://localhost:3000/updateonly/users/${userID}`)
-//         .then(data => data.json())
-//         .then(resultado => console.log(resultado))
-//         .catch(err => console.log(err))
-
-//     // Delete the cart
-//     options = {
-//         method: 'DELETE',
-//         headers: { 'x-access-token': userToken }
-//     }
-
-//     await fetch(`http://localhost:3000/delete/bags/${signature.id_bag}"`)
-//         .then(data => data.json())
-//         .then(resultado => console.log(resultado))
-//         .catch(err => console.log(err))
-
-//     changeFrame('#compraFinalizada');
-//     emptyCart();
-
-// });
-
 async function carrinhoFinalizarButton() {
     let options= {
         method:'GET',
@@ -652,7 +605,6 @@ async function carrinhoFinalizarButton() {
             }            
         })
         .catch(err => console.log(err));
-console.log(signature);
     
     // Insert signature info at user
     options = {
@@ -665,7 +617,6 @@ console.log(signature);
         .then(data => data.json())
         .then(resultado => console.log(resultado))
         .catch(err => console.log(err))
-console.log(signature);
 
     // Delete the cart
     options = {
@@ -673,7 +624,6 @@ console.log(signature);
         headers: { 'x-access-token': userToken }
     }
     
-console.log(signature);
     await fetch(`http://localhost:3000/delete/bags/${signature.id_bag}`, options)
         .then(data => data.json())
         .then(resultado => console.log(resultado))
@@ -711,7 +661,7 @@ $('#cadButton').on('click', () => {
         headers: { 'Content-Type': 'application/json' }
     }
 
-    fetch('http://localhost:3000/add/users', options)
+    fetch('http://localhost:3000/addnewuser/user', options)
         .then(data => data.json())
         .then(resposta => {console.log(resposta); changeFrame("#login", 'flex')} )
         .catch(err => console.log(err));
