@@ -101,6 +101,10 @@ $('#loginInvite').on('click', () => {
     changeFrame('#accountLost', 'flex');
 });
 
+$('#forgetButton').on('click', () =>{
+    changeFrame('#userCad-box', 'flex')
+})
+
 $('.toCart').on('click', () => {
     changeFrame('#carrinho', 'flex');  
 });
