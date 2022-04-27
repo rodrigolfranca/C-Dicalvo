@@ -12,6 +12,7 @@ function changeFrame(frame, display) {
     $('#carrinho').hide();
     $('#crudSpace').hide();
     $('#login').hide();
+    $('#thankYou').hide();
     crudShow();
     $(frame).fadeIn();
     if (display) {
@@ -629,7 +630,7 @@ async function carrinhoFinalizarButton() {
         .then(resultado => console.log(resultado))
         .catch(err => console.log(err))
 
-    changeFrame('#compraFinalizada');
+    changeFrame('#thankYou', 'flex');    
     emptyCart();
 }
 
