@@ -117,6 +117,24 @@ router.put("/update/:table/:id", verificadorJWT, async(req, res)=> {
         console.log(error);
     }
 });
+// 
+router.put("/update/users/:id", verificadorJWT, async(req, res)=> {
+    try {
+        const { id } = req.params;
+
+        const {signature_name} = req.body;
+        const {signature_type} = req.body;
+    
+        const updateTables = await pool.query(`
+            UPDATE users SET  signature_name =  $1, signature_type = $2 WHERE id = $3;`,
+            [ signature_name, signature_type, id]);
+
+        res.json(`ID = ${id} in ${table} was Updated!`);
+    } catch (error) {
+        console.log(error);
+    }
+});
+// 
 // Add item nas tabelas!
 router.post("/add/:table", verificadorJWT, async(req, res) => {
     try {
