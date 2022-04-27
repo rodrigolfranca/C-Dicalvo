@@ -18,15 +18,10 @@ function verificadorJWT(req, res, next){
 // postgreSQL;
 const pool = require("./db");
 
-// pesquisar nas tabelas
-router.get("/search/:table", verificadorJWT, async(req, res) => {
+router.get("/packs", async(req, res) => {
     try {
-        const { table } = req.params;
-
-        if(table == "user") return res.send("Nope")
-
         const searchTables = await pool.query(
-            `SELECT * FROM ${table} ORDER BY id`);
+            `SELECT * FROM packs ORDER BY id`);
 
         res.json(searchTables.rows);
 
@@ -36,11 +31,15 @@ router.get("/search/:table", verificadorJWT, async(req, res) => {
         console.log(error);
     }
 });
-router.get("/packs", async(req, res) => {
-    console.log("OI");
+// pesquisar nas tabelas
+router.get("/search/:table", verificadorJWT, async(req, res) => {
     try {
+        const { table } = req.params;
+
+        if(table == "user") return res.send("Nope")
+
         const searchTables = await pool.query(
-            `SELECT * FROM packs ORDER BY id`);
+            `SELECT * FROM ${table} ORDER BY id`);
 
         res.json(searchTables.rows);
 
