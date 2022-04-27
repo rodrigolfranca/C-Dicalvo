@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+require("dotenv-safe").config();
 
 
 module.exports = {
