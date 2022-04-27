@@ -1,35 +1,20 @@
 const EXPRESS = require("express");
+const { jwtCheck, jwtCheckAdmin } = require("../checkJWT");
 const router = EXPRESS.Router();
-const jwt = require("jsonwebtoken");
-
-function verificadorJWT(req, res, next){
-    const token = req.headers['x-access-token'];
-    if (!token) return res.status(401).json({ auth: false, message: 'No token provided.' });
-    
-    jwt.verify(token, process.env.SECRET, function(err, decoded) {
-        if (err) return res.status(500).json({ auth: false, message: 'Failed to authenticate token.' });
-    
-      // se tudo estiver ok, salva no request para uso posterior
-        req.userId = decoded.id;
-        next();
-    });
-}
 
 // postgreSQL;
 const pool = require("./db");
 
-router.get("/search/cart/:id", verificadorJWT, async(req, res) => {
+router.get("/search/cart/:id", jwtCheckAdmin, async(req, res) => {
     //  SELECT id_user, signature_type, id_pack, name, description, img_url, monthly_price FROM bags INNER JOIN packs ON id_pack = packs.id WHERE id_user = 10;
     try {
-        const {id} = req.params;
-        console.log("🚀 ~ file: router.js ~ line 25 ~ router.get ~ id", id)
+        const {id} = req.params;        
 
         const searchCart = await pool.query(
             `SELECT bags.id, id_user, signature_type, id_pack, name, description, img_url, monthly_price FROM bags INNER JOIN packs ON id_pack = packs.id WHERE id_user = ($1)`,
             [ id ]);
 
-        res.json(searchCart.rows);
-        console.log("🚀 ~ file: router.js ~ line 31 ~ router.get ~ searchCart", searchCart.rows)
+        res.json(searchCart.rows);        
 
         console.log(`MALUCOO`);
     } catch (error) {
@@ -52,7 +37,7 @@ router.get("/packs", async(req, res) => {
     }
 });
 // pesquisar nas tabelas
-router.get("/search/:table", verificadorJWT, async(req, res) => {
+router.get("/search/:table", jwtCheckAdmin, async(req, res) => {
     try {
         const { table } = req.params;
 
@@ -70,7 +55,7 @@ router.get("/search/:table", verificadorJWT, async(req, res) => {
     }
 });
 // pesquisar nas tabelas por ID;
-router.get("/search/:table/:id", verificadorJWT, async(req, res) => {
+router.get("/search/:table/:id", jwtCheckAdmin, async(req, res) => {
     try {
         const { table } = req.params;
         const { id } = req.params;
@@ -90,7 +75,7 @@ router.get("/search/:table/:id", verificadorJWT, async(req, res) => {
     }
 });
 // update item nas tabelas pelo ID;
-router.put("/update/:table/:id", verificadorJWT, async(req, res)=> {
+router.put("/update/:table/:id", jwtCheckAdmin, async(req, res)=> {
     try {
         const { table } = req.params;
         const { id } = req.params;
@@ -138,7 +123,7 @@ router.put("/update/:table/:id", verificadorJWT, async(req, res)=> {
     }
 });
 // 
-router.put("/updateonly/users/:id", verificadorJWT, async(req, res)=> {
+router.put("/updateonly/users/:id", jwtCheck, async(req, res)=> {
     try {
         const { id } = req.params;
 
@@ -156,28 +141,7 @@ router.put("/updateonly/users/:id", verificadorJWT, async(req, res)=> {
 });
 // 
 // Add item nas tabelas!
-router.post("/addnewuser/user", async(req, res) => {
-    try {    
-        const {fname} = req.body;
-        const {lname} = req.body;
-        const {email} = req.body;
-        const {password} = req.body;
-        const {type_of_bold} = req.body;
-        const type_user = 0;
-    
-        const addInTheTables = await pool.query(`
-            INSERT INTO users (fname, lname, password, email, type_of_bold, type_user) VALUES ($1, $2, $3, $4, $5, $6)`,
-            [ fname, lname, password, email, type_of_bold, type_user ]);
-    
-        console.log("Done!");
-
-        res.json(`New data in users was Add!`);
-    } catch (error) {
-        console.log(error);
-    }
-})
-
-router.post("/add/:table", verificadorJWT, async(req, res) => {
+router.post("/add/:table", jwtCheckAdmin, async(req, res) => {
     try {
         const { table } = req.params;
 
@@ -223,7 +187,7 @@ router.post("/add/:table", verificadorJWT, async(req, res) => {
     }
 })
 // DELETE item nas tabelas, pelo id
-router.delete("/delete/:table/:id", verificadorJWT, async(req, res) => {
+router.delete("/delete/:table/:id", jwtCheckAdmin, async(req, res) => {
     try {
         const {table} = req.params;
         const {id} = req.params;
