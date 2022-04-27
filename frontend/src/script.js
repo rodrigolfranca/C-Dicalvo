@@ -23,8 +23,8 @@ function changeFrame(frame, display) {
 const arrResponse = [];
 $(document).ready( async () => {
     // Fetch para o preço dos produtos na main page
-    const fetchProdutos = await fetch(`http://localhost:3000/search/packs`)
-        .then(data => data.json())
+    const fetchProdutos = await fetch(`http://localhost:3000/packs`)
+        .then(data => data.json());
         .then(response => {
             console.log(response);
             response.forEach(element => {
@@ -106,7 +106,7 @@ $('#loginInvite').on('click', () => {
 $('.toCart').on('click', () => {
     changeFrame('#carrinho', 'flex');  
 
-    fetch(`http://localhost:3000/search/packs`)
+    fetch(`http://localhost:3000/packs`)
         .then(data => data.json())
         .then(response => {
             console.log(response);

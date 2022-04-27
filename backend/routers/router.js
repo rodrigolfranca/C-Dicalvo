@@ -36,6 +36,23 @@ router.get("/search/:table", verificadorJWT, async(req, res) => {
         console.log(error);
     }
 });
+router.get("/packs", async(req, res) => {
+    try {
+        const { table } = req.params;
+
+        if(table == "user") return res.send("Nope")
+
+        const searchTables = await pool.query(
+            `SELECT * FROM ${table} ORDER BY id`);
+
+        res.json(searchTables.rows);
+
+        console.log(`Gotcha`);
+
+    } catch (error) {
+        console.log(error);
+    }
+});
 // pesquisar nas tabelas por ID;
 router.get("/search/:table/:id", verificadorJWT, async(req, res) => {
     try {
