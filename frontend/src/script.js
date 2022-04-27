@@ -187,7 +187,7 @@ $('#crudSelectButton').on('click', function() {
 
     const options = {
         method: "GET",
-        header: {"x-access-token": userToken}
+        headers: { 'Content-Type': 'application/json', "x-access-token": userToken}
     }
 
     fetch(url, options)
@@ -306,7 +306,7 @@ $('#crudInsertUsersButton').on('click', function() {
 
     fetch('http://localhost:3000/add/users', options)
         .then(data => data.json())
-        .then(resposta => console.log(resposta))
+        .then(resposta => $("#crudInsertUserAlert").text(resposta))
         .catch(err => console.log(err));
 
 });
@@ -336,7 +336,7 @@ $('#crudInsertPacksButton').on('click', function() {
 
     fetch('http://localhost:3000/add/packs', options)
         .then(data => data.json())
-        .then(resposta => console.log(resposta))
+        .then(resposta => $("#crudInsertPacksAlert").text(resposta))
         .catch(err => console.log(err));
         
 });
@@ -350,10 +350,10 @@ $("#crudAlterSearchButton").on('click', () => {
 
     const options = {
         method: "GET",
-        header: {"x-access-token": userToken}
+        headers: {"x-access-token": userToken}
     }
 
-    fetch(`http://localhost:3000/${tabela}/${id}`, options)
+    fetch(`http://localhost:3000/search/${tabela}/${id}`, options)
         .then(data => data.json())
         .then( resultado => {
             resultado = resultado[0];
@@ -446,7 +446,7 @@ $("#crudDeleteSearchButton").on('click', () => {
 
     const options = {
         method: "GET",
-        header: {"x-access-token": userToken}
+        headers: {"x-access-token": userToken}
     }
 
     fetch(`http://localhost:3000/search/${tabela}/${id}`, options)
@@ -513,7 +513,7 @@ $('#crudDeleteButton').on('click', () => {
 
     const options = {
         method: "DELETE",
-        header: {"x-access-token": userToken}
+        headers: {"x-access-token": userToken}
     }
 
     fetch(`http://localhost:3000/DELETE/${tabela}/${id}`, options)
