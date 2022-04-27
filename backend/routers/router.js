@@ -8,15 +8,13 @@ const pool = require("./db");
 router.get("/search/cart/:id", jwtCheckAdmin, async(req, res) => {
     //  SELECT id_user, signature_type, id_pack, name, description, img_url, monthly_price FROM bags INNER JOIN packs ON id_pack = packs.id WHERE id_user = 10;
     try {
-        const {id} = req.params;
-        console.log("🚀 ~ file: router.js ~ line 25 ~ router.get ~ id", id)
+        const {id} = req.params;        
 
         const searchCart = await pool.query(
             `SELECT bags.id, id_user, signature_type, id_pack, name, description, img_url, monthly_price FROM bags INNER JOIN packs ON id_pack = packs.id WHERE id_user = ($1)`,
             [ id ]);
 
-        res.json(searchCart.rows);
-        console.log("🚀 ~ file: router.js ~ line 31 ~ router.get ~ searchCart", searchCart.rows)
+        res.json(searchCart.rows);        
 
         console.log(`MALUCOO`);
     } catch (error) {
