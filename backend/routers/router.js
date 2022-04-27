@@ -5,7 +5,7 @@ const router = EXPRESS.Router();
 // postgreSQL;
 const pool = require("./db");
 
-router.get("/search/cart/:id", jwtCheckAdmin, async(req, res) => {
+router.get("/search/cart/:id", jwtCheck, async(req, res) => {
     //  SELECT id_user, signature_type, id_pack, name, description, img_url, monthly_price FROM bags INNER JOIN packs ON id_pack = packs.id WHERE id_user = 10;
     try {
         const {id} = req.params;        
@@ -37,7 +37,7 @@ router.get("/packs", async(req, res) => {
     }
 });
 // pesquisar nas tabelas
-router.get("/search/:table", jwtCheckAdmin, async(req, res) => {
+router.get("/search/:table", jwtCheck, async(req, res) => {
     try {
         const { table } = req.params;
 
@@ -55,7 +55,7 @@ router.get("/search/:table", jwtCheckAdmin, async(req, res) => {
     }
 });
 // pesquisar nas tabelas por ID;
-router.get("/search/:table/:id", jwtCheckAdmin, async(req, res) => {
+router.get("/search/:table/:id", jwtCheck, async(req, res) => {
     try {
         const { table } = req.params;
         const { id } = req.params;
@@ -75,7 +75,7 @@ router.get("/search/:table/:id", jwtCheckAdmin, async(req, res) => {
     }
 });
 // update item nas tabelas pelo ID;
-router.put("/update/:table/:id", jwtCheckAdmin, async(req, res)=> {
+router.put("/update/:table/:id", jwtCheck, async(req, res)=> {
     try {
         const { table } = req.params;
         const { id } = req.params;
@@ -141,7 +141,7 @@ router.put("/updateonly/users/:id", jwtCheck, async(req, res)=> {
 });
 // 
 // Add item nas tabelas!
-router.post("/add/:table", jwtCheckAdmin, async(req, res) => {
+router.post("/add/:table", jwtCheck, async(req, res) => {
     try {
         const { table } = req.params;
 
@@ -187,7 +187,7 @@ router.post("/add/:table", jwtCheckAdmin, async(req, res) => {
     }
 })
 // DELETE item nas tabelas, pelo id
-router.delete("/delete/:table/:id", jwtCheckAdmin, async(req, res) => {
+router.delete("/delete/:table/:id", jwtCheck, async(req, res) => {
     try {
         const {table} = req.params;
         const {id} = req.params;

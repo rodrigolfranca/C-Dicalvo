@@ -1155,6 +1155,51 @@ main{
             #carrinhoFinalizar:hover {
                 cursor: pointer;
             }
+#thankYou {
+    margin: 110px auto 0;
+    width: 1300px;
+    height: 100%;
+    display: none;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    justify-items: center;
+}
+    #thankYouCard {
+        width: 1100px;
+        height: 420px;
+        padding-top: 50px;
+        padding-left: 50px;
+
+        border-radius: 15px;
+        background-color: var(--green);
+
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 30px;
+    }
+    #thankYouTitle {
+        width: 600px;
+        height: 40px;
+        padding-left: 20px;
+        margin: 0;            
+
+        font-size: 24px;
+        font-weight: bold;
+        font-family: 'Oxygen', sans-serif;
+
+        color: var(--yellow);
+        border-bottom: 3px var(--yellow) solid;
+    }
+    #thankYouMessage{
+        width: 1000px;
+        height: 30px;
+        display: block;
+        text-align: center;
+        margin: 40px auto;
+        color: var(--white)
+    }
+
 #profilePage-box{
     margin: 0 auto 25px;
     width: 1100px;
