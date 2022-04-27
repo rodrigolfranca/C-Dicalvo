@@ -18,6 +18,24 @@ function verificadorJWT(req, res, next){
 // postgreSQL;
 const pool = require("./db");
 
+router.get("/search/cart/:id", verificadorJWT, async(req, res) => {
+    //  SELECT id_user, signature_type, id_pack, name, description, img_url, monthly_price FROM bags INNER JOIN packs ON id_pack = packs.id WHERE id_user = 10;
+    try {
+        const {id} = req.params;
+
+        const searchCart = await pool.query(
+            `SELECT id_user, signature_type, id_pack, name, description, img_url, monthly_price FROM bags INNER JOIN packs ON id_pack = packs.id WHERE id_user = ($1)`,
+            [ id  ]);
+
+        res.json(searchCart.rows);
+
+        console.log(`MALUCOO`);
+    } catch (error) {
+        console.log(error);
+    }
+
+})
+
 router.get("/packs", async(req, res) => {
     try {
         const searchTables = await pool.query(
