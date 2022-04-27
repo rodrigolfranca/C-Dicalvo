@@ -32,7 +32,8 @@ $(document).ready( async () => {
                 $('#seletorPacote').append(`
                     <input type="button" class="seletor" value="${element.name}" id="seletor_${element.id}" onClick="criadorDeFuncao(${element.id})" />
                 `);
-            });
+            })
+        .catch(err => console.log(err));
 
             $("#nomeProduto").text(`${response[0].name}`);
         
@@ -61,13 +62,10 @@ function criadorDeFuncao(params) {
     $("#productPhoto").html(`
         <img src="${arrResponse[params-1].img_url}" />
     `)
-
     $("#nomeProduto").text(`${arrResponse[params-1].name}`);
-
     $("#inputAssinar").html(`
         <input class="buyButton" type="button" value="Assinar" signature_name="${arrResponse[params-1].id}" signature_type="mensal" />
     `);
-    
     $("#inputAssinarAdulterado").html(`
         <input class="buyButton" type="button" value="Assinar" signature_name="${arrResponse[params-1].id}" signature_type="anual" />
     `);
@@ -116,6 +114,7 @@ $('.toCart').on('click', () => {
             $("#carrinhoDescricao").text(`${response[0].description}`);
             $(".precinhoHehe").text(`${response[0].monthly_price}`);
         })    
+        .catch(err => console.log(err));
 });
 
 // crud Frame selector
@@ -631,7 +630,7 @@ async function fillCart() {
             <h3 id="carrinhoTitle">Carrinho</h3>
             <div id="carrinhoContainer">
                 <div id="carrinhoPhotoBox">
-                    <img src="${response.img_url}" />
+                    <img src="${resultado.img_url}" />
                 </div>
                 <h4 id="nomeDoPacote">${resultado.signature_name}</h4>
                 <p id="carrinhoDescricao">${resultado.description}</p>
