@@ -606,7 +606,7 @@ $('#carrinhoFinalizar').on('click', async () => {
         headers: { 'x-access-token' : userToken } 
     }
 
-    const signature = await fetch(`urlFicticiaDeSatanas/${userID}`, options)
+    const signature = await fetch(`http://localhost:3000/search/cart/${userID}`, options)
         .then(data => data.json())
         .then(resultado => {
             resultado = resultado[0];
@@ -687,7 +687,7 @@ async function fillCart() {
         headers: { 'x-access-token' : userToken } 
     }
 
-    await fetch(`urlFicticiaDeSatanas/${userID}`, options)
+    await fetch(`http://localhost:3000/search/cart/${userID}`, options)
     .then(data => data.json())
     .then(resultado => {
         resultado = resultado[0]
