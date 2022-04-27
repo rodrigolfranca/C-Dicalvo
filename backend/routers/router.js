@@ -18,6 +18,19 @@ function verificadorJWT(req, res, next){
 // postgreSQL;
 const pool = require("./db");
 
+router.get("/packs", async(req, res) => {
+    try {
+        const searchTables = await pool.query(
+            `SELECT * FROM packs ORDER BY id`);
+
+        res.json(searchTables.rows);
+
+        console.log(`Gotcha`);
+
+    } catch (error) {
+        console.log(error);
+    }
+});
 // pesquisar nas tabelas
 router.get("/search/:table", verificadorJWT, async(req, res) => {
     try {
@@ -26,7 +39,7 @@ router.get("/search/:table", verificadorJWT, async(req, res) => {
         if(table == "user") return res.send("Nope")
 
         const searchTables = await pool.query(
-            `SELECT * FROM ${table}`);
+            `SELECT * FROM ${table} ORDER BY id`);
 
         res.json(searchTables.rows);
 
@@ -93,8 +106,8 @@ router.put("/update/:table/:id", verificadorJWT, async(req, res)=> {
             const {id_user} = req.body;
 
             const updateTables = await pool.query(`
-            UPDATE bag SET id_pack = ($1), signature_type = ($2), id_user = ($3)  WHERE id = ($4);`, 
-            [ id_pack, signature_type, id_user, id]);
+                UPDATE bag SET id_pack = ($1), signature_type = ($2), id_user = ($3)  WHERE id = ($4);`, 
+                [ id_pack, signature_type, id_user, id]);
 
             console.log("Done!");
         }
@@ -157,9 +170,10 @@ router.delete("/delete/:table/:id", verificadorJWT, async(req, res) => {
         const {id} = req.params;
 
         const deleteIteminTheTables  = await pool.query(`
-        DELETE FROM ${table} WHERE id = ($1)`,
-        [ id ]);
+            DELETE FROM ${table} WHERE id = ($1)`,
+            [ id ]);
 
+        console.log("Bye bitch!");
         res.json(`Item ${id} from ${table} was deleted`)
     } catch (error) {
         console.log(error);

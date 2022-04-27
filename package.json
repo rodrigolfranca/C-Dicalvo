@@ -23,5 +23,6 @@
   "bugs": {
     "url": "https://github.com/rodrigolfranca/C-Dicalvo/issues"
   },
-  "homepage": "https://github.com/rodrigolfranca/C-Dicalvo#readme"
+  "homepage": "https://github.com/rodrigolfranca/C-Dicalvo#readme",
+  "devDependencies": {}
 }
