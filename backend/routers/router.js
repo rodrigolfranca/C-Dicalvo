@@ -118,7 +118,7 @@ router.put("/update/:table/:id", verificadorJWT, async(req, res)=> {
     }
 });
 // 
-router.put("/update/users/:id", verificadorJWT, async(req, res)=> {
+router.put("/updateOnly/users/:id", verificadorJWT, async(req, res)=> {
     try {
         const { id } = req.params;
 
