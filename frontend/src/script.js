@@ -81,10 +81,6 @@ $('.toCart').on('click', () => {
         })
 });
 
-$('.buyButton').on('click', () => {
-    changeFrame('#carrinho', 'flex');
-});
-
 // crud Frame selector
 function crudShow(frame, link) {
     $('#crudMenuSelect').css('color', 'var(--yellow)');
@@ -522,3 +518,102 @@ $('#crudDeleteButton').on('click', () => {
         .catch(err => console.log(err));
 
 });
+
+//DELETE: fim
+//Carrinho: Início
+
+$('.buyButton').on('click', async function() {
+    if (!userLogged) { changeFrame('#login', 'flex'); return false; }
+    const newCart = {
+        signature_type : $(this).attr('signature_type'),
+        signature_name : $(this).attr('signature_name'),
+        id_user : userID
+    }
+
+    const options = {
+        method: 'PUT',
+        body: JSON.stringify(newCart),
+        headers: { 'Content-Type': 'application/json', 'x-access-token': userToken }
+    }
+
+    await fetch(`http://localhost:3000/add/bag`, options)
+        .then(data => data.json())
+        .then(result => console.log(result))
+        .catch(err => console.log(err));
+    
+    fillCart();
+    changeFrame('#carrinho', 'flex');
+});
+
+$('#carrinhoFinalizar').on('click', async () => {
+    changeFrame('#compraFinalizada');
+    emptyCart();
+
+    let options= {
+        method:'GET',
+        headers: { 'x-access-token' : userToken } 
+    }
+
+    const signature = await fetch(`urlFicticiaDeSatanas/${userID}`, options)
+        .then(data => data.json())
+        .then(resultado => {
+            resultado = resultado[0];
+            return {
+                signature_name: resultado.signature_name ,
+                signature_type: resultado.signature_type
+            }            
+        })
+        .catch(err => console.log(err));
+    
+    options = {
+        method: 'PUT',
+        body: JSON.stringify(signature),
+        headers: { 'Content-Type': 'application/json', 'x-access-token': userToken }
+    }
+
+    fetch(`maisUmaUrlSatanica/${userID}`)
+        .then(data => data.json())
+        .then(resultado => console.log(resultado))
+        .catch(err => console.log(err))
+    
+    
+
+});
+
+async function fillCart() {
+    const options= {
+        method:'GET',
+        headers: { 'x-access-token' : userToken } 
+    }
+
+    await fetch(`urlFicticiaDeSatanas/${userID}`, options)
+    .then(data => data.json())
+    .then(resultado => {
+        resultado = resultado[0]
+        $('#carrinhoCard').html(`
+            <h3 id="carrinhoTitle">Carrinho</h3>
+            <div id="carrinhoContainer">
+                <div id="carrinhoPhotoBox">
+                    <img src="${response.img_url}" />
+                </div>
+                <h4 id="nomeDoPacote">${resultado.signature_name}</h4>
+                <p id="carrinhoDescricao">${resultado.description}</p>
+                <p id="carrinhoPrecoAtual">R$${resultado.monthly_price}<span class="precinhoHehe"></span>/mês</p>
+            </div>
+            <div id="carrinhoFinal">
+                <h3>Preço Total</h3>
+                <p id="carrinhoPrecoFinal">R$${(resultado.signature_type === 'mensal')? resultado.monthly_price : (parseFloat(resultado.monthly_price) * 12).toFixed(2)}<span class="precinhoHehe"></span>/mês</p>
+                <input id=carrinhoFinalizar type="button" value="Finalizar!" />
+            </div>
+        `)
+    })
+
+    .catch(err => console.log(err))        
+}
+
+function emptyCart() {
+    $('#carrinhoCard').html(`
+        <h3 id="carrinhoTitle">Carrinho</h3>
+        <span id="emptyCart">Seu carrinho esta vazio.</span>
+    `)
+}

@@ -984,6 +984,14 @@ main{
             color: var(--yellow);
             border-bottom: 3px var(--yellow) solid;
         }
+        #emptyCart{
+            width: 1000px;
+            height: 30px;
+            display: block;
+            text-align: center;
+            margin: 40px auto;
+            color: var(--white)
+        }
         #carrinhoContainer {
             width: 725px;
             height: 250px;
