@@ -37,13 +37,10 @@ router.get("/search/:table", verificadorJWT, async(req, res) => {
     }
 });
 router.get("/packs", async(req, res) => {
+    console.log("OI");
     try {
-        const { table } = req.params;
-
-        if(table == "user") return res.send("Nope")
-
         const searchTables = await pool.query(
-            `SELECT * FROM ${table} ORDER BY id`);
+            `SELECT * FROM packs ORDER BY id`);
 
         res.json(searchTables.rows);
 

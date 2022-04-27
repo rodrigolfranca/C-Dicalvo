@@ -24,7 +24,7 @@ const arrResponse = [];
 $(document).ready( async () => {
     // Fetch para o preço dos produtos na main page
     const fetchProdutos = await fetch(`http://localhost:3000/packs`)
-        .then(data => data.json());
+        .then(data => data.json())
         .then(response => {
             console.log(response);
             response.forEach(element => {
