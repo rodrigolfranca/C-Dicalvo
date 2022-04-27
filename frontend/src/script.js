@@ -105,7 +105,16 @@ $('#loginInvite').on('click', () => {
 $('.toCart').on('click', () => {
     changeFrame('#carrinho', 'flex');  
 
-    
+    fetch(`http://localhost:3000/search/packs`)
+        .then(data => data.json())
+        .then(response => {
+            console.log(response);
+            $("#carrinhoPhotoBox").html(`
+                <img id="carrinhoPhoto" src="${response[0].img_url}" />`);
+            $("#nomeDoPacote").text(`${response[0].name}`);
+            $("#carrinhoDescricao").text(`${response[0].description}`);
+            $(".precinhoHehe").text(`${response[0].monthly_price}`);
+        })    
 });
 
 $('.buyButton').on('click', () => {
