@@ -156,6 +156,27 @@ router.put("/updateonly/users/:id", verificadorJWT, async(req, res)=> {
 });
 // 
 // Add item nas tabelas!
+router.post("/addnewuser/user", async(req, res) => {
+    try {    
+        const {fname} = req.body;
+        const {lname} = req.body;
+        const {email} = req.body;
+        const {password} = req.body;
+        const {type_of_bold} = req.body;
+        const type_user = 0;
+    
+        const addInTheTables = await pool.query(`
+            INSERT INTO users (fname, lname, password, email, type_of_bold, type_user) VALUES ($1, $2, $3, $4, $5, $6)`,
+            [ fname, lname, password, email, type_of_bold, type_user ]);
+    
+        console.log("Done!");
+
+        res.json(`New data in users was Add!`);
+    } catch (error) {
+        console.log(error);
+    }
+})
+
 router.post("/add/:table", verificadorJWT, async(req, res) => {
     try {
         const { table } = req.params;
