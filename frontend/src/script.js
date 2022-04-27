@@ -1,4 +1,5 @@
 let userLogged, userToken, userID, userADMIN;
+// userLogged = 1;
 
 // home: flex, userCad-box: flex , login: flex, accountLost: flex, crudSpace,  aboutUs: flex, produtos: block, carrinho: flex
 function changeFrame(frame, display) {
@@ -168,24 +169,7 @@ $('#crudInsertSelect').on('change', () => {
     }    
 });
 
-// crudAlter select
-$('#crudAlterSelect').on('change', () => {
-    switch ($('#crudAlterSelect').val()){
-        case 'users':
-            $('#crudAlterUser').fadeIn();
-            $('#crudAlterPacks').hide();
-            break;
-        case 'packs':
-            $('#crudAlterUser').hide();
-            $('#crudAlterPacks').fadeIn();
-            break;
-        default:
-            $('#crudAlterUser').hide();
-            $('#crudAlterPacks').hide();
-    }    
-})
-
-
+//LOGIN: inicio
 
 $('#loginButton').on('click', () => {
 
@@ -201,12 +185,15 @@ $('#loginButton').on('click', () => {
     fetch('http://localhost:3000/login', options)
         .then(data => data.json())
         .then(resposta => {
+        console.log("🚀 ~ file: script.js ~ line 151 ~ $ ~ resposta", resposta)
             if (resposta.auth) {
 
                 userLogged = 1;                
-                userToken = resposta.token;
+                userToken = resposta.token;                
                 userID = JSON.parse(window.atob(resposta.token.split('.')[1])).id;
-                userADMIN = JSON.parse(window.atob(resposta.token.split('.')[1])).admin;
+                userADMIN = JSON.parse(window.atob(resposta.token.split('.')[1])).adm;
+
+                console.log(`ID: ${userID} - ADM: ${userADMIN}`);
 
                 changeFrame("#crudSpace");
 
@@ -218,9 +205,12 @@ $('#loginButton').on('click', () => {
         .catch(err => console.log(err));
 });
 
+//LOGIN: fim
+//SELECT: inicio
+
 $('#crudSelectButton').on('click', function() {
     const buscaPor = $('#buscarPor').val();
-    let filtro = $('#crudSelectFilter').val();
+    const filtro = $('#crudSelectFilter').val();
     
     let url;
     (!filtro)? url = `http://localhost:3000/search/${buscaPor}` : url = `http://localhost:3000/search/${buscaPor}/${filtro}`;
@@ -232,8 +222,12 @@ $('#crudSelectButton').on('click', function() {
     }
     $('#crudSelectResults').html(``);
 
+    const options = {
+        method: "GET",
+        headers: { 'Content-Type': 'application/json', "x-access-token": userToken}
+    }
 
-    fetch(url)
+    fetch(url, options)
         .then(data => data.json())
         .then(objeto => {
                 switch (buscaPor) {
@@ -314,4 +308,254 @@ $('#crudSelectButton').on('click', function() {
                 }
         })
         .catch(err => console.log(err));
+});
+
+//SELECT: fim
+//INSERT: inicio
+
+$('#crudInsertUsersButton').on('click', function() {
+
+    //validação de inputs aqui \/\/\/\/\/\/\/\/
+
+    if (!$('#crudInsertUsersName').val()) { $('#crudInsertUsersName').effect('highlight'); return false; }
+    if (!$('#crudInsertUsersSurname').val()) { $('#crudInsertUsersSurname').effect('highlight'); return false; }
+    if (!$('#crudInsertUsersEmail').val()) { $('#crudInsertUsersEmail').effect('highlight'); return false; }
+    if (!$('#crudInsertUsersSenha').val()) { $('#crudInsertUsersSenha').effect('highlight'); return false; }
+    if (!$('#crudInsertUsersVerify').val()) { $('#crudInsertUsersVerify').effect('highlight'); return false; }
+    if (!$('#crudInsertUsersCalvicie').val()) { $('#crudInsertUsersCalvicie').effect('highlight'); return false; }
+
+    const newUser = {
+        fname : $('#crudInsertUsersName').val(),
+        lname : $('#crudInsertUsersSurname').val(),
+        email : $('#crudInsertUsersEmail').val(),
+        password : $('#crudInsertUsersSenha').val(),
+        type_of_bold : $('#crudInsertUsersCalvicie').val(),        
+        type_user : $('#crudInsertUsersAdmin').prop('checked'),
+        signature_name : $('#crudInsertUsersAssinatura').val(),
+        signature_type : $('#crudInsertUsersTipo').val()
+    }
+
+    const options = {
+        method: 'POST',
+        body: JSON.stringify(newUser),
+        headers: { 'Content-Type': 'application/json', 'x-access-token': userToken}
+    }
+
+    fetch('http://localhost:3000/add/users', options)
+        .then(data => data.json())
+        .then(resposta => $("#crudInsertUserAlert").text(resposta))
+        .catch(err => console.log(err));
+
+});
+
+$('#crudInsertPacksButton').on('click', function() {
+
+    //validação de inputs aqui \/\/\/\/\/\/\/\/
+
+    if (!$('#crudInsertPacksName').val()) { $('#crudInsertPacksName').effect('highlight'); return false; }
+    if (!$('#crudInsertPacksDescricao').val()) { $('#crudInsertPacksDescricao').effect('highlight'); return false; }
+    if (!$('#crudInsertPacksImage').val()) { $('#crudInsertPacksImage').effect('highlight'); return false; }
+    if (!$('#crudInsertPacksPreco').val()) { $('#crudInsertPacksPreco').effect('highlight'); return false; }
+    
+
+    const newPack = {
+        name : $('#crudInsertPacksName').val(),
+        description : $('#crudInsertPacksDescricao').val(),
+        img_url : $('#crudInsertPacksImage').val(),
+        monthly_price : $('#crudInsertPacksPreco').val(),        
+    }
+
+    const options = {
+        method: 'POST',
+        body: JSON.stringify(newPack),
+        headers: { 'Content-Type': 'application/json', 'x-access-token': userToken }
+    }
+
+    fetch('http://localhost:3000/add/packs', options)
+        .then(data => data.json())
+        .then(resposta => $("#crudInsertPacksAlert").text(resposta))
+        .catch(err => console.log(err));
+        
+});
+
+//INSERT: fim
+//UPDATE: inicio
+
+$("#crudAlterSearchButton").on('click', () => {
+    const tabela = $('#crudAlterSelect').val();
+    const id = $('#crudAlterID').val();
+
+    const options = {
+        method: "GET",
+        headers: {"x-access-token": userToken}
+    }
+
+    fetch(`http://localhost:3000/search/${tabela}/${id}`, options)
+        .then(data => data.json())
+        .then( resultado => {
+            resultado = resultado[0];
+            
+            switch (tabela) {
+                case 'users':
+                    $('#crudAlterUser').fadeIn();
+                    $('#crudAlterPacks').hide();
+                    $('#crudAlterUsersName').val(resultado.fname);
+                    $('#crudAlterUsersSurname').val(resultado.lname);
+                    $('#crudAlterUsersEmail').val(resultado.email);
+                    $('#crudAlterUsersSenha').val(resultado.password);
+                    $('#crudAlterUsersVerify').val(resultado.password);
+                    $('#crudAlterUsersCalvicie').val(resultado['type_of_bold']);
+                    $('#crudAlterUsersAssinatura').val(resultado['signature_name']);
+                    $('#crudAlterUsersTipo').val(resultado['signature_type']);
+                    break;
+                case 'packs':
+                    $('#crudAlterUser').hide();
+                    $('#crudAlterPacks').fadeIn();
+                    $('#crudAlterUsersName').val(resultado.name);
+                    $('#crudAlterUsersName').val(resultado.description);
+                    $('#crudAlterUsersName').val(resultado.img_url);
+                    $('#crudAlterUsersName').val(resultado.monthly_price);
+                    break;
+            }
+        })
+        .catch(err => console.log(err));
+});
+
+$('#crudAlterUsersButton').on('click', () => {
+
+    const tabela = $('#crudAlterSelect').val();
+    const id = $('#crudAlterID').val();
+    
+    const alteredUser = {
+        fname : $('#crudAlterUsersName').val(),
+        lname : $('#crudAlterUsersSurname').val(),
+        email : $('#crudAlterUsersEmail').val(),
+        password : $('#crudAlterUsersSenha').val(),
+        type_of_bold : $('#crudAlterUsersCalvicie').val(),
+        signature_name : $('#crudAlterUsersAssinatura').val(),
+        signature_type : $('#crudAlterUsersTipo').val()
+    }
+
+    const options = {
+        method: 'PUT',
+        body: JSON.stringify(alteredUser),
+        headers: { 'Content-Type': 'application/json', 'x-access-token': userToken }
+    }
+
+    fetch(`http://localhost:3000/update/${tabela}/${id}`, options)
+        .then(data => data.json())
+        .then(resposta => $('#crudAlterUserAlert').text(resposta))
+        .catch(err => console.log(err));
+
+});
+
+$('#crudAlterPacksButton').on('click', () => {
+
+    const tabela = $('#crudAlterSelect').val();
+    const id = $('#crudAlterID').val();
+    
+    const alteredPack = {
+        name : $('#crudAlterPacksName').val(),
+        description : $('#crudAlterPacksDescricao').val(),
+        img_url : $('#crudAlterPacksImagem').val(),
+        monthly_price : $('#crudAlterPacksPreco').val()
+    }
+
+    const options = {
+        method: 'PUT',
+        body: JSON.stringify(alteredPack),
+        headers: { 'Content-Type': 'application/json', 'x-access-token': userToken }
+    }
+
+    fetch(`http://localhost:3000/update/${tabela}/${id}`, options)
+        .then(data => data.json())
+        .then(resposta => $('#crudAlterPacksAlert').text(resposta))
+        .catch(err => console.log(err));
+});
+
+//UPDATE: fim
+//DELETE: inicio
+
+$("#crudDeleteSearchButton").on('click', () => {
+
+    const tabela = $('#crudDeleteSelect').val();
+    const id = $('#crudDeleteID').val();
+
+    const options = {
+        method: "GET",
+        headers: {"x-access-token": userToken}
+    }
+
+    fetch(`http://localhost:3000/search/${tabela}/${id}`, options)
+        .then(data => data.json())
+        .then( element => {
+            element = element[0];
+            switch (tabela) {
+                case 'users':
+                    $('#crudDeleteResult').html(`
+                        <table>
+                            <thead>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Sobrenome</th>
+                                <th>E-mail</th>
+                                <th>Tipo</th>
+                                <th>ADM</th>
+                                <th>Assinatura</th>
+                                <th>Periodicidade</th>                                
+                            </thead>   
+                            <tbody>
+                                <tr>
+                                    <td>${element.id}</td>
+                                    <td>${element.fname}</td>
+                                    <td>${element.lname}</td>                                    
+                                    <td>${element.email}</td>
+                                    <td>${element['type_of_bold']}</td>
+                                    <td>${(element['type_user'])? "ADM": "COMUM"}</td>
+                                    <td>${element['signature_name']}</td>
+                                    <td>${element['signature_type']}</td>
+                                </tr>
+                            </tbody>       
+                        </table>    
+                    `);
+                    break;
+                case 'packs':
+                    $('#crudDeleteResult').html(`
+                        <table>
+                            <thead>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Preço Mensal</th>                         
+                            </thead>
+                            <tbody id="tBody">
+                                <tr>
+                                    <td>${element.id}</td>
+                                    <td>${element.name}</td>
+                                    <td>${element['monthly_price']}</td>
+                                </tr>
+                            </tbody>
+                        </table>                    
+                    `);                    
+                    break;
+            }
+            $('#crudDeleteButton').css('display', 'block');
+        })
+        .catch(err => console.log(err));
+});
+
+$('#crudDeleteButton').on('click', () => {
+
+    const tabela = $('#crudDeleteSelect').val();
+    const id = $('#crudDeleteID').val();
+
+    const options = {
+        method: "DELETE",
+        headers: {"x-access-token": userToken}
+    }
+
+    fetch(`http://localhost:3000/DELETE/${tabela}/${id}`, options)
+        .then(data => data.json())
+        .then(resposta => $('#crudDeleteAlert').text(resposta))
+        .catch(err => console.log(err));
+
 });

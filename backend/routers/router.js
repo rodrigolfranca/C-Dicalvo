@@ -1,11 +1,25 @@
 const EXPRESS = require("express");
 const router = EXPRESS.Router();
+const jwt = require("jsonwebtoken");
+
+function verificadorJWT(req, res, next){
+    const token = req.headers['x-access-token'];
+    if (!token) return res.status(401).json({ auth: false, message: 'No token provided.' });
+    
+    jwt.verify(token, process.env.SECRET, function(err, decoded) {
+        if (err) return res.status(500).json({ auth: false, message: 'Failed to authenticate token.' });
+    
+      // se tudo estiver ok, salva no request para uso posterior
+        req.userId = decoded.id;
+        next();
+    });
+}
 
 // postgreSQL;
 const pool = require("./db");
 
 // pesquisar nas tabelas
-router.get("/search/:table", async(req, res) => {
+router.get("/search/:table", verificadorJWT, async(req, res) => {
     try {
         const { table } = req.params;
 
@@ -23,7 +37,7 @@ router.get("/search/:table", async(req, res) => {
     }
 });
 // pesquisar nas tabelas por ID;
-router.get("/search/:table/:id", async(req, res) => {
+router.get("/search/:table/:id", verificadorJWT, async(req, res) => {
     try {
         const { table } = req.params;
         const { id } = req.params;
@@ -43,7 +57,7 @@ router.get("/search/:table/:id", async(req, res) => {
     }
 });
 // update item nas tabelas pelo ID;
-router.put("/update/:table/:id", async(req, res)=> {
+router.put("/update/:table/:id", verificadorJWT, async(req, res)=> {
     try {
         const { table } = req.params;
         const { id } = req.params;
@@ -91,7 +105,7 @@ router.put("/update/:table/:id", async(req, res)=> {
     }
 });
 // Add item nas tabelas!
-router.post("/add/:table", async(req, res) => {
+router.post("/add/:table", verificadorJWT, async(req, res) => {
     try {
         const { table } = req.params;
 
@@ -137,7 +151,7 @@ router.post("/add/:table", async(req, res) => {
     }
 })
 // DELETE item nas tabelas, pelo id
-router.delete("/delete/:table/:id", async(req, res) => {
+router.delete("/delete/:table/:id", verificadorJWT, async(req, res) => {
     try {
         const {table} = req.params;
         const {id} = req.params;
@@ -146,6 +160,7 @@ router.delete("/delete/:table/:id", async(req, res) => {
             DELETE FROM ${table} WHERE id = ($1)`,
             [ id ]);
 
+        console.log("Bye bitch!");
         res.json(`Item ${id} from ${table} was deleted`)
     } catch (error) {
         console.log(error);
