@@ -1,7 +1,5 @@
 let userLogged, userToken, userID, userADMIN;
-// userLogged = 1;
 
-// home: flex, userCad-box: flex , login: flex, accountLost: flex, crudSpace,  aboutUs: flex, produtos: block, carrinho: flex
 function changeFrame(frame, display) {
     $('#primeiraPagina').hide();
     $('#home').hide();
