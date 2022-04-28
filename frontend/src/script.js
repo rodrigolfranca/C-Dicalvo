@@ -61,7 +61,7 @@ function criadorDeFuncao(params) {
 
     $("#productPhoto").html(`
         <img src="${arrResponse[params-1].img_url}" />
-    `)
+    `);
     $("#nomeProduto").text(`${arrResponse[params-1].name}`);
     $("#inputAssinar").html(`
         <input class="buyButton" type="button" value="Assinar" onclick="buyButtom('mensal', ${arrResponse[params-1].id})" />
@@ -95,6 +95,7 @@ $('.toHome').on('click', () => {
     $('#aboutUs').css('display', "flex");
     $('#produtos').css('display', "block");
     $('#oQueVai-box').css('display', "flex");
+    $('#profilePage-box').css('display', "block");
 });
 
 $('#loginInvite').on('click', () => {
@@ -122,22 +123,6 @@ function crudShow(frame, link) {
     $('#crudSelect').hide();
     if (frame) $(frame).fadeIn();
 }
-
-$('#crudMenuSelect').on('click', () => {
-    crudShow('#crudSelect', '#crudMenuSelect')
-});
-
-$('#crudMenuInsert').on('click', () => {
-    crudShow('#crudInsert', '#crudMenuInsert')
-});
-
-$('#crudMenuAlter').on('click', () => {
-    crudShow('#crudAlter', '#crudMenuAlter')
-});
-
-$('#crudMenuDelete').on('click', () => {
-    crudShow('#crudDelete', '#crudMenuDelete')
-});
 
 // crudInsert select 
 $('#crudInsertSelect').on('change', () => {
@@ -429,8 +414,7 @@ $("#crudAlterSearchButton").on('click', () => {
         .catch(err => console.log(err));
 });
 
-$('#crudAlterUsersButton').on('click', () => {
-
+function crudAlterUsersButton(){
     //validação de inputs aqui \/\/\/\/\/\/\/\/
 
     if (inputController($('#crudAlterUsersName').val(), 'text')) { $('#crudAlterUsersName').effect('highlight'); $("#crudAlterUserAlert").text("Nome Inválido"); return false; }
@@ -463,8 +447,7 @@ $('#crudAlterUsersButton').on('click', () => {
         .then(data => data.json())
         .then(resposta => $('#crudAlterUserAlert').text(resposta))
         .catch(err => console.log(err));
-
-});
+}
 
 $('#crudAlterPacksButton').on('click', () => {
 
@@ -586,13 +569,16 @@ $('#crudDeleteButton').on('click', () => {
 //Carrinho: Início
 
 async function buyButtom(signature_type, id_pack) {
-    if (!userLogged) { changeFrame('#login', 'flex'); return false; }
+    if (!userLogged) { changeFrame('#login', 'flex'); return false; };
+
     const newCart = {
         signature_type : signature_type,
         id_pack : id_pack,
         id_user : userID
     }
+
     console.log(newCart);
+
     const options = {
         method: 'POST',
         body: JSON.stringify(newCart),
@@ -656,7 +642,7 @@ async function carrinhoFinalizarButton() {
 //Carrinho: fim
 //user Creating a user : inicio
 
-$('#cadButton').on('click', () => {
+async function cadButton() {
     
     if (inputController($('#nome').val(), 'text')) { $('#nome').effect('highlight'); return false; }
     if (inputController($('#superName').val(), 'text')) { $('#superName').effect('highlight'); return false; }
@@ -684,7 +670,13 @@ $('#cadButton').on('click', () => {
         .then(resposta => {console.log(resposta); changeFrame("#login", 'flex')} )
         .catch(err => console.log(err));
 
-});
+    changeFrame('#home', 'flex');
+    $('#primeiraPagina').css('display', "block");
+    $('#aboutUs').css('display', "flex");
+    $('#produtos').css('display', "block");
+    $('#oQueVai-box').css('display', "flex");
+    
+}
 
 async function fillCart() {
     const options= {
@@ -710,7 +702,7 @@ async function fillCart() {
             </div>
             <div id="carrinhoFinal">
                 <h3>Preço Total</h3>
-                <p id="carrinhoPrecoFinal">R$${(resultado.signature_type === 'mensal')? resultado.monthly_price : (parseFloat(resultado.monthly_price) * 12).toFixed(2)}<span class="precinhoHehe"></span>/mês</p>
+                <p id="carrinhoPrecoFinal">R$${(resultado.signature_type === 'mensal')? resultado.monthly_price : (parseFloat(resultado.monthly_price) * 12).toFixed(2)}<span class="precinhoHehe"></span>/${(resultado.signature_type === 'mensal')? "mês" : "anual"}</p>
                 <input id=carrinhoFinalizar type="button" value="Finalizar!" onclick="carrinhoFinalizarButton()" />
             </div>
         `)
@@ -725,3 +717,109 @@ function emptyCart() {
         <span id="emptyCart">Seu carrinho esta vazio.</span>
     `)
 }
+// // // // 
+function crudAlterUsersButtonAssist(){
+    //validação de inputs aqui \/\/\/\/\/\/\/\/
+    if (!$('#crudAlterUsersName').val()) { $('#crudAlterUsersName').effect('highlight'); $("#crudAlterUserAlert").text("Nome Inválido"); return false; }
+    if (!$('#crudAlterUsersSurname').val()) { $('#crudAlterUsersSurname').effect('highlight'); $("#crudAlterUserAlert").text("Sobrenome Inválido"); return false; }
+    if (!$('#crudAlterUsersEmail').val()) { $('#crudAlterUsersEmail').effect('highlight'); $("#crudAlterUserAlert").text("E-mail Inválido"); return false; }
+    if (!$('#crudAlterUsersSenha').val()) { $('#crudAlterUsersSenha').effect('highlight'); $("#crudAlterUserAlert").text("Senha Inválida"); return false; }
+    if ($('#crudAlterUsersVerify').val() !== $('#crudAlterUsersSenha').val()) { $('#crudAlterUsersVerify').effect('highlight'); $("#crudAlterUserAlert").text("Senha e Confirmação de senha não correspondem"); return false; }
+    if (!$('#crudAlterUsersCalvicie').val()) { $('#crudAlterUsersCalvicie').effect('highlight'); $("#crudAlterUserAlert").text("Tipo de Calvície inválida"); return false; }
+    
+    const alteredUser = {
+        fname : $('#crudAlterUsersName').val(),
+        lname : $('#crudAlterUsersSurname').val(),
+        email : $('#crudAlterUsersEmail').val(),
+        password : $('#crudAlterUsersSenha').val(),
+        type_of_bold : $('#crudAlterUsersCalvicie').val(),
+        signature_name : $('#crudAlterUsersAssinatura').val(),
+        signature_type : $('#crudAlterUsersTipo').val()
+    }
+
+    const options = {
+        method: 'PUT',
+        body: JSON.stringify(alteredUser),
+        headers: { 'Content-Type': 'application/json', 'x-access-token': userToken }
+    }
+
+    fetch(`http://localhost:3000/update/users/${userID}`, options)
+        .then(data => data.json())
+        .then(resposta => $('#crudAlterUserAlert').text(resposta))
+        .catch(err => console.log(err));
+}
+// // // // 
+async function profilePageLeft(link) {
+    $('#profilePage-left-um').css({'background-color': 'var(--green)', 'color': 'var(--yellow)'});
+    $('#profilePage-left-dois').css({'background-color': 'var(--green)', 'color': 'var(--yellow)'});
+    $('#profilePage-left-tres').css({'background-color': 'var(--green)', 'color': 'var(--yellow)'});
+    if (link) $(link).css({'background-color': '#416e6e', 'color': 'var(--white)'});
+
+    if( link == '#profilePage-left-um'){
+        let arrPhofile;
+        await fetch(`http://localhost:3000/profilepage/${userID}`)
+            .then(data => data.json())
+            .then(response => {
+                arrPhofile = response;
+            })
+            .catch(err =>  console.log(err))
+
+        $('#profilePage-right').html(`
+            <h3>Último Pedido</h3>
+            <div id="infoDoFetch">
+                <img src="${arrPhofile[0].img_url}" style="height: 250px; width: 250px;">
+                <div>
+                    <h3 id="infoDoFetchPerfil">${arrPhofile[0].signature_name}</h3>
+                    <p id="infoDoFetchPerfilDesc">Descrição</p>    
+                    <p>
+                        ${arrPhofile[0].description}
+                    </p>    
+                    <p style="margin-top: 15px;font-weight: bold;">Tipo de assinatura: <span>${arrPhofile[0].signature_type}</span>!</p>                        
+                </div>
+            </div>
+        `);
+    } else if( link == '#profilePage-left-dois'){
+        $('#profilePage-right').html(`
+            <h3>Dados Pessoais</h3>
+            <div style="display: flex;height: 225px;width: 500px;justify-content: center;align-items: center;">
+                <section id="crudAlterUser" style="display: block">
+                    <input type="text" id="crudAlterUsersName" class="crudUsersMedium" placeholder="Nome" />
+                    <input type="text" id="crudAlterUsersSurname" class="crudUsersMedium" placeholder="Sobrenome" />                    
+                    <input type="text" id="crudAlterUsersEmail" class="crudUsersEmail" placeholder="E-mail" />
+                    <input type="password" id="crudAlterUsersSenha" class="crudUsersMedium" placeholder="Senha" />
+                    <input type="password" id="crudAlterUsersVerify" class="crudUsersMedium" placeholder="Confirmar Senha" />
+                    <input type="text" id="crudAlterUsersCalvicie" class="crudUsersMedium" placeholder="Tipo de Calvície" />                    
+                    <input type="text" id="crudAlterUsersBag" class="crudUsersBag" placeholder="Id do Carrinho" />
+                    <input type="text" id="crudAlterUsersAssinatura" class="crudUsersAssinatura" placeholder="Assinatura" />
+                    <input type="text" id="crudAlterUsersTipo" class="crudUsersTipo" placeholder="Tipo de Assinatura" />
+                    
+                    <input type="button" id="crudAlterUsersButton" class="crudUsersButton" value="Atualizar" onclick="crudAlterUsersButtonAssist()"/>
+                    <span id=crudAlterUserAlert class="crudAlert"></span>
+                </section>
+            </div>
+        `);
+
+        const options = {
+            method: 'get',
+            headers: { 'Content-Type': 'application/json', 'x-access-token': userToken }
+        }
+    
+        await fetch(`http://localhost:3000/search/users/${userID}`, options)
+            .then(data => data.json())
+            .then( resultado => {
+                resultado = resultado[0];
+                        $('#crudAlterUser').fadeIn();
+                        $('#crudAlterUsersName').val(resultado.fname);
+                        $('#crudAlterUsersSurname').val(resultado.lname);
+                        $('#crudAlterUsersEmail').val(resultado.email);
+                        $('#crudAlterUsersSenha').val(resultado.password);
+                        $('#crudAlterUsersVerify').val(resultado.password);
+                        $('#crudAlterUsersCalvicie').val(resultado['type_of_bold']);
+                        $('#crudAlterUsersAssinatura').val(resultado['signature_name']);
+                        $('#crudAlterUsersTipo').val(resultado['signature_type']);
+            })
+            .catch(err => console.log(err))
+    }   
+}
+
+
