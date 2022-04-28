@@ -21,36 +21,46 @@ router.get("/search/cart/:id", jwtCheck, async(req, res) => {
         console.log(error);
     }
 });
-
-router.get('/profilepage/:id', async(req, res) =>{
-    try {
-        const {id} = req.params;        
-
-        const searchCart = await pool.query(
-            `SELECT users.id, signature_name, signature_type, name, description, img_url, monthly_price FROM users INNER JOIN packs ON name = users.signature_name WHERE users.id = ($1);`,
-            [ id ]);
-
-        res.json(searchCart.rows);     
-        
-
-    } catch (error) {
-        console.log(error);
-    }
-});
-
 router.get("/packs", async(req, res) => {
     try {
         const searchTables = await pool.query(
             `SELECT * FROM packs ORDER BY id`);
 
         res.json(searchTables.rows);
-
-        console.log(`Gotcha`);
-
+        console.log(`get/packs`);
     } catch (error) {
         console.log(error);
     }
 });
+router.get(`/signers/:pack/`, async(req, res) => {
+    try {
+        const {pack} = req.params;
+
+        const searchAllUsersWithThisPack = await pool.query(`
+            SELECT users.id, users.fname, users.signature_name, name, monthly_price FROM packs INNER JOIN users ON users.signature_name = name WHERE name = ($1);
+        `, [ pack ]);
+
+        res.json(searchAllUsersWithThisPack.rows);
+        console.log('get/signers/:pack/');   
+    } catch (error) {
+        console.log(error);
+    }
+})
+router.get('/profilepage/:id', async(req, res) =>{
+    try {
+        const {id} = req.params;        
+
+        const searchCart = await pool.query(
+            `SELECT users.id, users.fname, signature_name, signature_type, name, description, img_url, monthly_price FROM users INNER JOIN packs ON name = users.signature_name WHERE users.id = ($1);`,
+            [ id ]);
+
+        res.json(searchCart.rows);  
+        console.log('get/profilepage/:id');   
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 // pesquisar nas tabelas
 router.get("/search/:table", jwtCheck, async(req, res) => {
     try {
@@ -62,9 +72,7 @@ router.get("/search/:table", jwtCheck, async(req, res) => {
             `SELECT * FROM ${table} ORDER BY id`);
 
         res.json(searchTables.rows);
-
-        console.log(`Gotcha`);
-
+        console.log(`get/search/:table`);
     } catch (error) {
         console.log(error);
     }
@@ -82,9 +90,7 @@ router.get("/search/:table/:id", jwtCheck, async(req, res) => {
             [id]);
 
         res.json(searchTables.rows);
-
-        console.log(`Gotcha`);
-
+        console.log(`get/search/:table/:id`);
     } catch (error) {
         console.log(error);
     }
@@ -98,19 +104,21 @@ router.put("/update/:table/:id", jwtCheck, async(req, res)=> {
         if ( table == "users" ){
             const {fname} = req.body;
             const {lname} = req.body;
-            const {password} = req.body;
             const {email} = req.body;
             const {type_of_bold} = req.body;
             const {signature_name} = req.body;
             const {signature_type} = req.body;
 
-            password = hashPwd(password);
     
             const updateTables = await pool.query(`
-                UPDATE users SET fname = $1, lname = $2, password = $3, email = $4, type_of_bold = $5, signature_name =  $6, signature_type = $7 WHERE id = $8;`,
-                [ fname, lname, password, email, type_of_bold, signature_name, signature_type, id]);
+                UPDATE users SET fname = $1, lname = $2, email = $3, type_of_bold = $4, signature_name =  $5, signature_type = $6 WHERE id = $7;`
+                , [ fname, lname, email, type_of_bold, signature_name, signature_type, id]);
 
-            console.log("Done!");
+// let {password} = req.body;
+// password = hashPwd(password);
+// const updateTables = await pool.query(`
+//     UPDATE users SET fname = $1, lname = $2, password = $3, email = $4, type_of_bold = $5, signature_name =  $6, signature_type = $7 WHERE id = $8;`
+// , [ fname, lname, password, email, type_of_bold, signature_name, signature_type, id]);
         } else if ( table == "packs" ){
             const {name}  = req.body;
             const {description}  = req.body;
@@ -120,8 +128,6 @@ router.put("/update/:table/:id", jwtCheck, async(req, res)=> {
             const updateTables = await pool.query(`
                 UPDATE packs SET name = ($1), description = ($2), img_url  = ($3), monthly_price = ($4) WHERE id = ($5);`,
                 [ name, description, img_url, monthly_price, id]);
-
-            console.log("Done!");
         } else if ( table == "bag" ){
             const {id_pack} = req.body;
             const {signature_type} = req.body;
@@ -130,11 +136,10 @@ router.put("/update/:table/:id", jwtCheck, async(req, res)=> {
             const updateTables = await pool.query(`
                 UPDATE bag SET id_pack = ($1), signature_type = ($2), id_user = ($3)  WHERE id = ($4);`, 
                 [ id_pack, signature_type, id_user, id]);
-
-            console.log("Done!");
         }
 
         res.json(`ID = ${id} in ${table} was Updated!`);
+        console.log("put/update/:table/:id");
     } catch (error) {
         console.log(error);
     }
@@ -143,7 +148,6 @@ router.put("/update/:table/:id", jwtCheck, async(req, res)=> {
 router.put("/updateonly/users/:id", jwtCheck, async(req, res)=> {
     try {
         const { id } = req.params;
-
         const {signature_name} = req.body;
         const {signature_type} = req.body;
     
@@ -152,6 +156,7 @@ router.put("/updateonly/users/:id", jwtCheck, async(req, res)=> {
             [ signature_name, signature_type, id]);
 
         res.json(`ID = ${id} in users was Updated!`);
+        console.log("put/updateonly/users/:id");
     } catch (error) {
         console.log(error);
     }
@@ -165,18 +170,17 @@ router.post("/add/:table", jwtCheck, async(req, res) => {
         if ( table == "users" ){
             const {fname} = req.body;
             const {lname} = req.body;
-            const {password} = req.body;
+
+            let {password} = req.body;
+            password = hashPwd(password);
+
             const {email} = req.body;
             const {type_of_bold} = req.body;
             const type_user = 1;
-
-            password = hashPwd(password);
     
             const addInTheTables = await pool.query(`
                 INSERT INTO users (fname, lname, password, email, type_of_bold, type_user) VALUES ($1, $2, $3, $4, $5, $6)`,
                 [ fname, lname, password, email, type_of_bold, type_user ]);
-
-            console.log("Done!");
         } else if ( table == "packs" ){
             const {name}  = req.body;
             const {description}  = req.body;
@@ -186,8 +190,6 @@ router.post("/add/:table", jwtCheck, async(req, res) => {
             const addInTheTables = await pool.query(`
                 INSERT INTO packs (name, description, img_url, monthly_price) VALUES ($1, $2, $3, $4)`,
                 [ name, description, img_url, monthly_price ]);
-
-            console.log("Done!");
         } else if ( table == "bags" ){
             const {id_pack} = req.body;
             const {signature_type} = req.body;
@@ -196,11 +198,10 @@ router.post("/add/:table", jwtCheck, async(req, res) => {
             const addInTheTables = await pool.query(`
                 INSERT INTO bags (id_pack, signature_type, id_user) VALUES ($1, $2, $3)`, 
                 [ id_pack, signature_type, id_user ]);
-
-            console.log("Done!");
         }
 
         res.json(`New data in ${table} was Add!`);
+        console.log("post/add/:table");
     } catch (error) {
         console.log(error);
     }
@@ -208,16 +209,18 @@ router.post("/add/:table", jwtCheck, async(req, res) => {
 router.post("/addnewuser/user", async(req, res) => {
     const {fname} = req.body;
     const {lname} = req.body;
+
     let { password } = req.body;
+    password = hashPwd(password);
+
     const {email} = req.body;
     const {type_of_bold} = req.body;
     const type_user = 0;
     
-    password = hashPwd(password);
-
     const addInTheTables = await pool.query(`
         INSERT INTO users (fname, lname, password, email, type_of_bold, type_user) VALUES ($1, $2, $3, $4, $5, $6)`,
         [ fname, lname, password, email, type_of_bold, type_user ]);
+    console.log("post/addnewuser/user");
 })
 // DELETE item nas tabelas, pelo id
 router.delete("/delete/:table/:id", jwtCheck, async(req, res) => {
@@ -230,6 +233,7 @@ router.delete("/delete/:table/:id", jwtCheck, async(req, res) => {
             [ id ]);
 
         res.json(`Item ${id} from ${table} was deleted`)
+        console.log("delete/delete/:table/:id");
     } catch (error) {
         console.log(error);
     }

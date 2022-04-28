@@ -13,6 +13,7 @@ function changeFrame(frame, display) {
     $('#crudSpace').hide();
     $('#login').hide();
     $('#thankYou').hide();
+    $('#profilePage-box').hide();
     crudShow();
     $(frame).fadeIn();
     if (display) {
@@ -91,7 +92,8 @@ $('#userHeader').on('click', () => {
     if (!userLogged) {
         changeFrame('#login', 'flex');              
     } else {
-        changeFrame('#crudSpace');             
+        (userADMIN)? changeFrame("#crudSpace"):changeFrame("#profilePage-box");
+        if(!userADMIN) profilePageLeft('#profilePage-left-um');            
     }
 });
 
@@ -101,7 +103,6 @@ $('.toHome').on('click', () => {
     $('#aboutUs').css('display', "flex");
     $('#produtos').css('display', "block");
     $('#oQueVai-box').css('display', "flex");
-    $('#profilePage-box').css('display', "block");
 });
 
 $('#loginInvite').on('click', () => {
@@ -173,6 +174,7 @@ $('#loginButton').on('click', () => {
                 console.log(`ID: ${userID} - ADM: ${userADMIN}`);
 
                 (userADMIN)? changeFrame("#crudSpace"):changeFrame("#profilePage-box");
+                if(!userADMIN) profilePageLeft('#profilePage-left-um');
 
             } else {
                 console.log('Login falhou!')
@@ -504,7 +506,6 @@ function crudAlterUsersButton(){
         fname : $('#crudAlterUsersName').val(),
         lname : $('#crudAlterUsersSurname').val(),
         email : $('#crudAlterUsersEmail').val(),
-        password : $('#crudAlterUsersSenha').val(),
         type_of_bold : $('#crudAlterUsersCalvicie').val(),
         signature_name : $('#crudAlterUsersAssinatura').val(),
         signature_type : $('#crudAlterUsersTipo').val()
@@ -523,7 +524,6 @@ function crudAlterUsersButton(){
 }
 
 $('#crudAlterPacksButton').on('click', () => {
-
     if (!inputController($('#crudAlterPacksName').val(), 'text')) { $('#crudAlterPacksName').effect('highlight'); $("#crudAlterPacksAlert").text("Nome de Pacote inválido"); return false; }
     if (!inputController($('#crudAlterPacksDescricao').val())) { $('#crudAlterPacksDescricao').effect('highlight'); $("#crudAlterPacksAlert").text("Descrição de Pacote inválida"); return false; }
     if (!inputController($('#crudAlterPacksImage').val())) { $('#crudAlterPacksImage').effect('highlight'); $("#crudAlterPacksAlert").text("URL da Imagem inválido"); return false; }
@@ -531,14 +531,12 @@ $('#crudAlterPacksButton').on('click', () => {
 
     const tabela = $('#crudAlterSelect').val();
     const id = $('#crudAlterID').val();
-    
     const alteredPack = {
         name : $('#crudAlterPacksName').val(),
         description : $('#crudAlterPacksDescricao').val(),
         img_url : $('#crudAlterPacksImagem').val(),
         monthly_price : $('#crudAlterPacksPreco').val()
     }
-
     const options = {
         method: 'PUT',
         body: JSON.stringify(alteredPack),
@@ -804,7 +802,6 @@ function crudAlterUsersButtonAssist(){
         fname : $('#crudAlterUsersName').val(),
         lname : $('#crudAlterUsersSurname').val(),
         email : $('#crudAlterUsersEmail').val(),
-        password : $('#crudAlterUsersSenha').val(),
         type_of_bold : $('#crudAlterUsersCalvicie').val(),
         signature_name : $('#crudAlterUsersAssinatura').val(),
         signature_type : $('#crudAlterUsersTipo').val()
@@ -836,6 +833,8 @@ async function profilePageLeft(link) {
                 arrPhofile = response;
             })
             .catch(err =>  console.log(err))
+        
+        $('#nomeDoCaraLogado').text(`${arrPhofile[0].fname}`)
 
         $('#profilePage-right').html(`
             <h3>Último Pedido</h3>
