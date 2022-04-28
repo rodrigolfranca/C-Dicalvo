@@ -1,5 +1,7 @@
 const EXPRESS = require("express");
 const { jwtCheck, jwtCheckAdmin } = require("../checkJWT");
+const { hashPwd, comparePwd } = require("../hashPwd");
+const hashPwd = require("../hashPwd");
 const router = EXPRESS.Router();
 
 // postgreSQL;
@@ -88,6 +90,8 @@ router.put("/update/:table/:id", jwtCheck, async(req, res)=> {
             const {type_of_bold} = req.body;
             const {signature_name} = req.body;
             const {signature_type} = req.body;
+
+            password = hashPwd(password);
     
             const updateTables = await pool.query(`
                 UPDATE users SET fname = $1, lname = $2, password = $3, email = $4, type_of_bold = $5, signature_name =  $6, signature_type = $7 WHERE id = $8;`,
@@ -152,6 +156,8 @@ router.post("/add/:table", jwtCheck, async(req, res) => {
             const {email} = req.body;
             const {type_of_bold} = req.body;
             const type_user = 1;
+
+            password = hashPwd(password);
     
             const addInTheTables = await pool.query(`
                 INSERT INTO users (fname, lname, password, email, type_of_bold, type_user) VALUES ($1, $2, $3, $4, $5, $6)`,
