@@ -13,8 +13,9 @@ module.exports = {
 
     comparePwd: function(password, hash) {
         bcrypt.compare(password, hash, function(err, res) {
-            // if res == true, password matched
-            // else wrong password
+            if (err) { console.log(err) ; return "zuou o bcrypt"}
+
+            return res            
         });
     }
 

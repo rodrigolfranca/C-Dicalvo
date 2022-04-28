@@ -288,20 +288,20 @@ $('#crudSelectButton').on('click', function() {
 function inputController(item, metodo) {
 
     if (!item) return false;
-    let regex = new RegExp('^<([a-z]+)([^<]+)*(?:>(.*)</1>|s+/>)$');
+    let regex = new RegExp('^<([a-z]+)([^<]+)$', 'g');
     if (regex.test(item)) return false;
     switch (metodo) {
-        case ('text'):         
-            regex = new RegExp('^[a-zA-Z]+$');
+        case ('text'):            
+            regex = new RegExp('^[a-z A-Z]+$', 'g');
             return regex.test(item);
         case ('email'):
-            regex = new RegExp('^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$');
+            regex = new RegExp('^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$', 'g');
             return regex.test(item);
         case('password'):
-            regex = new RegExp('^.*(?=.{6,})(?=.*d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*? ]).*$');
+            regex = new RegExp('^.*(?=.{6,})(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*?]).*$', 'g');
             return regex.test(item);
         case('preco'):
-            regex = new RegExp('(\d+)(\.\d{2})');
+            regex = new RegExp('^(\d+)(\.\d{2})|(\d+)(\,\d{2})$', 'g');
             return regex.test(item);        
         default:
             return true
