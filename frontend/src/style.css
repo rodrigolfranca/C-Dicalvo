@@ -542,6 +542,12 @@ main{
                 padding-left: 5px;
                 border: none;
             }
+            #crudSelectPacksSelect {
+                font-family: 'Oxygen', sans-serif;
+            }
+            #crudSelectPacksSelect option{
+                font-family: 'Oxygen', sans-serif;
+            }
         .crudResults {            
             display: block;
             height: fit-content;
