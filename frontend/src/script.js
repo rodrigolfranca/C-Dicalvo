@@ -214,7 +214,45 @@ $('#buscarPor').on('change', async function(){
 $('#crudSelectButton').on('click', function() {
     const buscaPor = $('#buscarPor').val();
     const filtro = $('#crudSelectFilter').val();
+    const filtroSelect = $('#crudSelectPacksSelect').val();
     
+    if (buscaPor === 'assinantes') {
+
+        const optionsSelect = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json', "x-access-token": userToken }
+        }
+
+        fetch(`http://localhost:3000/packs/${filtroSelect}`, optionsSelect)
+            .then(data => data)
+            .then(objeto => {
+                $('#crudSelectResults').append(`
+                    <table>
+                        <thead>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Sobrenome</th>
+                            <th>Assinatura</th>
+                            <th>Preço</th>                                                            
+                        </thead>   
+                        <tbody id="tBody"></tbody>       
+                    </table>    
+                    `);
+                objeto.forEach(element => {
+                    $('#tBody').append(`
+                        <tr>
+                            <td>${element.id}</td>
+                            <td>${element.fname}</td>
+                            <td>${element.lname}</td>                                    
+                            <td>${element.signature_name}</td>
+                            <td>${element.monthly_price}</td>                            
+                        </tr>                 
+                    `)
+                })
+            })                                
+            .catch(err => console.log(err));
+            
+    } else {    
     let url;
     (!filtro)? url = `http://localhost:3000/search/${buscaPor}` : url = `http://localhost:3000/search/${buscaPor}/${filtro}`;
 
@@ -226,7 +264,7 @@ $('#crudSelectButton').on('click', function() {
 
     const options = {
         method: "GET",
-        headers: { 'Content-Type': 'application/json', "x-access-token": userToken}
+        headers: { 'Content-Type': 'application/json', "x-access-token": userToken }
     }
 
     fetch(url, options)
@@ -310,6 +348,7 @@ $('#crudSelectButton').on('click', function() {
                 }
         })
         .catch(err => console.log(err));
+    }
 });
 
 //SELECT: fim
