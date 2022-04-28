@@ -287,12 +287,12 @@ $('#crudSelectButton').on('click', function() {
 
 function inputController(item, metodo) {
 
-    if (!item) return false;
-    let regex = new RegExp('^<([a-z]+)([^<]+)$', 'g');
-    if (regex.test(item)) return false;
+    if (item === "") return false;    
+    let regex = new RegExp('^<([a-z]+)([^<]+)$', 'g');    
+    if (regex.test(item)) return false;    
     switch (metodo) {
         case ('text'):            
-            regex = new RegExp('^[a-z A-Z]+$', 'g');
+            regex = new RegExp('^([A-Z çóíúéáâêîûôãõa-z])+$', 'g');
             return regex.test(item);
         case ('email'):
             regex = new RegExp('^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$', 'g');
@@ -643,12 +643,18 @@ async function carrinhoFinalizarButton() {
 //user Creating a user : inicio
 
 async function cadButton() {
-    if (inputController($('#nome').val(), 'text')) { $('#nome').effect('highlight'); return false; }
-    if (inputController($('#superName').val(), 'text')) { $('#superName').effect('highlight'); return false; }
-    if (inputController($('#email').val(), 'email')) { $('#email').effect('highlight'); return false; }
-    if (inputController($('#senha').val(), 'password')) { $('#senha').effect('highlight'); return false; }
+    console.log("Chegamos?")
+    if (!inputController($('#nome').val(), 'text')) { $('#nome').effect('highlight'); return false; }
+    console.log("Nome Passou");
+    if (!inputController($('#superName').val(), 'text')) { $('#superName').effect('highlight'); return false; }
+    console.log("Sobrenome Passou");
+    if (!inputController($('#email').val(), 'email')) { $('#email').effect('highlight'); return false; }
+    console.log("Email Passou");
+    if (!inputController($('#senha').val(), 'password')) { $('#senha').effect('highlight'); return false; }
+    console.log("Senha Passou");
     if ($('#senha').val() !== $('#checkSenha').val()) { $('#checkSenha').effect('highlight'); return false; }
-    if (inputController($('#calvicie').val())) { $('#calvicie').effect('highlight'); return false; }
+    if (!inputController($('#calvicie').val())) { $('#calvicie').effect('highlight'); return false; }
+    console.log("Calvicie Passou");
 
     const newUser = {
         fname : $('#nome').val(),
