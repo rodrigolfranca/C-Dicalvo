@@ -657,7 +657,7 @@ async function cadButton() {
         password : $('#senha').val(),
         type_of_bold : $('#calvicie').val()
     }
-
+    
     const options = {
         method: 'POST',
         body: JSON.stringify(newUser),
