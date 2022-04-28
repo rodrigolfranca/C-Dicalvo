@@ -19,7 +19,13 @@ function changeFrame(frame, display) {
         $(frame).css('display', display);
     }
 }
+const imgs = document.getElementById("img")
+const img = document.querySelectorAll(".container img");
+// 
 
+
+
+// 
 const arrResponse = [];
 $(document).ready( async () => {
     // Fetch para o preço dos produtos na main page
@@ -185,7 +191,6 @@ $('#crudSelectButton').on('click', function() {
     
     let url;
     (!filtro)? url = `http://localhost:3000/search/${buscaPor}` : url = `http://localhost:3000/search/${buscaPor}/${filtro}`;
-    console.log("🚀 ~ file: script.js ~ line 191 ~ $ ~ url", url)
 
     if (buscaPor === 0) {
         alert("Selecione uma tabela para pesquisar");

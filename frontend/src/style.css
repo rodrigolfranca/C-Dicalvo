@@ -25,7 +25,50 @@ body {
 }
 option {
     font-family: 'Oxygen', sans-serif;
+}   
+/*  */
+
+.slider-frame{
+    overflow: hidden;
+    height: 500px;
+    width: 1500px;
 }
+@-webkit-keyframes slide_animation{
+    0% {left: 0px;}
+    10% {left: 0px;}
+    20% {left: 1500px;}
+    30% {left: 3000px;}
+    40% {left: 4500px;}
+    50% {left: 6000px;}
+    60% {left: 7500px;}
+    70% {left: 6000px;}
+    80% {left: 3000px;}
+    90% {left: 1500px;}
+    100% {left: 0px;}
+}
+.slide-images{
+    width: 9000px;
+    height: 500px;
+    margin: 0 0 0 -7500px;
+    position: relative;
+    -webkit-animation-name: slide_animation;
+    -webkit-animation-duration: 5s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-direction: alternate;
+    -webkit-animation-play-state: running;
+}
+.img-container{
+    height: 500px;
+    width:  1500px;
+    position: relative;
+    float: left;
+}
+.img-container img{
+    height: 500px;
+    width: 1500px;
+}
+
+/*  */
 #header{
     height: 60px;
     width: 100%;
@@ -102,7 +145,6 @@ main{
     #carrosel{
         width:100%;
         height: 412px;
-        background-image: url("./assets/slider/3.jpg");
         background-size: cover;
         background-repeat: no-repeat;
         display: flex;
@@ -1335,16 +1377,3 @@ main{
                     font-size: 18px;
                     color: var(--white);
                 }
-
-                /* #crudAlterUser {
-                    display: none;
-                    margin: 45px auto;
-                    height: 200px;
-                    width: 416px;            
-                }#crudAlterUser label{
-                    color: var(--white); 
-                    padding-left: 40px;
-                }
-                #crudAlterUser input, #crudAlterUser label {
-                    margin:5.5px 7.5px;
-                } */
