@@ -8,7 +8,7 @@ require("dotenv-safe").config();
 
 
 //postgreSQL
-const pool = require("./routers/db");
+const pool = require("./db");
 
 app.use(cors());
 app.use(express.urlencoded({extended: true}));
