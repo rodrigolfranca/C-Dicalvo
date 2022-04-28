@@ -1,7 +1,6 @@
 const EXPRESS = require("express");
 const { jwtCheck, jwtCheckAdmin } = require("../checkJWT");
 const { hashPwd, comparePwd } = require("../hashPwd");
-const hashPwd = require("../hashPwd");
 const router = EXPRESS.Router();
 
 // postgreSQL;
