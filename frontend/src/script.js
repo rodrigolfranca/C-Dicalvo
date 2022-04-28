@@ -291,7 +291,7 @@ function inputController(item, metodo) {
     let regex = new RegExp('^<([a-z]+)([^<]+)*(?:>(.*)</1>|s+/>)$');
     if (regex.test(item)) return false;
     switch (metodo) {
-        case ('text'):            
+        case ('text'):         
             regex = new RegExp('^[a-zA-Z]+$');
             return regex.test(item);
         case ('email'):
@@ -643,7 +643,6 @@ async function carrinhoFinalizarButton() {
 //user Creating a user : inicio
 
 async function cadButton() {
-    
     if (inputController($('#nome').val(), 'text')) { $('#nome').effect('highlight'); return false; }
     if (inputController($('#superName').val(), 'text')) { $('#superName').effect('highlight'); return false; }
     if (inputController($('#email').val(), 'email')) { $('#email').effect('highlight'); return false; }
