@@ -285,11 +285,19 @@ $('#crudSelectButton').on('click', function() {
 //SELECT: fim
 //INSERT: inicio
 
-function inputController(item, metodo) {
+function inputController(item, metodo, input) {
+    console.log(input);
+    if ( item === null ) return false;
+    console.log("🚀 ~ file: script.js ~ line 290 ~ inputController ~ item", item)
+    if ( metodo === null ) return false;
+    console.log("🚀 ~ file: script.js ~ line 292 ~ inputController ~ metodo", metodo)
 
-    if (!item) return false;
+    console.log("Ain");
+
     let regex = new RegExp('^<([a-z]+)([^<]+)$', 'g');
+
     if (regex.test(item)) return false;
+
     switch (metodo) {
         case ('text'):            
             regex = new RegExp('^[a-z A-Z]+$', 'g');
@@ -643,12 +651,24 @@ async function carrinhoFinalizarButton() {
 //user Creating a user : inicio
 
 async function cadButton() {
-    if (inputController($('#nome').val(), 'text')) { $('#nome').effect('highlight'); return false; }
-    if (inputController($('#superName').val(), 'text')) { $('#superName').effect('highlight'); return false; }
-    if (inputController($('#email').val(), 'email')) { $('#email').effect('highlight'); return false; }
-    if (inputController($('#senha').val(), 'password')) { $('#senha').effect('highlight'); return false; }
-    if ($('#senha').val() !== $('#checkSenha').val()) { $('#checkSenha').effect('highlight'); return false; }
-    if (inputController($('#calvicie').val())) { $('#calvicie').effect('highlight'); return false; }
+    if ( inputController($('#nome').val(), 'text', $('#nome')) ) {
+        $('#nome').effect('highlight'); console.log("Oi"); return false; 
+    }
+    if ( inputController($('#superName').val(), 'text', $('#superName')) ) {
+        $('#superName').effect('highlight'); console.log("Oi1"); return false; 
+    }
+    if ( inputController($('#email').val(), 'email', $('#email')) ) {
+        $('#email').effect('highlight'); console.log("Oi2"); return false; 
+    }
+    if ( inputController($('#senha').val(), 'password', $('#senha')) ) {
+        $('#senha').effect('highlight'); console.log("Oi3"); return false; 
+    }
+    if ( $('#senha').val() !== $('#checkSenha').val() ) {
+        $('#checkSenha').effect('highlight'); console.log("Oi4"); return false; 
+    }
+    if ( inputController($('#calvicie').val()) ) {
+        $('#calvicie').effect('highlight'); console.log("Oi5"); return false; 
+    }
 
     const newUser = {
         fname : $('#nome').val(),
@@ -657,7 +677,7 @@ async function cadButton() {
         password : $('#senha').val(),
         type_of_bold : $('#calvicie').val()
     }
-    
+    console.log(newUser);    
     const options = {
         method: 'POST',
         body: JSON.stringify(newUser),
