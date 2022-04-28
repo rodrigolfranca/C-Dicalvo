@@ -292,12 +292,6 @@ $('#crudSelectButton').on('click', function() {
 function inputController(item, metodo, input) {
     console.log(input);
     if ( item === null ) return false;
-    console.log("🚀 ~ file: script.js ~ line 290 ~ inputController ~ item", item)
-    if ( metodo === null ) return false;
-    console.log("🚀 ~ file: script.js ~ line 292 ~ inputController ~ metodo", metodo)
-
-    console.log("Ain");
-
     if (item === "") return false;    
     let regex = new RegExp('^<([a-z]+)([^<]+)$', 'g');    
     if (regex.test(item)) return false;    
@@ -323,12 +317,12 @@ function inputController(item, metodo, input) {
 
 $('#crudInsertUsersButton').on('click', function() {
 
-    if (inputController($('#crudInsertUsersName').val(), 'text')) { $('#crudInsertUsersName').effect('highlight'); $("#crudInsertUserAlert").text("Nome Inválido"); return false; }
-    if (inputController($('#crudInsertUsersSurname').val(), 'text')) { $('#crudInsertUsersSurname').effect('highlight'); $("#crudInsertUserAlert").text("Sobrenome Inválido"); return false; }
-    if (inputController($('#crudInsertUsersEmail').val(), 'email')) { $('#crudInsertUsersEmail').effect('highlight'); $("#crudInsertUserAlert").text("E-mail Inválido"); return false; }
-    if (inputController($('#crudInsertUsersSenha').val(), 'password')) { $('#crudInsertUsersSenha').effect('highlight'); $("#crudInsertUserAlert").text("Senha Inválida"); return false; }
+    if (!inputController($('#crudInsertUsersName').val(), 'text')) { $('#crudInsertUsersName').effect('highlight'); $("#crudInsertUserAlert").text("Nome Inválido"); return false; }
+    if (!inputController($('#crudInsertUsersSurname').val(), 'text')) { $('#crudInsertUsersSurname').effect('highlight'); $("#crudInsertUserAlert").text("Sobrenome Inválido"); return false; }
+    if (!inputController($('#crudInsertUsersEmail').val(), 'email')) { $('#crudInsertUsersEmail').effect('highlight'); $("#crudInsertUserAlert").text("E-mail Inválido"); return false; }
+    if (!inputController($('#crudInsertUsersSenha').val(), 'password')) { $('#crudInsertUsersSenha').effect('highlight'); $("#crudInsertUserAlert").text("Senha Inválida"); return false; }
     if ($('#crudInsertUsersVerify').val() !== $('#crudInsertUsersSenha').val()) { $('#crudInsertUsersVerify').effect('highlight'); $("#crudInsertUserAlert").text("Senha e Confirmação de senha não correspondem"); return false; }
-    if (inputController($('#crudInsertUsersCalvicie').val())) { $('#crudInsertUsersCalvicie').effect('highlight'); $("#crudInsertUserAlert").text("Tipo de Calvície inválida"); return false; }
+    if (!inputController($('#crudInsertUsersCalvicie').val())) { $('#crudInsertUsersCalvicie').effect('highlight'); $("#crudInsertUserAlert").text("Tipo de Calvície inválida"); return false; }
 
     const newUser = {
         fname : $('#crudInsertUsersName').val(),
@@ -356,10 +350,10 @@ $('#crudInsertUsersButton').on('click', function() {
 
 $('#crudInsertPacksButton').on('click', function() {
 
-    if (inputController($('#crudInsertPacksName').val(), 'text')) { $('#crudInsertPacksName').effect('highlight'); $("#crudInsertPacksAlert").text("Nome de Pacote inválido"); return false; }
-    if (inputController($('#crudInsertPacksDescricao').val())) { $('#crudInsertPacksDescricao').effect('highlight'); $("#crudInsertPacksAlert").text("Descrição de Pacote inválida"); return false; }
-    if (inputController($('#crudInsertPacksImage').val())) { $('#crudInsertPacksImage').effect('highlight'); $("#crudInsertPacksAlert").text("URL da Imagem inválido"); return false; }
-    if (inputController($('#crudInsertPacksPreco').val(), 'preco')) { $('#crudInsertPacksPreco').effect('highlight'); $("#crudInsertPacksAlert").text("Preço inválido"); return false; }
+    if (!inputController($('#crudInsertPacksName').val(), 'text')) { $('#crudInsertPacksName').effect('highlight'); $("#crudInsertPacksAlert").text("Nome de Pacote inválido"); return false; }
+    if (!inputController($('#crudInsertPacksDescricao').val())) { $('#crudInsertPacksDescricao').effect('highlight'); $("#crudInsertPacksAlert").text("Descrição de Pacote inválida"); return false; }
+    if (!inputController($('#crudInsertPacksImage').val())) { $('#crudInsertPacksImage').effect('highlight'); $("#crudInsertPacksAlert").text("URL da Imagem inválido"); return false; }
+    if (!inputController($('#crudInsertPacksPreco').val(), 'preco')) { $('#crudInsertPacksPreco').effect('highlight'); $("#crudInsertPacksAlert").text("Preço inválido"); return false; }
     
 
     const newPack = {
@@ -428,12 +422,12 @@ $("#crudAlterSearchButton").on('click', () => {
 function crudAlterUsersButton(){
     //validação de inputs aqui \/\/\/\/\/\/\/\/
 
-    if (inputController($('#crudAlterUsersName').val(), 'text')) { $('#crudAlterUsersName').effect('highlight'); $("#crudAlterUserAlert").text("Nome Inválido"); return false; }
-    if (inputController($('#crudAlterUsersSurname').val(), 'text')) { $('#crudAlterUsersSurname').effect('highlight'); $("#crudAlterUserAlert").text("Sobrenome Inválido"); return false; }
-    if (inputController($('#crudAlterUsersEmail').val(), 'email')) { $('#crudAlterUsersEmail').effect('highlight'); $("#crudAlterUserAlert").text("E-mail Inválido"); return false; }
-    if (inputController($('#crudAlterUsersSenha').val(), 'password')) { $('#crudAlterUsersSenha').effect('highlight'); $("#crudAlterUserAlert").text("Senha Inválida"); return false; }
+    if (!inputController($('#crudAlterUsersName').val(), 'text')) { $('#crudAlterUsersName').effect('highlight'); $("#crudAlterUserAlert").text("Nome Inválido"); return false; }
+    if (!inputController($('#crudAlterUsersSurname').val(), 'text')) { $('#crudAlterUsersSurname').effect('highlight'); $("#crudAlterUserAlert").text("Sobrenome Inválido"); return false; }
+    if (!inputController($('#crudAlterUsersEmail').val(), 'email')) { $('#crudAlterUsersEmail').effect('highlight'); $("#crudAlterUserAlert").text("E-mail Inválido"); return false; }
+    if (!inputController($('#crudAlterUsersSenha').val(), 'password')) { $('#crudAlterUsersSenha').effect('highlight'); $("#crudAlterUserAlert").text("Senha Inválida"); return false; }
     if ($('#crudAlterUsersVerify').val() !== $('#crudAlterUsersSenha').val()) { $('#crudAlterUsersVerify').effect('highlight'); $("#crudAlterUserAlert").text("Senha e Confirmação de senha não correspondem"); return false; }
-    if (inputController($('#crudAlterUsersCalvicie').val())) { $('#crudAlterUsersCalvicie').effect('highlight'); $("#crudAlterUserAlert").text("Tipo de Calvície inválida"); return false; }
+    if (!inputController($('#crudAlterUsersCalvicie').val())) { $('#crudAlterUsersCalvicie').effect('highlight'); $("#crudAlterUserAlert").text("Tipo de Calvície inválida"); return false; }
 
     const tabela = $('#crudAlterSelect').val();
     const id = $('#crudAlterID').val();
@@ -462,10 +456,10 @@ function crudAlterUsersButton(){
 
 $('#crudAlterPacksButton').on('click', () => {
 
-    if (inputController($('#crudAlterPacksName').val(), 'text')) { $('#crudAlterPacksName').effect('highlight'); $("#crudAlterPacksAlert").text("Nome de Pacote inválido"); return false; }
-    if (inputController($('#crudAlterPacksDescricao').val())) { $('#crudAlterPacksDescricao').effect('highlight'); $("#crudAlterPacksAlert").text("Descrição de Pacote inválida"); return false; }
-    if (inputController($('#crudAlterPacksImage').val())) { $('#crudAlterPacksImage').effect('highlight'); $("#crudAlterPacksAlert").text("URL da Imagem inválido"); return false; }
-    if (inputController($('#crudAlterPacksPreco').val(), 'preco')) { $('#crudAlterPacksPreco').effect('highlight'); $("#crudAlterPacksAlert").text("Preço inválido"); return false; }
+    if (!inputController($('#crudAlterPacksName').val(), 'text')) { $('#crudAlterPacksName').effect('highlight'); $("#crudAlterPacksAlert").text("Nome de Pacote inválido"); return false; }
+    if (!inputController($('#crudAlterPacksDescricao').val())) { $('#crudAlterPacksDescricao').effect('highlight'); $("#crudAlterPacksAlert").text("Descrição de Pacote inválida"); return false; }
+    if (!inputController($('#crudAlterPacksImage').val())) { $('#crudAlterPacksImage').effect('highlight'); $("#crudAlterPacksAlert").text("URL da Imagem inválido"); return false; }
+    if (!inputController($('#crudAlterPacksPreco').val(), 'preco')) { $('#crudAlterPacksPreco').effect('highlight'); $("#crudAlterPacksAlert").text("Preço inválido"); return false; }
 
     const tabela = $('#crudAlterSelect').val();
     const id = $('#crudAlterID').val();
@@ -654,18 +648,13 @@ async function carrinhoFinalizarButton() {
 //user Creating a user : inicio
 
 async function cadButton() {
-    console.log("Chegamos?")
+        
     if (!inputController($('#nome').val(), 'text')) { $('#nome').effect('highlight'); return false; }
-    console.log("Nome Passou");
     if (!inputController($('#superName').val(), 'text')) { $('#superName').effect('highlight'); return false; }
-    console.log("Sobrenome Passou");
     if (!inputController($('#email').val(), 'email')) { $('#email').effect('highlight'); return false; }
-    console.log("Email Passou");
     if (!inputController($('#senha').val(), 'password')) { $('#senha').effect('highlight'); return false; }
-    console.log("Senha Passou");
     if ($('#senha').val() !== $('#checkSenha').val()) { $('#checkSenha').effect('highlight'); return false; }
     if (!inputController($('#calvicie').val())) { $('#calvicie').effect('highlight'); return false; }
-    console.log("Calvicie Passou");
 
     const newUser = {
         fname : $('#nome').val(),
