@@ -172,7 +172,7 @@ $('#loginButton').on('click', () => {
 
                 console.log(`ID: ${userID} - ADM: ${userADMIN}`);
 
-                changeFrame("#crudSpace");
+                (userADMIN)? changeFrame("#crudSpace"):changeFrame("#profilePage-box");
 
             } else {
                 console.log('Login falhou!')

@@ -1290,7 +1290,8 @@ main{
 #profilePage-box{
     margin: 0 auto 25px;
     width: 1100px;
-    height: 350px; 
+    height: 350px;
+    display: none;
     align-items: center;
     align-content: center;
     justify-content: center;
