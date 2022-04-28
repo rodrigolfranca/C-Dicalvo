@@ -16,12 +16,15 @@
 }
 html{
     overflow-x: hidden;
+    margin: 0;
+    padding: 0;
 }
 a{
     text-decoration: none;
 }
 body {
     margin: 0;
+    padding: 0;
     background-image: url("./assets/background.jpg");
     background-size: cover;
     background-repeat: no-repeat;
@@ -50,6 +53,19 @@ option {
     90% {left: 400vw;}
     100% {left: 0px;}
 }
+@keyframes slide_animation{
+    0% {left: 0px;}
+    10% {left: 0px;}
+    20% {left: 100vw;}
+    30% {left: 200vw;}
+    40% {left: 300vw;}
+    50% {left: 400vw;}
+    60% {left: 500vw;}
+    70% {left: 400vw;}
+    80% {left: 300vw;}
+    90% {left: 400vw;}
+    100% {left: 0px;}
+}
 .slide-images{
     width: 600vw;
     height: 80vh;
@@ -60,6 +76,11 @@ option {
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-direction: alternate;
     -webkit-animation-play-state: running;
+    animation-name: slide_animation;
+    animation-duration: 30s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-play-state: running;
 }
 .img-container{
     height: 80vh;
@@ -831,7 +852,7 @@ main{
 #aboutUs-box{
     margin: 50px auto 0;
     width: 1070px;
-    height: 700px;
+    height: 625px;
 
     display: flex;
     flex-direction: column;
@@ -1392,3 +1413,60 @@ main{
                     font-size: 18px;
                     color: var(--white);
                 }
+footer {
+    height: 110px;
+    width: 100%;
+    background-color:var(--green);
+}
+    #footer-box{
+        display: flex;
+        flex-wrap: wrap;
+        width:1300px;
+        height: 100px;
+        margin: 0 auto;
+        column-gap: 30px;        
+    }
+        #footer-right, #footer-left {
+            height: 100px;
+            width: 400px;            
+        }
+            #footer-right {
+                padding: 1em 1em;
+                text-align: right;
+            }
+            #footer-left {
+                padding: 1em 1em;
+                text-align: left;
+            }
+            #footer-left p, #footer-right p {
+                font-size: 20px;
+                color: var(--yellow)
+            }
+            #footer-right .linkedin, #footer-right .github {
+                float: right
+            }
+            #footer-left .linkedin, #footer-left .github {
+                float: left
+            }
+            .linkedin, .github {
+                margin: 10px 10px;
+                fill: var(--yellow);
+                width: 24px;
+                height: 24px;                
+            }
+            .linkedin:hover, .github:hover {
+                cursor:pointer;
+                fill:var(--cream);
+                transform: scale(105%);
+            }
+        #footer-mid {
+            padding-top: 1em;
+            height: 100px;
+            width: 438px;
+        }
+        #footer-mid p, #footer-mid span {
+            display: block;
+            font-size: 16px;
+            color: var(--yellow);
+            text-align: center;
+        }
