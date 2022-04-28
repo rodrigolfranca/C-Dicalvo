@@ -6,7 +6,6 @@ const jwt = require("jsonwebtoken");
 const { comparePwd } = require('./hashPwd');
 require("dotenv-safe").config();
 
-
 //postgreSQL
 const pool = require("./db");
 
@@ -39,12 +38,11 @@ app.post("/login", async(req, res) => {
     }
 })
 
-const ROUTER_PSQL = require("./routers/router");
-
 const ROUTER_GET = require("./routers/routerGet");
+const ROUTER_PUT = require("./routers/routerPut");
+const ROUTER_POST = require("./routers/routerPost");
+const ROUTER_DELETE = require("./routers/routerDelet");
 
-const ROUTER_PUT = require("./routers/routerGet");
-
-app.use("/", ROUTER_PSQL, ROUTER_GET, ROUTER_PUT);
+app.use("/", ROUTER_POST, ROUTER_GET, ROUTER_PUT, ROUTER_DELETE);
 
 app.listen(port, () => console.log("Servidor Aberto em", port));
