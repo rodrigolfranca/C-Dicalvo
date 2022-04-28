@@ -21,21 +21,18 @@ app.get('/' , (req , res) => {
 app.post("/login", async(req, res) => {
     try {
         const email = req.body.email;
-        const password = req.body.senha;
+        const password = req.body.password;
 
-        const usuario = await pool.query(`SELECT * FROM users WHERE email = ($1)`, [ email ]);        
-        if (comparePwd(password, usuario.rows[0].password)) {
+        const usuario = await pool.query(`SELECT * FROM users WHERE email = ($1)`, [ email ]);   
 
+        if ( comparePwd(password, usuario.rows[0].password) ) {
             const id = usuario.rows[0].id;
             const adm = usuario.rows[0].type_user;
             const token = jwt.sign({ id , adm }, process.env.SECRET);
 
-            res.json({ auth: true, token})
-
+            res.json({ auth: true, token});
         } else {
-
-            res.json("Wrong Password")
-            
+            res.json("Wrong Password");
         }
     } catch (error) {
         console.log(error);

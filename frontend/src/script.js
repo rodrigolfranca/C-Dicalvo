@@ -146,18 +146,17 @@ $('#crudInsertSelect').on('change', () => {
 $('#loginButton').on('click', () => {
 
     const email = $('#emailLogin').val();
-    const senha = $('#senhaLogin').val();
+    const password = $('#senhaLogin').val();
 
     const options = {
         method: 'POST',
-        body: JSON.stringify({ email, senha }),
+        body: JSON.stringify({ email, password }),
         headers: { 'Content-Type': 'application/json' }
     }
 
     fetch('http://localhost:3000/login', options)
         .then(data => data.json())
         .then(resposta => {
-        console.log("🚀 ~ file: script.js ~ line 151 ~ $ ~ resposta", resposta)
             if (resposta.auth) {
 
                 userLogged = 1;                
