@@ -1,5 +1,5 @@
 const EXPRESS = require("express");
-const { jwtCheck, jwtCheckAdmin } = require("../checkJWT");
+const { jwtCheck } = require("../checkJWT");
 const router = EXPRESS.Router();
 // postgreSQL;
 const pool = require("../db");

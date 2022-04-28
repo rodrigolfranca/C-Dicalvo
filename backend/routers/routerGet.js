@@ -1,5 +1,5 @@
 const EXPRESS = require("express");
-const { jwtCheck, jwtCheckAdmin } = require("../checkJWT");
+const { jwtCheck } = require("../checkJWT");
 const router = EXPRESS.Router();
 // postgreSQL;
 const pool = require("../db");
@@ -49,11 +49,11 @@ router.get('/profilepage/:id', async(req, res) =>{
         const {id} = req.params;        
 
         const searchCart = await pool.query(
-            `SELECT users.id, users.fname, signature_name, signature_type, name, description, img_url, monthly_price FROM users INNER JOIN packs ON name = users.signature_name WHERE users.id = ($1);`,
+            `SELECT users.id, fname, signature_name, signature_type, name, description, img_url, monthly_price FROM users INNER JOIN packs ON name = users.signature_name WHERE users.id = ($1);`,
             [ id ]);
 
-        res.json(searchCart.rows);  
-        console.log('get/profilepage/:id');   
+        res.json(searchCart.rows);
+        console.log(`get/profilepage/${id}`);
     } catch (error) {
         console.log(error);
     }

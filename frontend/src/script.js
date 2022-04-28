@@ -22,11 +22,7 @@ function changeFrame(frame, display) {
 }
 const imgs = document.getElementById("img")
 const img = document.querySelectorAll(".container img");
-// 
 
-
-
-// 
 const arrResponse = [];
 $(document).ready( async () => {
     // Fetch para o preço dos produtos na main page
@@ -829,8 +825,11 @@ async function profilePageLeft(link) {
                 arrPhofile = response;
             })
             .catch(err =>  console.log(err))
+        console.log(arrPhofile);
         
-        $('#nomeDoCaraLogado').text(`${arrPhofile[0].fname}`)
+        $('#nomeDoCaraLogado').text(`${arrPhofile[0].fname}`);
+
+        console.log(arrPhofile);
 
         $('#profilePage-right').html(`
             <h3>Último Pedido</h3>
@@ -889,5 +888,3 @@ async function profilePageLeft(link) {
             .catch(err => console.log(err))
     }   
 }
-
-

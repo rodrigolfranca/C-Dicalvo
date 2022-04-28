@@ -1,11 +1,10 @@
 const EXPRESS = require("express");
-const { jwtCheck, jwtCheckAdmin } = require("../checkJWT");
-const { hashPwd, comparePwd } = require("../hashPwd");
+const { jwtCheck } = require("../checkJWT");
+const { hashPwd } = require("../hashPwd");
 const router = EXPRESS.Router();
 // postgreSQL;
 const pool = require("../db");
 
-// 
 // Add item nas tabelas!
 router.post("/add/:table", jwtCheck, async(req, res) => {
     try {
@@ -20,7 +19,7 @@ router.post("/add/:table", jwtCheck, async(req, res) => {
 
             const {email} = req.body;
             const {type_of_bold} = req.body;
-            const type_user = 1;
+            const type_user = 0;
     
             const addInTheTables = await pool.query(`
                 INSERT INTO users (fname, lname, password, email, type_of_bold, type_user) VALUES ($1, $2, $3, $4, $5, $6)`,
@@ -66,21 +65,5 @@ router.post("/addnewuser/user", async(req, res) => {
         [ fname, lname, password, email, type_of_bold, type_user ]);
     console.log("post/addnewuser/user");
 })
-// DELETE item nas tabelas, pelo id
-router.delete("/delete/:table/:id", jwtCheck, async(req, res) => {
-    try {
-        const {table} = req.params;
-        const {id} = req.params;
-
-        const deleteIteminTheTables  = await pool.query(`
-            DELETE FROM ${table} WHERE id = ($1)`,
-            [ id ]);
-
-        res.json(`Item ${id} from ${table} was deleted`)
-        console.log("delete/delete/:table/:id");
-    } catch (error) {
-        console.log(error);
-    }
-});
 
 module.exports = router;
