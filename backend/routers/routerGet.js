@@ -30,12 +30,12 @@ router.get("/packs", async(req, res) => {
         console.log(error);
     }
 });
-router.get(`/signers/:pack/`, async(req, res) => {
+router.get(`/signers/:pack`, async(req, res) => {
     try {
-        const {pack} = req.params;
+        const { pack } = req.params;
 
         const searchAllUsersWithThisPack = await pool.query(`
-            SELECT users.id, users.fname, users.signature_name, name, monthly_price FROM packs INNER JOIN users ON users.signature_name = name WHERE name = ($1) ORDER BY users.id;
+            SELECT users.id, users.fname, users.lname, users.signature_name, name, monthly_price FROM packs INNER JOIN users ON users.signature_name = name WHERE name = ($1) ORDER BY users.id;
         `, [ pack ]);
 
         res.json(searchAllUsersWithThisPack.rows);

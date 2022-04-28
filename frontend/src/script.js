@@ -217,14 +217,15 @@ $('#crudSelectButton').on('click', function() {
     const filtroSelect = $('#crudSelectPacksSelect').val();
     
     if (buscaPor === 'assinantes') {
-
         const optionsSelect = {
             method: 'GET',
             headers: { 'Content-Type': 'application/json', "x-access-token": userToken }
         }
 
-        fetch(`http://localhost:3000/packs/${filtroSelect}`, optionsSelect)
-            .then(data => data)
+        $('#crudSelectResults').html("");
+
+        fetch(`http://localhost:3000/signers/${filtroSelect}`, optionsSelect)
+            .then(data => data.json())
             .then(objeto => {
                 $('#crudSelectResults').append(`
                     <table>
@@ -239,6 +240,7 @@ $('#crudSelectButton').on('click', function() {
                     </table>    
                     `);
                 objeto.forEach(element => {
+                console.log("🚀 ~ file: script.js ~ line 243 ~ $ ~ element", element)
                     $('#tBody').append(`
                         <tr>
                             <td>${element.id}</td>
@@ -251,103 +253,102 @@ $('#crudSelectButton').on('click', function() {
                 })
             })                                
             .catch(err => console.log(err));
-            
-    } else {    
-    let url;
-    (!filtro)? url = `http://localhost:3000/search/${buscaPor}` : url = `http://localhost:3000/search/${buscaPor}/${filtro}`;
+    } else { 
+        let url;
+        (!filtro)? url = `http://localhost:3000/search/${buscaPor}` : url = `http://localhost:3000/search/${buscaPor}/${filtro}`;
 
-    if (buscaPor === 0) {
-        alert("Selecione uma tabela para pesquisar");
-        return false;
-    }
-    $('#crudSelectResults').html(``);
+        if (buscaPor === 0) {
+            alert("Selecione uma tabela para pesquisar");
+            return false;
+        }
+        $('#crudSelectResults').html(``);
 
-    const options = {
-        method: "GET",
-        headers: { 'Content-Type': 'application/json', "x-access-token": userToken }
-    }
+        const options = {
+            method: "GET",
+            headers: { 'Content-Type': 'application/json', "x-access-token": userToken }
+        }
 
-    fetch(url, options)
-        .then(data => data.json())
-        .then(objeto => {
-                switch (buscaPor) {
-                    case 'users':
-                        $('#crudSelectResults').append(`
-                            <table>
-                                <thead>
-                                    <th>ID</th>
-                                    <th>Nome</th>
-                                    <th>Sobrenome</th>
-                                    <th>E-mail</th>
-                                    <th>Tipo</th>
-                                    <th>ADM</th>
-                                    <th>Assinatura</th>
-                                    <th>Periodicidade</th>                                
-                                </thead>   
-                                <tbody id="tBody"></tbody>       
-                            </table>    
+        fetch(url, options)
+            .then(data => data.json())
+            .then(objeto => {
+                    switch (buscaPor) {
+                        case 'users':
+                            $('#crudSelectResults').append(`
+                                <table>
+                                    <thead>
+                                        <th>ID</th>
+                                        <th>Nome</th>
+                                        <th>Sobrenome</th>
+                                        <th>E-mail</th>
+                                        <th>Tipo</th>
+                                        <th>ADM</th>
+                                        <th>Assinatura</th>
+                                        <th>Periodicidade</th>                                
+                                    </thead>   
+                                    <tbody id="tBody"></tbody>       
+                                </table>    
+                                `);
+                            objeto.forEach(element => {
+                                $('#tBody').append(`
+                                    <tr>
+                                        <td>${element.id}</td>
+                                        <td>${element.fname}</td>
+                                        <td>${element.lname}</td>                                    
+                                        <td>${element.email}</td>
+                                        <td>${element['type_of_bold']}</td>
+                                        <td>${(element['type_user'])? "ADM": "COMUM"}</td>
+                                        <td>${element['signature_name']}</td>
+                                        <td>${element['signature_type']}</td>
+                                    </tr>                 
+                                `)
+                            });
+                            break;
+                        case 'packs':
+                            $('#crudSelectResults').append(`
+                                <table>
+                                    <thead>
+                                        <th>ID</th>
+                                        <th>Nome</th>
+                                        <th>Preço Mensal</th>                         
+                                    </thead>
+                                    <tbody id="tBody"></tbody>
+                                </table>                    
                             `);
-                        objeto.forEach(element => {
+                            objeto.forEach(element => {
+                                $('#tBody').append(`
+                                    <tr>
+                                        <td>${element.id}</td>
+                                        <td>${element.name}</td>
+                                        <td>${element['monthly_price']}</td>
+                                    </tr>
+                                `)
+                            });
+                            break;
+                        case 'bags':
+                            $('#crudSelectResults').append(`
+                                <table>
+                                    <thead>
+                                        <th>ID</th>
+                                        <th>Pacote</th>
+                                        <th>Plano</th>
+                                        <th>ID do Dono</th>                               
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>                    
+                            `);
                             $('#tBody').append(`
                                 <tr>
                                     <td>${element.id}</td>
-                                    <td>${element.fname}</td>
-                                    <td>${element.lname}</td>                                    
-                                    <td>${element.email}</td>
-                                    <td>${element['type_of_bold']}</td>
-                                    <td>${(element['type_user'])? "ADM": "COMUM"}</td>
-                                    <td>${element['signature_name']}</td>
-                                    <td>${element['signature_type']}</td>
-                                </tr>                 
-                            `)
-                        });
-                        break;
-                    case 'packs':
-                        $('#crudSelectResults').append(`
-                            <table>
-                                <thead>
-                                    <th>ID</th>
-                                    <th>Nome</th>
-                                    <th>Preço Mensal</th>                         
-                                </thead>
-                                <tbody id="tBody"></tbody>
-                            </table>                    
-                        `);
-                        objeto.forEach(element => {
-                            $('#tBody').append(`
-                                <tr>
-                                    <td>${element.id}</td>
-                                    <td>${element.name}</td>
-                                    <td>${element['monthly_price']}</td>
+                                    <td>${element['id_pack']}</td>
+                                    <td>${element['signature_type']}</td>                                    
+                                    <td>${element['user_id']}</td>
                                 </tr>
-                            `)
-                        });
-                        break;
-                    case 'bags':
-                        $('#crudSelectResults').append(`
-                            <table>
-                                <thead>
-                                    <th>ID</th>
-                                    <th>Pacote</th>
-                                    <th>Plano</th>
-                                    <th>ID do Dono</th>                               
-                                </thead>
-                                <tbody></tbody>
-                            </table>                    
-                        `);
-                        $('#tBody').append(`
-                            <tr>
-                                <td>${element.id}</td>
-                                <td>${element['id_pack']}</td>
-                                <td>${element['signature_type']}</td>                                    
-                                <td>${element['user_id']}</td>
-                            </tr>
-                        `);                        
-                        break;
-                    default:
-                }
-        })
-        .catch(err => console.log(err));
+                            `);                        
+                            break;
+                        default:
+                    }
+            })
+            .catch(err => console.log(err));
     }
 });
 
