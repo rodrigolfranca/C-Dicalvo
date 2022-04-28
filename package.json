@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv-safe": "^8.2.0",
     "express": "^4.17.3",
@@ -23,6 +24,5 @@
   "bugs": {
     "url": "https://github.com/rodrigolfranca/C-Dicalvo/issues"
   },
-  "homepage": "https://github.com/rodrigolfranca/C-Dicalvo#readme",
-  "devDependencies": {}
+  "homepage": "https://github.com/rodrigolfranca/C-Dicalvo#readme"
 }
