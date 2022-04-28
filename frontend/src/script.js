@@ -292,7 +292,7 @@ function inputController(item, metodo) {
     if (regex.test(item)) return false;
     switch (metodo) {
         case ('text'):            
-            regex = new RegExp('^[a-zA-Z]+$', 'g');
+            regex = new RegExp('^[a-z A-Z]+$', 'g');
             return regex.test(item);
         case ('email'):
             regex = new RegExp('^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$', 'g');
