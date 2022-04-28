@@ -1,21 +1,26 @@
+//postgreSQL
+const pool = require("./db");
+
 const express = require('express');
 const app = express();
 const port = 3000;
 const cors = require('cors');
-const jwt = require("jsonwebtoken");
-const { comparePwd } = require('./hashPwd');
-require("dotenv-safe").config();
-
-//postgreSQL
-const pool = require("./db");
 
 app.use(cors());
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
-app.get('/' , (req , res) => {
-    res.send("Its Alive");
-});
+const jwt = require("jsonwebtoken");
+
+require("dotenv-safe").config();
+
+const { comparePwd } = require('./routers/hashPwd');
+const ROUTER_GET = require("./routers/httpRouter/routerGet");
+const ROUTER_PUT = require("./routers/httpRouter/routerPut");
+const ROUTER_POST = require("./routers/httpRouter/routerPost");
+const ROUTER_DELETE = require("./routers/httpRouter/routerDelet");
+
+app.use("/", ROUTER_POST, ROUTER_GET, ROUTER_PUT, ROUTER_DELETE);
 
 app.post("/login", async(req, res) => {
     try {
@@ -37,12 +42,5 @@ app.post("/login", async(req, res) => {
         console.log(error);
     }
 })
-
-const ROUTER_GET = require("./routers/routerGet");
-const ROUTER_PUT = require("./routers/routerPut");
-const ROUTER_POST = require("./routers/routerPost");
-const ROUTER_DELETE = require("./routers/routerDelet");
-
-app.use("/", ROUTER_POST, ROUTER_GET, ROUTER_PUT, ROUTER_DELETE);
 
 app.listen(port, () => console.log("Servidor Aberto em", port));
