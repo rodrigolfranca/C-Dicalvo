@@ -185,6 +185,35 @@ $('#loginButton').on('click', () => {
 //LOGIN: fim
 //SELECT: inicio
 
+$('#buscarPor').on('change', function(){
+
+    if($('#buscarPor').val() === "assinantes") {
+        $('#crudSelectFilter').css('display', 'none');
+        $('#crudSelectPacksSelect').css('display', 'block');
+        $('#crudSelectPacksSelect').html(async () => {
+            
+            const options = {
+                method: 'GET',
+                headers: { 'x-access-token': userToken }
+            }
+
+            return fetch('http://localhost:3000/signers/packs', options)
+            .then(data => data.json())
+            .then(resultado => {
+                let htmlToAppen = "<option value='-i'> </option>";
+                resultado.forEach(element => htmlToAppen += `<option value='${element.name}'>${element.name}</option>` )
+                return htmlToAppen
+            })
+            .catch(err => console.log(err))
+
+        })
+    } else {
+        $('#crudSelectPacksSelect').css('display', 'none');        
+        $('#crudSelectFilter').css('display', 'block');
+    }
+
+})
+
 $('#crudSelectButton').on('click', function() {
     const buscaPor = $('#buscarPor').val();
     const filtro = $('#crudSelectFilter').val();
