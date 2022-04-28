@@ -1,5 +1,5 @@
 //postgreSQL
-const pool = require("./db");
+const pool = require("./routers/db");
 
 const express = require('express');
 const app = express();
