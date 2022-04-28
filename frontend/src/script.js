@@ -165,7 +165,6 @@ $('#loginButton').on('click', () => {
         .then(data => data.json())
         .then(resposta => {
             if (resposta.auth) {
-
                 userLogged = 1;                
                 userToken = resposta.token;                
                 userID = JSON.parse(window.atob(resposta.token.split('.')[1])).id;
@@ -175,10 +174,8 @@ $('#loginButton').on('click', () => {
 
                 (userADMIN)? changeFrame("#crudSpace"):changeFrame("#profilePage-box");
                 if(!userADMIN) profilePageLeft('#profilePage-left-um');
-
             } else {
                 console.log('Login falhou!')
-
             }
         })
         .catch(err => console.log(err));
@@ -187,33 +184,31 @@ $('#loginButton').on('click', () => {
 //LOGIN: fim
 //SELECT: inicio
 
-$('#buscarPor').on('change', function(){
+$('#buscarPor').on('change', async function(){
 
     if($('#buscarPor').val() === "assinantes") {
         $('#crudSelectFilter').css('display', 'none');
         $('#crudSelectPacksSelect').css('display', 'block');
-        $('#crudSelectPacksSelect').html(async () => {
-            
+        async function htmlToAppend() {
             const options = {
                 method: 'GET',
                 headers: { 'x-access-token': userToken }
             }
 
-            return fetch('http://localhost:3000/signers/packs', options)
-            .then(data => data.json())
-            .then(resultado => {
-                let htmlToAppen = "<option value='-i'> </option>";
-                resultado.forEach(element => htmlToAppen += `<option value='${element.name}'>${element.name}</option>` )
-                return htmlToAppen
-            })
-            .catch(err => console.log(err))
+            const dados = await fetch('http://localhost:3000/packs', options)
+                .then(data => data.json())
+                .then(resultado => resultado)
+                .catch(err => console.log(err))
 
-        })
+            let htmlToAppen = "<option value='-i'>Selecione</option>";
+            dados.forEach(element => htmlToAppen += `<option value='${element.name}'>${element.name}</option>`)
+            return htmlToAppen
+        };
+        $('#crudSelectPacksSelect').html(await htmlToAppend());
     } else {
         $('#crudSelectPacksSelect').css('display', 'none');        
         $('#crudSelectFilter').css('display', 'block');
     }
-
 })
 
 $('#crudSelectButton').on('click', function() {
@@ -337,7 +332,7 @@ function inputController(item, metodo, input) {
             regex = new RegExp('^.*(?=.{6,})(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*?]).*$', 'g');
             return regex.test(item);
         case('preco'):
-            regex = new RegExp('^(\d+)(\.\d{2})|(\d+)(\,\d{2})$', 'g');
+            regex = new RegExp('^([0-9]+)(\.[0-9]{2})|([0-9]+)(\,[0-9]{2})$', 'g');
             return regex.test(item);        
         default:
             return true
@@ -381,7 +376,7 @@ $('#crudInsertUsersButton').on('click', function() {
 
 $('#crudInsertPacksButton').on('click', function() {
 
-    if (!inputController($('#crudInsertPacksName').val(), 'text')) { $('#crudInsertPacksName').effect('highlight'); $("#crudInsertPacksAlert").text("Nome de Pacote inválido"); return false; }
+    if (!inputController($('#crudInsertPacksName').val())) { $('#crudInsertPacksName').effect('highlight'); $("#crudInsertPacksAlert").text("Nome de Pacote inválido"); return false; }
     if (!inputController($('#crudInsertPacksDescricao').val())) { $('#crudInsertPacksDescricao').effect('highlight'); $("#crudInsertPacksAlert").text("Descrição de Pacote inválida"); return false; }
     if (!inputController($('#crudInsertPacksImage').val())) { $('#crudInsertPacksImage').effect('highlight'); $("#crudInsertPacksAlert").text("URL da Imagem inválido"); return false; }
     if (!inputController($('#crudInsertPacksPreco').val(), 'preco')) { $('#crudInsertPacksPreco').effect('highlight'); $("#crudInsertPacksAlert").text("Preço inválido"); return false; }
@@ -485,7 +480,7 @@ function crudAlterUsersButton(){
 }
 
 $('#crudAlterPacksButton').on('click', () => {
-    if (!inputController($('#crudAlterPacksName').val(), 'text')) { $('#crudAlterPacksName').effect('highlight'); $("#crudAlterPacksAlert").text("Nome de Pacote inválido"); return false; }
+    if (!inputController($('#crudAlterPacksName').val())) { $('#crudAlterPacksName').effect('highlight'); $("#crudAlterPacksAlert").text("Nome de Pacote inválido"); return false; }
     if (!inputController($('#crudAlterPacksDescricao').val())) { $('#crudAlterPacksDescricao').effect('highlight'); $("#crudAlterPacksAlert").text("Descrição de Pacote inválida"); return false; }
     if (!inputController($('#crudAlterPacksImage').val())) { $('#crudAlterPacksImage').effect('highlight'); $("#crudAlterPacksAlert").text("URL da Imagem inválido"); return false; }
     if (!inputController($('#crudAlterPacksPreco').val(), 'preco')) { $('#crudAlterPacksPreco').effect('highlight'); $("#crudAlterPacksAlert").text("Preço inválido"); return false; }

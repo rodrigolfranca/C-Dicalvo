@@ -41,6 +41,10 @@ app.post("/login", async(req, res) => {
 
 const ROUTER_PSQL = require("./routers/router");
 
-app.use("/", ROUTER_PSQL);
+const ROUTER_GET = require("./routers/routerGet");
+
+const ROUTER_PUT = require("./routers/routerGet");
+
+app.use("/", ROUTER_PSQL, ROUTER_GET, ROUTER_PUT);
 
 app.listen(port, () => console.log("Servidor Aberto em", port));
