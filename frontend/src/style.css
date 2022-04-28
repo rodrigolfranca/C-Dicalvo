@@ -29,46 +29,48 @@ option {
 /*  */
 
 .slider-frame{
+    z-index: -1;
     overflow: hidden;
-    height: 500px;
-    width: 1500px;
+    height: 80vh;
+    width: 100vw;
 }
 @-webkit-keyframes slide_animation{
     0% {left: 0px;}
     10% {left: 0px;}
-    20% {left: 1500px;}
-    30% {left: 3000px;}
-    40% {left: 4500px;}
-    50% {left: 6000px;}
-    60% {left: 7500px;}
-    70% {left: 6000px;}
-    80% {left: 3000px;}
-    90% {left: 1500px;}
+    20% {left: 100vw;}
+    30% {left: 200vw;}
+    40% {left: 300vw;}
+    50% {left: 400vw;}
+    60% {left: 500vw;}
+    70% {left: 400vw;}
+    80% {left: 300vw;}
+    90% {left: 400vw;}
     100% {left: 0px;}
 }
 .slide-images{
-    width: 9000px;
-    height: 500px;
-    margin: 0 0 0 -7500px;
+    width: 600vw;
+    height: 80vh;
+    margin: 0 0 0 -500vw;
     position: relative;
     -webkit-animation-name: slide_animation;
-    -webkit-animation-duration: 5s;
+    -webkit-animation-duration: 30s;
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-direction: alternate;
     -webkit-animation-play-state: running;
 }
 .img-container{
-    height: 500px;
-    width:  1500px;
+    height: 80vh;
+    width:  100vw;
     position: relative;
     float: left;
 }
 .img-container img{
-    height: 500px;
-    width: 1500px;
+    height: 80vh;
+    width: 100vw;
 }
 
 /*  */
+
 #header{
     height: 60px;
     width: 100%;
@@ -143,8 +145,11 @@ main{
 }
     /* Carrosel inicio*/
     #carrosel{
-        width:100%;
-        height: 412px;
+        z-index: -1;
+        width: 100vw;
+        position: absolute ;
+        height: 80vh;
+        background-color: rgba(0, 0, 0, 0.6);
         background-size: cover;
         background-repeat: no-repeat;
         display: flex;
