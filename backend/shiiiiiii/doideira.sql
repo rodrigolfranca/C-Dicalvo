@@ -10,6 +10,7 @@ CREATE TABLE users (
 	signature_type varchar(60),
 	CONSTRAINT users_pk PRIMARY KEY (id)
 ) WITH (
+	
 	OIDS=FALSE
 );
 

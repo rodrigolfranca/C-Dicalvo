@@ -16,12 +16,26 @@ router.get("/search/cart/:id", jwtCheck, async(req, res) => {
 
         res.json(searchCart.rows);        
 
-        console.log(`MALUCOO`);
     } catch (error) {
         console.log(error);
     }
+});
 
-})
+router.get('/profilepage/:id', async(req, res) =>{
+    try {
+        const {id} = req.params;        
+
+        const searchCart = await pool.query(
+            `SELECT users.id, signature_name, signature_type, name, description, img_url, monthly_price FROM users INNER JOIN packs ON name = users.signature_name WHERE users.id = ($1);`,
+            [ id ]);
+
+        res.json(searchCart.rows);     
+        
+
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 router.get("/packs", async(req, res) => {
     try {
@@ -186,6 +200,20 @@ router.post("/add/:table", jwtCheck, async(req, res) => {
         console.log(error);
     }
 })
+router.post("/addnewuser/user", async(req, res) => {
+    const {fname} = req.body;
+    const {lname} = req.body;
+    const {password} = req.body;
+    const {email} = req.body;
+    const {type_of_bold} = req.body;
+    const type_user = 0;
+    
+    password = hashPwd(password);
+
+    const addInTheTables = await pool.query(`
+        INSERT INTO users (fname, lname, password, email, type_of_bold, type_user) VALUES ($1, $2, $3, $4, $5, $6)`,
+        [ fname, lname, password, email, type_of_bold, type_user ]);
+})
 // DELETE item nas tabelas, pelo id
 router.delete("/delete/:table/:id", jwtCheck, async(req, res) => {
     try {
@@ -196,7 +224,6 @@ router.delete("/delete/:table/:id", jwtCheck, async(req, res) => {
             DELETE FROM ${table} WHERE id = ($1)`,
             [ id ]);
 
-        console.log("Bye bitch!");
         res.json(`Item ${id} from ${table} was deleted`)
     } catch (error) {
         console.log(error);

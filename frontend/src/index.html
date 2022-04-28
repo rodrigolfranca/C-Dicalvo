@@ -136,13 +136,20 @@
                     </div>
                 </div>
             </section>
-            <section id="aboutUs">
-                <div id="us">
-                    <div class="foto"></div>
-                    <div class="foto"></div>
-                    <p>“Estamos em busca de recuperar o Orgulho da Calvicie”</p>                
+            <section id="aboutUs-box">
+                <h3>Quem somos nós?</h3>
+                <div id="aboutUs">
+                    <div id="us">
+                        <div class="foto">
+                            <img src="./assets/luizQuadrado.jpg" alt="">
+                        </div>
+                        <div class="foto">
+                            <img src="./assets/rodrigoQuadrado.jpg" alt="">
+                        </div>
+                        <p>“Estamos em busca de recuperar o Orgulho da Calvicie”</p>                
+                    </div>
+                    <p id="idea">C-Dicalvo começou após a subida do euro e com isso o distanciamento da tão sonhada protese capilar turquesa. Então Rodrigo e Gustavo se juntaram com o objetivo de fazer o problema capilar deles virar a nova moda do momento!</p>
                 </div>
-                <p id="idea">C-Dicalvo começou após a subida do euro e com isso o distanciamento da tão sonhada protese capilar turquesa. Então Rodrigo e Gustavo se juntaram com o objetivo de fazer o problema capilar deles virar a nova moda do momento!</p>
             </section>
         </div>
 
@@ -181,26 +188,10 @@
                         <img style="height: 150px; width: 150px; margin-top: 50px;" src="./assets/profilePic.png" alt="">
                         <span style="margin-top: 5px; font-size: 18px; font-weight: bold;">Nome</span>
                     </div>
-                    <p id="profilePage-left-um">Minha conta</p>
-                    <p id="profilePage-left-dois">Dados pessoais</p>
-                    <p id="profilePage-left-tres">Pedidos</p>
+                    <p id="profilePage-left-um" onclick="profilePageLeft('#profilePage-left-um')">Minha conta</p>
+                    <p id="profilePage-left-dois" onclick="profilePageLeft('#profilePage-left-dois')">Dados pessoais</p>
                 </div>
                 <div id="profilePage-right">
-                    <h3>Último Pedido</h3>
-                    <div id="infoDoFetch">
-                        <img src="./assets/404.jpg" style="height: 250px; width: 250px;">
-                        <div>
-                            <h3 id="infoDoFetchPerfil">C-Beginner</h3>
-                            <p id="infoDoFetchPerfilDesc">Descrição</p>    
-                            <p>
-                                Esponja para polir, pomada para polir, pente curvo, mecha de 
-                                cabelo falsa, peruca de calvo, enceradeira automotiva, 3 potes de 
-                                cera automotiva, barbeador, poster do The Rock, livro do Abraham 
-                                Lincoln, quadro do gato calvo e sabre de luz. 
-                            </p>    
-                            <p style="margin-top: 15px;font-weight: bold;">Tipo de assinatura: <span>Mensal</span>!</p>                        
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -230,17 +221,17 @@
                     </form>
                     <img id=estagios src="./assets/estagios.png" />
                 </div>
-                <input type="button" id=cadButton value="Criar conta!">
+                <input type="button" id=cadButton value="Criar conta!" onclick="cadButton()">
             </div>
         </section>
         <!--/////////// Pagina de Crud ///////////-->
         <section id="crudSpace">
             <header id="crudHeader">
                 <ul>
-                    <li class="crudMenu" id="crudMenuSelect">Pesquisar</li>
-                    <li class="crudMenu" id="crudMenuInsert">Adicionar</li>
-                    <li class="crudMenu" id="crudMenuAlter">Atualizar</li>
-                    <li class="crudMenu" id="crudMenuDelete">Deletar</li>
+                    <li class="crudMenu" id="crudMenuSelect" onclick="crudShow('#crudSelect', '#crudMenuSelect')">Pesquisar</li>
+                    <li class="crudMenu" id="crudMenuInsert" onclick="crudShow('#crudInsert', '#crudMenuInsert')">Adicionar</li>
+                    <li class="crudMenu" id="crudMenuAlter" onclick="crudShow('#crudAlter', '#crudMenuAlter')">Atualizar</li>
+                    <li class="crudMenu" id="crudMenuDelete" onclick="crudShow('#crudDelete', '#crudMenuDelete')">Deletar</li>
                 </ul>
             </header>
             <section id="crudSelect">
@@ -316,7 +307,7 @@
                     <input type="text" id="crudAlterUsersAssinatura" class="crudUsersAssinatura" placeholder="Assinatura" />
                     <input type="text" id="crudAlterUsersTipo" class="crudUsersTipo" placeholder="Tipo de Assinatura" />
                     
-                    <input type="button" id="crudAlterUsersButton" class="crudUsersButton" value="Atualizar" />
+                    <input type="button" id="crudAlterUsersButton" class="crudUsersButton" value="Atualizar" onclick="crudAlterUsersButton()"/>
                     <span id=crudAlterUserAlert class="crudAlert"></span>
                 </section>
             </section>

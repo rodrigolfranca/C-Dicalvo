@@ -81,6 +81,8 @@ option {
             }
             header li:hover{
                 cursor: pointer;
+                color: var(--cream);
+                transition: 250ms;
             }
 main{
     margin-top: 60px;
@@ -115,7 +117,7 @@ main{
             width: 400px;
             color: var(--white);
             text-align: justify;
-            /* font-weight: bold; */
+            
             font-family: "Open Sans";
             font-size: 18px;
         }
@@ -185,7 +187,7 @@ main{
 /* Sessão 'Usuário' */
 #userCad-box {
     margin: 110px auto 0;
-    border-radius: 30px;
+    border-radius: 10px;
     height: 600px;
     width: 1200px;
     display: none;
@@ -194,6 +196,7 @@ main{
     color: var(--yellow);
     column-gap: 20px;
     padding-top: 50px;
+    box-shadow: 1px 4px 4px 0px #1a2d2d40;
 }
     #userCad{
         width: 1000px;
@@ -205,6 +208,7 @@ main{
             text-align: center;
             display: flex;
             width: 505px;
+            align-items: center;
             justify-content: center;
         }
             #inviteCad h3{
@@ -217,11 +221,12 @@ main{
             align-items: center;
         }
             .inputCad{
-                border-radius: 50px;
+                border-radius: 10px;
                 padding-left: 20px;
                 width: 300px;
                 height: 40px;
                 margin: 40px 45px 0 0;
+                border: none;
             }
             #email {
                 display: block;
@@ -236,13 +241,19 @@ main{
             }
         #cadButton {
             margin-top: 30px;
-            width: 250px;
-            height: 42px;
+            width: 150px;
+            height: 38px;
             color: var(--white);
             background-color: var(--yellow);
-            border-radius: 50px;
+            border-radius: 10px;
             border:none;
+            box-shadow: 1px 4px 4px 0px #1a2d2d40;
         }
+            #cadButton:hover{
+                cursor: pointer;
+                background-color: #ffc126;
+                transition: 250ms;
+            }
 
 #login {
     margin: 110px 0 0;
@@ -317,20 +328,23 @@ main{
     }
     #loginButton:hover {
         cursor: pointer;
+        background-color: #ffc126;
+        transition: 250ms;
     }
     #forgetButton {
         margin: 0 auto 50px;
         width: 160px;
+        height: 30px;
         font-size: 14px;
         
         background:var(--green);
         color: var(--yellow);
         border: 2px solid var(--yellow);
         border-radius: 10px;
-        box-shadow: 1px 4px 4px 0px #daa52040;
     }
     #forgetButton:hover {
         cursor: pointer;
+        box-shadow: 1px 4px 4px 0px #daa52040;
     }
     #loginInvite {
         color: var(--cream);
@@ -387,12 +401,17 @@ main{
         margin: 10px;
         text-decoration: underline;        
     }
+        #accountLostPanel span:hover{
+            cursor: pointer;
+            color: #ffce53;
+            transition: 250ms;
+        }
     #AccountLostBack {
         margin: 9px auto 20px;
         width: 250px;
         height: 42px;
         border-radius: 10px;
-        color:var(--white);
+        color: var(--white);
         background-color: var(--yellow);
         border:none;
 
@@ -401,17 +420,18 @@ main{
         font-weight: bold;
         box-shadow: 1px 4px 4px 0px #00000040;
     }
-    #AccountLostBack:hover {
+    #AccountLostBack:hover{
         cursor: pointer;
+        background-color: #ffc126;
+        transition: 250ms;
     }
 #crudSpace {
-    width: 1230px;
+    width: 1040px;
     height: 515px;
     margin: 110px auto 0;
     background-color: var(--green);
     border-radius: 30px;
     padding-top: 20px;    
-    padding-left: 20px;
     display: none;
 }
     #crudHeader {
@@ -465,6 +485,8 @@ main{
             }
             #crudSelectButton:hover {
                 cursor: pointer;
+                background-color: #ffc126;
+                transition: 250ms;
             }
             #crudSelectFilter {
                 width: 150px;
@@ -484,7 +506,8 @@ main{
             .crudResults td, .crudResults th, .crudResults table {
                 border: var(--black) 1px solid;
                 border-collapse: collapse;
-                background-color: var(--cream);
+                color: var(--black);
+                background-color: var(--white);
             }
                 .crudResults td, .crudResults th {
                     padding-left: 10px;
@@ -691,6 +714,8 @@ main{
         }
         #crudAlterSearchButton:hover {
             cursor: pointer;
+            background-color: #ffc126;
+            transition: 250ms;
         }
     #crudDelete{
         display: none;        
@@ -747,18 +772,30 @@ main{
             outline: none;
         }
 /* Sessão 'Sobre Nós' */
-#aboutUs {
-    margin: 10px auto 0;
+#aboutUs-box{
+    margin: 50px auto 0;
     width: 1070px;
     height: 700px;
 
-    display:flex;
-    flex-wrap: wrap;
-    column-gap: 150px;    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+#aboutUs{
+    display: flex;
+    flex-direction: row;
+    column-gap: 150px;
+    flex-wrap: nowrap;
+}
+    #aboutUs-box h3{
+        font-size: 28px;
+        text-align: center;
+        margin-bottom: 36px;
+        color: var(--black);
+    }
     #us {
         width: 500px;
-        height: 600px;
+        height: 500px;
         padding-top: 30px;
         padding-left: 30px;
 
@@ -766,13 +803,12 @@ main{
         flex-wrap: wrap;
         column-gap: 50px;
     }
-    .foto {
-        width: 200px;
-        height: 230px;
-
-        border-radius: 50px;
-        border: solid 3px black;
-    }
+        .foto img{
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            border: solid 3px black;
+        }
     #us p {
         margin: 0 auto;
         width: 380px;
@@ -787,8 +823,8 @@ main{
         padding-top: 55px;
 
         font-size: 26px;
-        text-justify: auto;
-        text-align: center;
+        text-align: justify;
+        color: var(--black);
     }
 #produtos-box{
     display: flex;
@@ -833,6 +869,8 @@ main{
         }
         .seletor:hover {
             cursor: pointer;
+            background-color: #416e6e;
+            transition: 250ms;
         }
         
     #painelProduto {
@@ -958,6 +996,8 @@ main{
                     }
                     .buyButton:hover{
                         cursor: pointer;
+                        background-color: #ffc126;
+                        transition: 250ms;
                     }
 #oQueVai-box{
     width: 100vw;
@@ -990,6 +1030,9 @@ main{
                 justify-content: center;
                 align-items: center;
                 column-gap: 10px;
+            }
+            .oQueVaiItensCaixa div{
+                text-align: justify;
             }
                 .oQueVaiItensCaixa img{
                     height: 110px;
@@ -1090,6 +1133,7 @@ main{
                 padding-top: 10px;
                 padding-left: 20px;
                 font-size: 18px;
+                text-align: justify;
 
                 width: 530px;
                 height: 130px;
@@ -1192,10 +1236,10 @@ main{
         border-bottom: 3px var(--yellow) solid;
     }
     #thankYouMessage{
-        width: 700px;
+        width: 525px;
         height: 85px;
         display: block;
-        text-align: center;
+        text-align: justify;
         margin: 40px auto;
         font-size: 24px;
         color: var(--white)
@@ -1204,7 +1248,7 @@ main{
 #profilePage-box{
     margin: 0 auto 25px;
     width: 1100px;
-    height: 400px;
+    height: 350px; 
     align-items: center;
     align-content: center;
     justify-content: center;
@@ -1219,7 +1263,7 @@ main{
         #profilePage-left{
             width: 250px;
             background-color: var(--green);
-            height: 400px;
+            height: 350px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -1228,7 +1272,7 @@ main{
             #profilePage-left span{
                 color: var(--yellow);
             }
-            #profilePage-left-um, #profilePage-left-dois, #profilePage-left-tres{
+            #profilePage-left-um, #profilePage-left-dois{
                 height: 50px;
                 width: 250px;
                 border: 1px solid var(--yellow);
@@ -1239,12 +1283,13 @@ main{
                 flex-direction: column;
                 color: var(--yellow);
             }
-                #profilePage-left-tres{                    
+                #profilePage-left-dois{                    
                     border-radius: 0 0 0 15px ;
                 }
-                #profilePage-left-um:hover, #profilePage-left-dois:hover, #profilePage-left-tres:hover{
+                #profilePage-left-um:hover, #profilePage-left-dois:hover{
                     background-color: #416e6e;
                     color:  var(--white);
+                    transition: 250ms;
                 }
             #profilePage-left-img{
                 border: 1px solid var(--yellow);
@@ -1290,3 +1335,16 @@ main{
                     font-size: 18px;
                     color: var(--white);
                 }
+
+                /* #crudAlterUser {
+                    display: none;
+                    margin: 45px auto;
+                    height: 200px;
+                    width: 416px;            
+                }#crudAlterUser label{
+                    color: var(--white); 
+                    padding-left: 40px;
+                }
+                #crudAlterUser input, #crudAlterUser label {
+                    margin:5.5px 7.5px;
+                } */
