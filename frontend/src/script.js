@@ -643,7 +643,6 @@ async function carrinhoFinalizarButton() {
 //user Creating a user : inicio
 
 async function cadButton() {
-    
     if (inputController($('#nome').val(), 'text')) { $('#nome').effect('highlight'); return false; }
     if (inputController($('#superName').val(), 'text')) { $('#superName').effect('highlight'); return false; }
     if (inputController($('#email').val(), 'email')) { $('#email').effect('highlight'); return false; }
