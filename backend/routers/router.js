@@ -4,7 +4,7 @@ const { hashPwd, comparePwd } = require("../hashPwd");
 const router = EXPRESS.Router();
 
 // postgreSQL;
-const pool = require("./db");
+const pool = require("../db");
 
 router.get("/search/cart/:id", jwtCheck, async(req, res) => {
     //  SELECT id_user, signature_type, id_pack, name, description, img_url, monthly_price FROM bags INNER JOIN packs ON id_pack = packs.id WHERE id_user = 10;
