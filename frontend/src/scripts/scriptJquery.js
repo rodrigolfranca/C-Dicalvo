@@ -127,6 +127,11 @@ $('#buscarPor').on('change', async function(){
     } else {
         $('#crudSelectPacksSelect').css('display', 'none');        
         $('#crudSelectFilter').css('display', 'block');
+        if ($('#buscarPor').val() === 'users') {
+            $('#crudSelectFilter').attr('placeholder', 'Nome (vazio = todos)');
+        } else{
+            $('#crudSelectFilter').attr('placeholder', 'ID (vazio = todos)');
+        }
     }
 })
 
