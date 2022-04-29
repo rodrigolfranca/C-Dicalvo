@@ -34,8 +34,10 @@ app.post("/login", async(req, res) => {
         if ( comparePwd(password, usuario.rows[0].password) ) {
             const id = usuario.rows[0].id;
             const adm = usuario.rows[0].type_user;            
-            let userCart = false;
-            if (cart.rows[0].id > 0) userCart = true;
+            let userCart = true;
+
+            if (cart.rows.length === 0) userCart = false;
+
             const token = jwt.sign({ id , adm , userCart }, process.env.SECRET);
 
             res.json({ auth: true, token});

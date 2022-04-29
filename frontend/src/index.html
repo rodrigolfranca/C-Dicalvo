@@ -88,11 +88,6 @@
                 <div id="produtos">
                     <h2>Escolha a CalvoBox ideal para você e viva essa experiência!</h2>
                     <div id="seletorPacote"></div>
-                    
-                    <!-- <input type="button" class="seletor" value="C Begginer" id="cBegginer" />
-                    <input type="button" class="seletor" value="C Intermediate" id="cBItermediate" />
-                    <input type="button" class="seletor" value="C Proud" id="cProud" /> -->
-
                     <div id="painelProduto">
                         <div id="productPhoto">
                         </div>
@@ -212,6 +207,7 @@
                     </div>
                     <p id="profilePage-left-um" onclick="profilePageLeft('#profilePage-left-um')">Minha conta</p>
                     <p id="profilePage-left-dois" onclick="profilePageLeft('#profilePage-left-dois')">Dados pessoais</p>
+                    <p id="profilePage-left-tres" onclick="profilePageLeft('#profilePage-left-tres')">Sair da Conta</p>
                 </div>
                 <div id="profilePage-right">
                 </div>
@@ -324,14 +320,11 @@
                     <input type="text" id="crudAlterUsersName" class="crudUsersMedium" placeholder="Nome" />
                     <input type="text" id="crudAlterUsersSurname" class="crudUsersMedium" placeholder="Sobrenome" />                    
                     <input type="text" id="crudAlterUsersEmail" class="crudUsersEmail" placeholder="E-mail" />
-                    <input type="password" id="crudAlterUsersSenha" class="crudUsersMedium" placeholder="Senha" />
-                    <input type="password" id="crudAlterUsersVerify" class="crudUsersMedium" placeholder="Confirmar Senha" />
-                    <input type="text" id="crudAlterUsersCalvicie" class="crudUsersMedium" placeholder="Tipo de Calvície" />                    
-                    <input type="text" id="crudAlterUsersBag" class="crudUsersBag" placeholder="Id do Carrinho" />
-                    <input type="text" id="crudAlterUsersAssinatura" class="crudUsersAssinatura" placeholder="Assinatura" />
-                    <input type="text" id="crudAlterUsersTipo" class="crudUsersTipo" placeholder="Tipo de Assinatura" />
+                    <input type="text" id="crudAlterUsersCalvicie" class="crudUsersMedium" placeholder="Tipo de Calvície" />
+                    <input type="text" id="crudAlterUsersAssinatura" class="crudUsersMedium" placeholder="Assinatura" />
+                    <input type="text" id="crudAlterUsersTipo" class="crudUsersEmail" placeholder="Tipo de Assinatura" />
                     
-                    <input type="button" id="crudAlterUsersButton" class="crudUsersButton" value="Atualizar" onclick="crudAlterUsersButton()"/>
+                    <input type="button" id="crudAlterUsersButton" class="crudUsersButton" style="margin-top: 15px;" value="Atualizar" onclick="crudAlterUsersButton()"/>
                     <span id=crudAlterUserAlert class="crudAlert"></span>
                 </section>
             </section>
@@ -349,7 +342,7 @@
                 <span id=crudDeleteAlert class="crudAlert"></span>
             </section>
         </section>
-        <footer>
+        <footer id="footer">
             <div id="footer-box">
                 <div id="footer-left">
                     <p>Rodrigo Luiz de França</p>

@@ -48,6 +48,7 @@ $('.toHome').on('click', () => {
     $('#aboutUs').css('display', "flex");
     $('#produtos').css('display', "block");
     $('#oQueVai-box').css('display', "flex");
+    $('#footer').css('display', 'block');  
 });
 
 $('#loginInvite').on('click', () => {
@@ -95,6 +96,7 @@ $('#loginButton').on('click', () => {
                 userToken = resposta.token;                
                 userID = JSON.parse(window.atob(resposta.token.split('.')[1])).id;
                 userADMIN = JSON.parse(window.atob(resposta.token.split('.')[1])).adm;
+                userCart = JSON.parse(window.atob(resposta.token.split('.')[1])).userCart;
                 
 
                 console.log(`ID: ${userID} - ADM: ${userADMIN}`);
@@ -141,6 +143,7 @@ $('#crudSelectButton').on('click', function() {
     const buscaPor = $('#buscarPor').val();
     const filtro = $('#crudSelectFilter').val();
     const filtroSelect = $('#crudSelectPacksSelect').val();
+
     if (buscaPor === 'assinantes') {
         const optionsSelect = {
             method: 'GET',
@@ -178,18 +181,27 @@ $('#crudSelectButton').on('click', function() {
             .catch(err => console.log(err));
     } else { 
         let url;
+        
         (!filtro)? url = `http://localhost:3000/search/${buscaPor}` : url = `http://localhost:3000/search/${buscaPor}/${filtro}`;
-        if (buscaPor === 'users') url = `urlnova`
+
+        if (buscaPor === 'users') url = `http://localhost:3000/searchString/${filtro}`;
+
+        if ( buscaPor === 'users' && !filtro ) url = `http://localhost:3000/search/${buscaPor}`;
+
         if (buscaPor === 0) {
             alert("Selecione uma tabela para pesquisar");
             return false;
         }
+
         $('#crudSelectResults').html(``);
         const options = {
             method: "GET",
-            body: JSON.stringify({string: filtro}),
             headers: { 'Content-Type': 'application/json', "x-access-token": userToken }
         }
+        
+        console.log(options);
+        console.log(url);
+
         fetch(url, options)
             .then(data => data.json())
             .then(objeto => {
@@ -340,8 +352,8 @@ $("#crudAlterSearchButton").on('click', () => {
                     $('#crudAlterUsersName').val(resultado.fname);
                     $('#crudAlterUsersSurname').val(resultado.lname);
                     $('#crudAlterUsersEmail').val(resultado.email);
-                    $('#crudAlterUsersSenha').val(resultado.password);
-                    $('#crudAlterUsersVerify').val(resultado.password);
+                    // $('#crudAlterUsersSenha').val(resultado.password);
+                    // $('#crudAlterUsersVerify').val(resultado.password);
                     $('#crudAlterUsersCalvicie').val(resultado['type_of_bold']);
                     $('#crudAlterUsersAssinatura').val(resultado['signature_name']);
                     $('#crudAlterUsersTipo').val(resultado['signature_type']);
@@ -358,6 +370,7 @@ $("#crudAlterSearchButton").on('click', () => {
         })
         .catch(err => console.log(err));
 });
+
 $('#crudAlterPacksButton').on('click', () => {
     if (!inputController($('#crudAlterPacksName').val())) { $('#crudAlterPacksName').effect('highlight'); $("#crudAlterPacksAlert").text("Nome de Pacote inválido"); return false; }
     if (!inputController($('#crudAlterPacksDescricao').val())) { $('#crudAlterPacksDescricao').effect('highlight'); $("#crudAlterPacksAlert").text("Descrição de Pacote inválida"); return false; }

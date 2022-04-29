@@ -4,9 +4,9 @@ const router = EXPRESS.Router();
 // postgreSQL;
 const pool = require("../db");
 
-router.get("/searchString", async(req, res) => {
+router.get("/searchString/:string", async(req, res) => {
     try {
-        const { string } = req.body;
+        const { string } = req.params;
 
         const searchString = await pool.query(`
             SELECT * FROM users WHERE fname ILIKE '%${string}%';
@@ -61,10 +61,12 @@ router.get(`/signers/:pack`, async(req, res) => {
 router.get('/profilepage/:id', async(req, res) =>{
     try {
         const {id} = req.params;        
+        console.log("🚀 ~ file: routerGet.js ~ line 64 ~ router.get ~ id", id)
 
         const searchCart = await pool.query(
-            `SELECT users.id, fname, signature_name, signature_type, name, description, img_url, monthly_price FROM users INNER JOIN packs ON name = users.signature_name WHERE users.id = ($1);`,
+                `SELECT users.id, fname, signature_name, signature_type, name, description, img_url, monthly_price FROM users INNER JOIN packs ON name = users.signature_name WHERE users.id = ($1);`,
             [ id ]);
+        console.log("🚀 ~ file: routerGet.js ~ line 71 ~ router.get ~ searchCart", searchCart)
 
         res.json(searchCart.rows);
         console.log(`get/profilepage/${id}`);

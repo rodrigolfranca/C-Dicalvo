@@ -553,6 +553,7 @@ main{
                 text-align: center;
 
                 line-height: 18px;
+                box-shadow: 1px 4px 4px 0px #00000040;
             }
             #crudSelectButton:hover {
                 cursor: pointer;
@@ -612,6 +613,9 @@ main{
             margin: 65px auto;
             height: 215px;
             width: 425px;            
+        }
+        #crudAlterUsersButton{
+            margin-top: 15px;
         }
         #crudAlterPacks {
             display: none;
@@ -748,7 +752,13 @@ main{
                 display:block;
                 border:none;
                 outline: none;
+                box-shadow: 1px 4px 4px 0px #00000040;
             }
+                .crudUsersButton:hover {
+                    cursor: pointer;
+                    background-color: #ffc126;
+                    transition: 250ms;
+                }
     #crudAlter{
         display: none;
         height: 425px;
@@ -788,6 +798,7 @@ main{
             display:block;
             border:none;
             outline: none;
+            box-shadow: 1px 4px 4px 0px #00000040;
         }
         #crudAlterSearchButton:hover {
             cursor: pointer;
@@ -835,7 +846,13 @@ main{
             display:block;
             border:none;
             outline: none;
+            box-shadow: 1px 4px 4px 0px #00000040;
         }
+            #crudDeleteSearchButton:hover, #crudDeleteButton:hover{
+                cursor: pointer;
+                background-color: #ffc126;
+                transition: 250ms;
+            }
         #crudDeleteButton {
             width: 85px;
             height: 22px;
@@ -847,6 +864,7 @@ main{
             display:none;
             border:none;
             outline: none;
+            box-shadow: 1px 4px 4px 0px #00000040;
         }
 /* Sessão 'Sobre Nós' */
 #aboutUs-box{
@@ -1350,7 +1368,7 @@ main{
             #profilePage-left span{
                 color: var(--yellow);
             }
-            #profilePage-left-um, #profilePage-left-dois{
+            #profilePage-left-um, #profilePage-left-dois, #profilePage-left-tres{
                 height: 50px;
                 width: 250px;
                 border: 1px solid var(--yellow);
@@ -1361,10 +1379,10 @@ main{
                 flex-direction: column;
                 color: var(--yellow);
             }
-                #profilePage-left-dois{                    
+                #profilePage-left-tres{                    
                     border-radius: 0 0 0 15px ;
                 }
-                #profilePage-left-um:hover, #profilePage-left-dois:hover{
+                #profilePage-left-um:hover, #profilePage-left-dois:hover, #profilePage-left-tres:hover{
                     background-color: #416e6e;
                     color:  var(--white);
                     transition: 250ms;
@@ -1413,7 +1431,8 @@ main{
                     font-size: 18px;
                     color: var(--white);
                 }
-footer {
+#footer {
+    display: block;
     height: 110px;
     width: 100%;
     background-color:var(--green);

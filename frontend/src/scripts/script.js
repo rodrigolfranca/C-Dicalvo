@@ -7,6 +7,7 @@ function changeFrame(frame, display) {
     $('#userCad-box').hide();
     $('#accountLost').hide();
     $('#aboutUs').hide();
+    $('#footer').hide();
     $('#produtos').hide();
     $('#oQueVai-box').hide();
     $('#carrinho').hide();
@@ -43,8 +44,6 @@ function criadorDeFuncao(params) {
     $("#precosDoPacoteMensal").html(`${parseFloat(precoMensal).toFixed(2)}`);
     $("#precosDoPacoteAdulteradoMensal").html(`${parseFloat(precoMensalAdulterado).toFixed(2)}`);
 }
-
-
 // crud Frame selector
 function crudShow(frame, link) {
     $('#crudMenuSelect').css('color', 'var(--yellow)');
@@ -88,8 +87,6 @@ function crudAlterUsersButton(){
     if (!inputController($('#crudAlterUsersName').val(), 'text')) { $('#crudAlterUsersName').effect('highlight'); $("#crudAlterUserAlert").text("Nome Inválido"); return false; }
     if (!inputController($('#crudAlterUsersSurname').val(), 'text')) { $('#crudAlterUsersSurname').effect('highlight'); $("#crudAlterUserAlert").text("Sobrenome Inválido"); return false; }
     if (!inputController($('#crudAlterUsersEmail').val(), 'email')) { $('#crudAlterUsersEmail').effect('highlight'); $("#crudAlterUserAlert").text("E-mail Inválido"); return false; }
-    if (!inputController($('#crudAlterUsersSenha').val(), 'password')) { $('#crudAlterUsersSenha').effect('highlight'); $("#crudAlterUserAlert").text("Senha Inválida"); return false; }
-    if ($('#crudAlterUsersVerify').val() !== $('#crudAlterUsersSenha').val()) { $('#crudAlterUsersVerify').effect('highlight'); $("#crudAlterUserAlert").text("Senha e Confirmação de senha não correspondem"); return false; }
     if (!inputController($('#crudAlterUsersCalvicie').val())) { $('#crudAlterUsersCalvicie').effect('highlight'); $("#crudAlterUserAlert").text("Tipo de Calvície inválida"); return false; }
 
     const tabela = $('#crudAlterSelect').val();
@@ -115,60 +112,40 @@ function crudAlterUsersButton(){
         .then(resposta => $('#crudAlterUserAlert').text(resposta))
         .catch(err => console.log(err));
 }
-
-
-//DELETE: fim
-//Carrinho: Início
-
 async function buyButtom(signature_type, id_pack) {
     if (!userLogged) { changeFrame('#login', 'flex'); return false; };
-
     if (userCart) {
-
         const newCart = {
             signature_type : signature_type,
             id_pack : id_pack,
             id_user : userID
         }
-
-        console.log(newCart);
-
-        const options = {
+        options = {
             method: 'PUT',
             body: JSON.stringify(newCart),
             headers: { 'Content-Type': 'application/json', 'x-access-token': userToken }
         }
-
-        await fetch(`rotapraalterarcarrinho`, options)
+        await fetch(`http://localhost:3000/altertabag/${userID}`, options)
             .then(data => data.json())
             .then(result => console.log(result))
             .catch(err => console.log(err));
-
-
-
     } else {
-
+        userCart = true;
         const newCart = {
             signature_type : signature_type,
             id_pack : id_pack,
             id_user : userID
         }
-
-        console.log(newCart);
-
         const options = {
             method: 'POST',
             body: JSON.stringify(newCart),
             headers: { 'Content-Type': 'application/json', 'x-access-token': userToken }
         }
-
         await fetch(`http://localhost:3000/add/bags`, options)
             .then(data => data.json())
             .then(result => console.log(result))
             .catch(err => console.log(err));
-    
     }
-
     fillCart();
     changeFrame('#carrinho', 'flex');
 }
@@ -178,7 +155,6 @@ async function carrinhoFinalizarButton() {
         method:'GET',
         headers: { 'x-access-token' : userToken } 
     }
-
     const signature = await fetch(`http://localhost:3000/search/cart/${userID}`, options)
         .then(data => data.json())
         .then(resultado => {
@@ -190,7 +166,6 @@ async function carrinhoFinalizarButton() {
             }            
         })
         .catch(err => console.log(err));
-    
     // Insert signature info at user
     options = {
         method: 'PUT',
@@ -214,15 +189,11 @@ async function carrinhoFinalizarButton() {
         .then(resultado => console.log(resultado))
         .catch(err => console.log(err))
 
+    userCart = false;
     changeFrame('#thankYou', 'flex');    
     emptyCart();
 }
-
-//Carrinho: fim
-//user Creating a user : inicio
-
 async function cadButton() {
-        
     if (!inputController($('#nome').val(), 'text')) { $('#nome').effect('highlight'); return false; }
     if (!inputController($('#superName').val(), 'text')) { $('#superName').effect('highlight'); return false; }
     if (!inputController($('#email').val(), 'email')) { $('#email').effect('highlight'); return false; }
@@ -254,10 +225,12 @@ async function cadButton() {
     $('#aboutUs').css('display', "flex");
     $('#produtos').css('display', "block");
     $('#oQueVai-box').css('display', "flex");
-    
+    $('#footer').css('display', 'block');  
 }
 
 async function fillCart() {
+    console.log("ainda");
+    $('#carrinhoCard').html(` `);
     const options= {
         method:'GET',
         headers: { 'x-access-token' : userToken } 
@@ -284,7 +257,6 @@ async function fillCart() {
             </div>
         `)
     })
-
     .catch(err => console.log(err))        
 }
 
@@ -300,8 +272,6 @@ function crudAlterUsersButtonAssist(){
     if (!$('#crudAlterUsersName').val()) { $('#crudAlterUsersName').effect('highlight'); $("#crudAlterUserAlert").text("Nome Inválido"); return false; }
     if (!$('#crudAlterUsersSurname').val()) { $('#crudAlterUsersSurname').effect('highlight'); $("#crudAlterUserAlert").text("Sobrenome Inválido"); return false; }
     if (!$('#crudAlterUsersEmail').val()) { $('#crudAlterUsersEmail').effect('highlight'); $("#crudAlterUserAlert").text("E-mail Inválido"); return false; }
-    if (!$('#crudAlterUsersSenha').val()) { $('#crudAlterUsersSenha').effect('highlight'); $("#crudAlterUserAlert").text("Senha Inválida"); return false; }
-    if ($('#crudAlterUsersVerify').val() !== $('#crudAlterUsersSenha').val()) { $('#crudAlterUsersVerify').effect('highlight'); $("#crudAlterUserAlert").text("Senha e Confirmação de senha não correspondem"); return false; }
     if (!$('#crudAlterUsersCalvicie').val()) { $('#crudAlterUsersCalvicie').effect('highlight'); $("#crudAlterUserAlert").text("Tipo de Calvície inválida"); return false; }
     
     const alteredUser = {
@@ -339,12 +309,29 @@ async function profilePageLeft(link) {
                 arrPhofile = response;
             })
             .catch(err =>  console.log(err))
-        console.log(arrPhofile);
-        
+// trava para quando o perfil não fez nenhuma compra!
+        if ( arrPhofile[0] == null) {
+            const options = {
+                method: 'get',
+                headers: { 'Content-Type': 'application/json', 'x-access-token': userToken }
+            }
+            await fetch(`http://localhost:3000/search/users/${userID}`, options)
+                .then(data => data.json())
+                .then(response => {
+                    arrPhofile = response;
+                })
+                .catch(err =>  console.log(err));
+            $('#nomeDoCaraLogado').text(`${arrPhofile[0].fname}`);
+            $('#profilePage-right').html(`
+            <div style="width: 850px; height: 350px;display: flex;flex-direction: column;justify-content: center;align-items: center;">
+                <h3 style="text-align: center;"> Você ainda não fez nenhuma assinatura! </h3>
+            </div>
+            `);
+
+            return false
+        };
+// fim da trava
         $('#nomeDoCaraLogado').text(`${arrPhofile[0].fname}`);
-
-        console.log(arrPhofile);
-
         $('#profilePage-right').html(`
             <h3>Último Pedido</h3>
             <div id="infoDoFetch">
@@ -361,30 +348,26 @@ async function profilePageLeft(link) {
         `);
     } else if( link == '#profilePage-left-dois'){
         $('#profilePage-right').html(`
-            <h3>Dados Pessoais</h3>
-            <div style="display: flex;height: 225px;width: 500px;justify-content: center;align-items: center;">
-                <section id="crudAlterUser" style="display: block">
-                    <input type="text" id="crudAlterUsersName" class="crudUsersMedium" placeholder="Nome" />
-                    <input type="text" id="crudAlterUsersSurname" class="crudUsersMedium" placeholder="Sobrenome" />                    
-                    <input type="text" id="crudAlterUsersEmail" class="crudUsersEmail" placeholder="E-mail" />
-                    <input type="password" id="crudAlterUsersSenha" class="crudUsersMedium" placeholder="Senha" />
-                    <input type="password" id="crudAlterUsersVerify" class="crudUsersMedium" placeholder="Confirmar Senha" />
-                    <input type="text" id="crudAlterUsersCalvicie" class="crudUsersMedium" placeholder="Tipo de Calvície" />                    
-                    <input type="text" id="crudAlterUsersBag" class="crudUsersBag" placeholder="Id do Carrinho" />
-                    <input type="text" id="crudAlterUsersAssinatura" class="crudUsersAssinatura" placeholder="Assinatura" />
-                    <input type="text" id="crudAlterUsersTipo" class="crudUsersTipo" placeholder="Tipo de Assinatura" />
-                    
-                    <input type="button" id="crudAlterUsersButton" class="crudUsersButton" value="Atualizar" onclick="crudAlterUsersButtonAssist()"/>
-                    <span id=crudAlterUserAlert class="crudAlert"></span>
-                </section>
+            <div style="width: 850px; height: 350px;display: flex;flex-direction: column;justify-content: center;align-items: center;">
+                <h3>Dados Pessoais</h3>
+                <div style="display: flex;height: 225px;width: 500px;justify-content: center;align-items: center;">
+                    <section id="crudAlterUser" style="display: block;margin: 45px auto;height: 150px;width: 416px;">
+                        <input type="text" id="crudAlterUsersName" class="crudUsersMedium" placeholder="Nome" />
+                        <input type="text" id="crudAlterUsersSurname" class="crudUsersMedium" placeholder="Sobrenome" />                    
+                        <input type="text" id="crudAlterUsersEmail" class="crudUsersEmail" placeholder="E-mail" />
+                        <input type="text" id="crudAlterUsersCalvicie" class="crudUsersMedium" placeholder="Tipo de Calvície" style="display: block;margin-top: 10px;"/>
+                        
+                        <input style="width: 90px;display: inline;" type="button" id="crudAlterUsersButton" class="crudUsersButton" value="Atualizar" onclick="crudAlterUsersButtonAssist()"/>
+                        <input style="width: 145px;float: right;display: inline;"  type="button" id="crudAlterPasswordButton" class="crudUsersButton" value="Trocar minha senha" onclick="trocaSenhaUserComum()"/>
+                        <span id=crudAlterUserAlert class="crudAlert"></span>
+                    </section>
+                </div>
             </div>
         `);
-
         const options = {
             method: 'get',
             headers: { 'Content-Type': 'application/json', 'x-access-token': userToken }
         }
-    
         await fetch(`http://localhost:3000/search/users/${userID}`, options)
             .then(data => data.json())
             .then( resultado => {
@@ -393,12 +376,74 @@ async function profilePageLeft(link) {
                         $('#crudAlterUsersName').val(resultado.fname);
                         $('#crudAlterUsersSurname').val(resultado.lname);
                         $('#crudAlterUsersEmail').val(resultado.email);
-                        $('#crudAlterUsersSenha').val(resultado.password);
-                        $('#crudAlterUsersVerify').val(resultado.password);
                         $('#crudAlterUsersCalvicie').val(resultado['type_of_bold']);
-                        $('#crudAlterUsersAssinatura').val(resultado['signature_name']);
-                        $('#crudAlterUsersTipo').val(resultado['signature_type']);
             })
             .catch(err => console.log(err))
-    }   
+    } else{
+        $('#profilePage-right').html(`
+            <div style="width: 850px; height: 350px;display: flex;flex-direction: column;justify-content: center;align-items: center;">
+                <h3>Realmente deseja sair?</h3>
+                <input type="button" id="logOut" class="crudUsersButton" value="Log Out" onclick="logOut()"/>
+            </div>
+        `)
+    }
+}
+function logOut() {
+    userLogged = 0;
+    userToken = "";
+    userID = 0;
+    userADMIN = 0;
+    userCart = null;
+    changeFrame("#login", "flex");
+}
+function trocaSenhaUserComum() {
+    $('#profilePage-right').html(`
+            <div style="width: 850px; height: 350px;display: flex;flex-direction: column;justify-content: center;align-items: center;">
+                <h3>Troca de Senha</h3>
+                <div style="display: flex;height: 225px;width: 500px;justify-content: center;align-items: center;">
+                    <section id="crudAlterUser" style="display: block;margin: 45px auto;height: 150px;width: 416px;">
+                        <p>Senha Atual</p>
+                        <input type="password" id="senhaAtual" class="crudUsersMedium" placeholder="Senha Atual" />                 
+                        <p>Digite a sua nova senha</p>
+                        <input type="password" id="senhaNova" class="crudUsersMedium" placeholder="Senha Nova" />     
+                        <input type="password" id="senhaNovaConfirmar" class="crudUsersMedium" placeholder="Senha Nova" />     
+                        <input type="button" id="trocaDeSenha" class="crudUsersButton" value="Trocar" onclick="fetchTrocaDeSenha()"/
+                        <span id="crudTrocaDesenha" class="crudAlert"></span>
+                    </section>
+                </div>
+            </div>
+        `);
+}
+async function fetchTrocaDeSenha() {
+    const testeSenha = {
+        password : $('#senhaAtual').val()
+    }
+    let options = {
+        method: 'PUT',
+        body: JSON.stringify(testeSenha),
+        headers: { 'Content-Type': 'application/json', 'x-access-token': userToken}
+    }
+    let senhaCorreta
+    await fetch(`http://localhost:3000/testeSenha/${userID}`, options)
+        .then(data => data.json())
+        .then(resposta => senhaCorreta = resposta)
+        .catch(err => console.log(err));
+
+    if(!senhaCorreta) return console.log("Senha Incorreta");;
+
+    if (!inputController($('#senhaNova').val(), 'password')) { $('#senhaNova').effect('highlight'); $("#crudTrocaDesenha").text("Senha Inválida"); return false; }
+    if ($('#senhaNovaConfirmar').val() !== $('#senhaNova').val()) { $('#senhaNovaConfirmar').effect('highlight'); $("#crudTrocaDesenha").text("Senha e Confirmação de senha não correspondem"); return false; }
+    
+    const password = $('#senhaNova').val();
+
+    options = {
+        method: 'PUT',
+        body: JSON.stringify({password}),
+        headers: { 'Content-Type': 'application/json', 'x-access-token': userToken}
+    }
+
+    await fetch(`http://localhost:3000/updatesenha/users/${userID}`, options)
+        .then(data => data.json())
+        .then(resposta => console.log(resposta))
+        .catch(err => console.log(err));
 }
