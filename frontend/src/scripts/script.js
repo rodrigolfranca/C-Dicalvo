@@ -402,9 +402,9 @@ function trocaSenhaUserComum() {
                 <h3>Troca de Senha</h3>
                 <div style="display: flex;height: 225px;width: 500px;justify-content: center;align-items: center;">
                     <section id="crudAlterUser" style="display: block;margin: 45px auto;height: 150px;width: 416px;">
-                        <p>Senha Atual</p>
+                        <p style="color: var(--yellow);">Senha Atual</p>
                         <input type="password" id="senhaAtual" class="crudUsersMedium" placeholder="Senha Atual" />                 
-                        <p>Digite a sua nova senha</p>
+                        <p style="color: var(--yellow);">Digite a sua nova senha</p>
                         <input type="password" id="senhaNova" class="crudUsersMedium" placeholder="Senha Nova" />     
                         <input type="password" id="senhaNovaConfirmar" class="crudUsersMedium" placeholder="Senha Nova" />     
                         <input type="button" id="trocaDeSenha" class="crudUsersButton" value="Trocar" onclick="fetchTrocaDeSenha()"/
