@@ -59,7 +59,8 @@ $('#forgetButton').on('click', () =>{
 })
 
 $('.toCart').on('click', () => {
-    changeFrame('#carrinho', 'flex');  
+    if (userCart) fillCart();
+    changeFrame('#carrinho', 'flex');
 });
 
 $('#crudInsertSelect').on('change', () => {
@@ -94,6 +95,7 @@ $('#loginButton').on('click', () => {
                 userToken = resposta.token;                
                 userID = JSON.parse(window.atob(resposta.token.split('.')[1])).id;
                 userADMIN = JSON.parse(window.atob(resposta.token.split('.')[1])).adm;
+                
 
                 console.log(`ID: ${userID} - ADM: ${userADMIN}`);
 
@@ -177,6 +179,7 @@ $('#crudSelectButton').on('click', function() {
     } else { 
         let url;
         (!filtro)? url = `http://localhost:3000/search/${buscaPor}` : url = `http://localhost:3000/search/${buscaPor}/${filtro}`;
+        if (buscaPor === 'users') url = `urlnova`
         if (buscaPor === 0) {
             alert("Selecione uma tabela para pesquisar");
             return false;
@@ -184,6 +187,7 @@ $('#crudSelectButton').on('click', function() {
         $('#crudSelectResults').html(``);
         const options = {
             method: "GET",
+            body: JSON.stringify({string: filtro}),
             headers: { 'Content-Type': 'application/json', "x-access-token": userToken }
         }
         fetch(url, options)

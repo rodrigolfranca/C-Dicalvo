@@ -24,15 +24,19 @@ app.use("/", ROUTER_POST, ROUTER_GET, ROUTER_PUT, ROUTER_DELETE);
 
 app.post("/login", async(req, res) => {
     try {
+        
         const email = req.body.email;
         const password = req.body.password;
 
-        const usuario = await pool.query(`SELECT * FROM users WHERE email = ($1)`, [ email ]);   
+        const usuario = await pool.query(`SELECT * FROM users WHERE email = ($1)`, [ email ]);
+        const cart = await pool.query(`SELECT id FROM bags WHERE id_user = ($1)`, [usuario.rows[0].id]);
 
         if ( comparePwd(password, usuario.rows[0].password) ) {
             const id = usuario.rows[0].id;
-            const adm = usuario.rows[0].type_user;
-            const token = jwt.sign({ id , adm }, process.env.SECRET);
+            const adm = usuario.rows[0].type_user;            
+            let userCart = false;
+            if (cart.rows[0].id > 0) userCart = true;
+            const token = jwt.sign({ id , adm , userCart }, process.env.SECRET);
 
             res.json({ auth: true, token});
         } else {

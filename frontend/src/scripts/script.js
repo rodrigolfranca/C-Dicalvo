@@ -1,4 +1,4 @@
-let userLogged, userToken, userID, userADMIN;
+let userLogged, userToken, userID, userADMIN, userCart;
 
 function changeFrame(frame, display) {
     $('#profilePage-box').hide();
@@ -123,25 +123,52 @@ function crudAlterUsersButton(){
 async function buyButtom(signature_type, id_pack) {
     if (!userLogged) { changeFrame('#login', 'flex'); return false; };
 
-    const newCart = {
-        signature_type : signature_type,
-        id_pack : id_pack,
-        id_user : userID
-    }
+    if (userCart) {
 
-    console.log(newCart);
+        const newCart = {
+            signature_type : signature_type,
+            id_pack : id_pack,
+            id_user : userID
+        }
 
-    const options = {
-        method: 'POST',
-        body: JSON.stringify(newCart),
-        headers: { 'Content-Type': 'application/json', 'x-access-token': userToken }
-    }
+        console.log(newCart);
 
-    await fetch(`http://localhost:3000/add/bags`, options)
-        .then(data => data.json())
-        .then(result => console.log(result))
-        .catch(err => console.log(err));
+        const options = {
+            method: 'PUT',
+            body: JSON.stringify(newCart),
+            headers: { 'Content-Type': 'application/json', 'x-access-token': userToken }
+        }
+
+        await fetch(`rotapraalterarcarrinho`, options)
+            .then(data => data.json())
+            .then(result => console.log(result))
+            .catch(err => console.log(err));
+
+
+
+    } else {
+
+        const newCart = {
+            signature_type : signature_type,
+            id_pack : id_pack,
+            id_user : userID
+        }
+
+        console.log(newCart);
+
+        const options = {
+            method: 'POST',
+            body: JSON.stringify(newCart),
+            headers: { 'Content-Type': 'application/json', 'x-access-token': userToken }
+        }
+
+        await fetch(`http://localhost:3000/add/bags`, options)
+            .then(data => data.json())
+            .then(result => console.log(result))
+            .catch(err => console.log(err));
     
+    }
+
     fillCart();
     changeFrame('#carrinho', 'flex');
 }
@@ -239,9 +266,7 @@ async function fillCart() {
     await fetch(`http://localhost:3000/search/cart/${userID}`, options)
     .then(data => data.json())
     .then(resultado => {
-        console.log("🚀 ~ file: script.js ~ line 692 ~ fillCart ~ resultado", resultado)
         resultado = resultado[0]
-        console.log("🚀 ~ file: script.js ~ line 694 ~ fillCart ~ resultado", resultado)
         $('#carrinhoCard').html(`
             <h3 id="carrinhoTitle">Carrinho</h3>
             <div id="carrinhoContainer">
