@@ -932,7 +932,7 @@ main{
 }
 #produtos{
     width: 1100px;
-    height: 650px;
+    height: 700px;
 }
     #produtos h2{
         color: var(--green);
@@ -1011,7 +1011,7 @@ main{
             }
         #precos {
             width: 500px;
-            height: 300px;
+            height: 400px;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;

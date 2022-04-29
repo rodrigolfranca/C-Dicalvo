@@ -43,6 +43,7 @@ function criadorDeFuncao(params) {
     $("#precoAduterado").html(`${parseFloat(precoAdulterado).toFixed(2)}`);
     $("#precosDoPacoteMensal").html(`${parseFloat(precoMensal).toFixed(2)}`);
     $("#precosDoPacoteAdulteradoMensal").html(`${parseFloat(precoMensalAdulterado).toFixed(2)}`);
+    $('#descricao').text(`${arrResponse[params-1].description}`)
 }
 // crud Frame selector
 function crudShow(frame, link) {

@@ -13,6 +13,7 @@ $(document).ready( async () => {
             })
 
             $("#nomeProduto").text(`${response[0].name}`);
+            $('#descricao').text(`${response[0].description}`)
         
             $("#productPhoto").append(`
                 <img src="${response[0].img_url}" />
@@ -352,8 +353,6 @@ $("#crudAlterSearchButton").on('click', () => {
                     $('#crudAlterUsersName').val(resultado.fname);
                     $('#crudAlterUsersSurname').val(resultado.lname);
                     $('#crudAlterUsersEmail').val(resultado.email);
-                    // $('#crudAlterUsersSenha').val(resultado.password);
-                    // $('#crudAlterUsersVerify').val(resultado.password);
                     $('#crudAlterUsersCalvicie').val(resultado['type_of_bold']);
                     $('#crudAlterUsersAssinatura').val(resultado['signature_name']);
                     $('#crudAlterUsersTipo').val(resultado['signature_type']);
