@@ -21,7 +21,6 @@ function changeFrame(frame, display) {
     }
 };
 
-
 function criadorDeFuncao(params) {
     $("#productPhoto").html(`
         <img src="${arrResponse[params-1].img_url}" />
