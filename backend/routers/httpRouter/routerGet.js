@@ -4,6 +4,20 @@ const router = EXPRESS.Router();
 // postgreSQL;
 const pool = require("../db");
 
+router.get("/searchString", async(req, res) => {
+    try {
+        const { string } = req.body;
+
+        const searchString = await pool.query(`
+            SELECT * FROM users WHERE fname ILIKE '%${string}%';
+        `)
+
+        res.json(searchString.rows);
+        console.log("get/searchString/:table");
+    } catch (error) {
+        console.log(error);
+    }
+});
 router.get("/search/cart/:id", jwtCheck, async(req, res) => {
     //  SELECT id_user, signature_type, id_pack, name, description, img_url, monthly_price FROM bags INNER JOIN packs ON id_pack = packs.id WHERE id_user = 10;
     try {
